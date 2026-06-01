@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aditya Singh | Software Engineer & AI/ML Specialist</title>
+  <meta name="description" content="Cinematic parallax-zoom portfolio of Aditya Singh, Software Engineer and AI/ML Specialist from MIT. Discover featured projects like Nexus, CoverAI, and HealthDB.">
+  
+  <!-- SEO Meta Tags -->
+  <meta property="og:title" content="Aditya Singh | Software Engineer & AI/ML Specialist">
+  <meta property="og:description" content="Immersive, smooth-scroll personal portfolio showcasing Aditya Singh's AI/ML projects and software engineering expertise.">
+  <meta property="og:type" content="website">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Lenis CSS (Optional but good for smooth scroll setup) -->
+  <style>
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+    .lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+    .lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+    .lenis-stopped {
+      overflow: hidden;
+    }
+    .lenis-smooth iframe {
+      pointer-events: none;
+    }
+  </style>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Background Particle Field -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Hamburger Menu Button -->
+  <button class="menu-btn" id="menu-btn" aria-label="Toggle Menu" aria-expanded="false">
+    <span class="menu-line line-top"></span>
+    <span class="menu-line line-mid"></span>
+    <span class="menu-line line-bot"></span>
+  </button>
+
+  <!-- Full-screen Navigation Overlay -->
+  <nav class="nav-overlay" id="nav-overlay" aria-hidden="true">
+    <div class="nav-container">
+      <ul class="nav-links">
+        <li><a href="#hero" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#education" class="nav-link">Education</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+      <div class="nav-footer">
+        <p>Connect with me</p>
+        <div class="nav-socials">
+          <a href="https://github.com/aditya0si" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:oliaditya05@gmail.com">Email</a>
+          <a href="tel:7651982009">Phone</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Scroll Container -->
+  <main id="scroll-container">
+
+    <!-- 1. Hero Section -->
+    <section id="hero" class="scene">
+      <div class="hero-content">
+        <div class="hero-badge">Available for Opportunities</div>
+        <h1 class="hero-title">
+          <span>ADITYA SINGH</span>
+          <span class="text-gradient">ENGINEERING INTELLIGENCE</span>
+          <span>&amp; SCALABLE CODE</span>
+        </h1>
+        <p class="hero-subtitle">Software Engineer &amp; AI/ML Specialist from MIT building immersive, scalable systems that bridge code and cognition.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">View Projects</a>
+          <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+        </div>
+      </div>
+      <div class="scroll-indicator">
+        <span class="mouse-icon">
+          <span class="wheel"></span>
+        </span>
+        <span class="scroll-text">Scroll to explore</span>
+      </div>
+    </section>
+
+    <!-- 2. About Section -->
+    <section id="about" class="scene">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-visual">
+            <div class="photo-wrapper">
+              <div class="photo-overlay"></div>
+              <!-- Placeholder profile picture with pure CSS abstract graphics or high quality styling -->
+              <div class="abstract-avatar">
+                <svg viewBox="0 0 100 100" class="avatar-svg">
+                  <defs>
+                    <linearGradient id="avatar-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="var(--accent-primary)"></stop>
+                      <stop offset="100%" stop-color="var(--accent-secondary)"></stop>
+                    </linearGradient>
+                  </defs>
+                  <circle cx="50" cy="50" r="45" fill="url(#avatar-grad)" opacity="0.15" stroke="url(#avatar-grad)" stroke-width="0.5"></circle>
+                  <path d="M50 20 C60 20, 68 28, 68 38 C68 48, 60 56, 50 56 C40 56, 32 48, 32 38 C32 28, 40 20, 50 20 Z" fill="url(#avatar-grad)"></path>
+                  <path d="M20 80 C20 65, 30 60, 50 60 C70 60, 80 65, 80 80 Z" fill="url(#avatar-grad)"></path>
+                </svg>
+              </div>
+            </div>
+            <div class="visual-glow"></div>
+          </div>
+          <div class="about-info">
+            <h2 class="section-title">Who I Am</h2>
+            <p class="lead">I am Aditya Singh, a passionate Software Engineer and AI/ML Specialist at MIT, specializing in deep learning, distributed architectures, and creating highly polished interactive experiences.</p>
+            <p>I combine the structural discipline of full-stack engineering with the analytical depth of machine learning. My objective is to design systems that are not only computationally robust but also visually stunning and intuitive to interact with.</p>
+            <p>Whether configuring high-performance pipelines in PyTorch, deploying containerized microservices in the cloud, or engineering smooth interfaces, I focus on performance, scalability, and code cleanliness.</p>
+            <div class="about-stats">
+              <div class="stat-card">
+                <span class="stat-num">5+</span>
+                <span class="stat-label">Years Experience</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-num">20+</span>
+                <span class="stat-label">Projects Completed</span>
+              </div>
+              <div class="stat-card">
+                <span class="stat-num">99%</span>
+                <span class="stat-label">Client Satisfaction</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Skills Section -->
+    <section id="skills" class="scene">
+      <div class="container">
+        <h2 class="section-title center">Technical Arsenal</h2>
+        <p class="section-subtitle center">My toolbox covers the full spectrum from low-level systems to advanced cognitive models.</p>
+        
+        <div class="skills-grid">
+          <!-- Card 1: Core Languages -->
+          <div class="skill-card">
+            <div class="card-glow"></div>
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+            </div>
+            <h3>Languages</h3>
+            <ul class="skill-list">
+              <li>Python <span>(Advanced)</span></li>
+              <li>JavaScript / TypeScript <span>(Advanced)</span></li>
+              <li>Rust <span>(Intermediate)</span></li>
+              <li>C++ <span>(Proficient)</span></li>
+              <li>SQL / NoSQL <span>(Advanced)</span></li>
+            </ul>
+          </div>
+
+          <!-- Card 2: AI & Machine Learning -->
+          <div class="skill-card">
+            <div class="card-glow"></div>
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+            </div>
+            <h3>AI &amp; Machine Learning</h3>
+            <ul class="skill-list">
+              <li>PyTorch &amp; TensorFlow</li>
+              <li>Large Language Models (LLMs)</li>
+              <li>Computer Vision &amp; OCR</li>
+              <li>Reinforcement Learning</li>
+              <li>Data Science &amp; NLP</li>
+            </ul>
+          </div>
+
+          <!-- Card 3: Web & Frontend -->
+          <div class="skill-card">
+            <div class="card-glow"></div>
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect><line x1="8" y1="21" x2="16" y2="21"></line><line x1="12" y1="17" x2="12" y2="21"></line></svg>
+            </div>
+            <h3>Web Technologies</h3>
+            <ul class="skill-list">
+              <li>HTML5 / CSS3 / ES6+</li>
+              <li>React.js &amp; Next.js</li>
+              <li>Node.js / Express</li>
+              <li>Tailwind CSS &amp; Sass</li>
+              <li>GSAP &amp; WebGL / Three.js</li>
+            </ul>
+          </div>
+
+          <!-- Card 4: DevOps & Infrastructure -->
+          <div class="skill-card">
+            <div class="card-glow"></div>
+            <div class="skill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+            </div>
+            <h3>Cloud &amp; DevOps</h3>
+            <ul class="skill-list">
+              <li>Docker &amp; Kubernetes</li>
+              <li>AWS &amp; Google Cloud</li>
+              <li>CI/CD (GitHub Actions)</li>
+              <li>Linux Systems &amp; Bash</li>
+              <li>Git &amp; Version Control</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Projects Section -->
+    <section id="projects" class="scene">
+      <div class="container">
+        <h2 class="section-title center">Selected Creations</h2>
+        <p class="section-subtitle center">A showcase of advanced software and intelligent models. Hover to interact, scroll to trigger parallax depth.</p>
+        
+        <div class="projects-container">
+          <!-- Project 1 -->
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <div class="project-parallax-bg" style="background: linear-gradient(135deg, #1e1e2f, #3b3b5c);">
+                <!-- Abstract visual simulation of an AI Neural Net -->
+                <div class="project-abstract-graphic">
+                  <svg viewBox="0 0 100 100" class="graphic-svg">
+                    <circle cx="20" cy="50" r="3" fill="#6c5ce7"></circle>
+                    <circle cx="50" cy="30" r="3" fill="#00cec9"></circle>
+                    <circle cx="50" cy="70" r="3" fill="#00cec9"></circle>
+                    <circle cx="80" cy="50" r="3" fill="#6c5ce7"></circle>
+                    <line x1="20" y1="50" x2="50" y2="30" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"></line>
+                    <line x1="20" y1="50" x2="50" y2="70" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"></line>
+                    <line x1="50" y1="30" x2="80" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"></line>
+                    <line x1="50" y1="70" x2="80" y2="50" stroke="rgba(255,255,255,0.2)" stroke-width="0.5"></line>
+                    <circle cx="35" cy="40" r="1.5" fill="#fff" opacity="0.6"></circle>
+                    <circle cx="65" cy="60" r="1.5" fill="#fff" opacity="0.6"></circle>
+                  </svg>
+                </div>
+              </div>
+              <div class="project-tag">ORCHESTRATION &amp; AGENTIC AI</div>
+            </div>
+            <div class="project-info">
+              <h3>Nexus</h3>
+              <p>A low-latency, event-driven orchestration engine for multi-agent LLM systems, coordinating complex multi-step workflows with real-time feedback loops.</p>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>FastAPI</span>
+                <span>Redis</span>
+                <span>Docker</span>
+                <span>LangChain</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/aditya0si/nexus" target="_blank" rel="noopener" class="link-btn">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 2 -->
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <div class="project-parallax-bg" style="background: linear-gradient(135deg, #102a43, #243b53);">
+                <!-- Abstract visual simulation of a web canvas / node cluster -->
+                <div class="project-abstract-graphic">
+                  <svg viewBox="0 0 100 100" class="graphic-svg">
+                    <circle cx="50" cy="50" r="30" fill="none" stroke="#00cec9" stroke-width="0.5" stroke-dasharray="2 2"></circle>
+                    <path d="M 20,50 A 30,30 0 0,1 80,50" fill="none" stroke="#6c5ce7" stroke-width="1"></path>
+                    <circle cx="50" cy="20" r="4" fill="#00cec9"></circle>
+                    <circle cx="80" cy="50" r="4" fill="#6c5ce7"></circle>
+                    <circle cx="20" cy="50" r="4" fill="#6c5ce7"></circle>
+                  </svg>
+                </div>
+              </div>
+              <div class="project-tag">GENERATIVE AI &amp; NLP</div>
+            </div>
+            <div class="project-info">
+              <h3>CoverAI</h3>
+              <p>An intelligent application that analyzes job descriptions and generates highly tailored, SEO-optimized cover letters and resumes using fine-tuned LLaMA models.</p>
+              <div class="project-tech">
+                <span>Next.js</span>
+                <span>PyTorch</span>
+                <span>Transformers</span>
+                <span>OpenAI API</span>
+                <span>Tailwind CSS</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/aditya0si/coverai" target="_blank" rel="noopener" class="link-btn">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Project 3 -->
+          <article class="project-card">
+            <div class="project-image-wrapper">
+              <div class="project-parallax-bg" style="background: linear-gradient(135deg, #1b162b, #332454);">
+                <!-- Abstract visual simulation of an interactive interface -->
+                <div class="project-abstract-graphic">
+                  <svg viewBox="0 0 100 100" class="graphic-svg">
+                    <rect x="15" y="15" width="70" height="70" rx="5" fill="none" stroke="#6c5ce7" stroke-width="0.5"></rect>
+                    <line x1="15" y1="35" x2="85" y2="35" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"></line>
+                    <circle cx="25" cy="25" r="2" fill="#ff7675"></circle>
+                    <circle cx="32" cy="25" r="2" fill="#ffeaa7"></circle>
+                    <circle cx="39" cy="25" r="2" fill="#55efc4"></circle>
+                    <rect x="25" y="45" width="50" height="8" rx="2" fill="#00cec9" opacity="0.3"></rect>
+                    <rect x="25" y="60" width="35" height="4" rx="1" fill="#fff" opacity="0.4"></rect>
+                  </svg>
+                </div>
+              </div>
+              <div class="project-tag">SECURE HEALTHCARE INFRASTRUCTURE</div>
+            </div>
+            <div class="project-info">
+              <h3>HealthDB</h3>
+              <p>A highly secure, HIPAA-compliant distributed medical records database featuring encrypted data storage, fine-grained access control, and predictive patient health analytics.</p>
+              <div class="project-tech">
+                <span>Node.js</span>
+                <span>Express</span>
+                <span>PostgreSQL</span>
+                <span>AWS KMS</span>
+                <span>React</span>
+              </div>
+              <div class="project-links">
+                <a href="https://github.com/aditya0si/healthdb" target="_blank" rel="noopener" class="link-btn">
+                  <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Education Section -->
+    <section id="education" class="scene">
+      <div class="container">
+        <h2 class="section-title center">Education &amp; Credentials</h2>
+        <p class="section-subtitle center">Academic checkpoints and continuous structural learning that reinforce my engineering capabilities.</p>
+        
+        <div class="timeline-wrapper">
+          <!-- Central scroll-growing timeline line -->
+          <div class="timeline-line">
+            <div class="timeline-line-progress"></div>
+          </div>
+
+          <!-- Timeline Item 1 -->
+          <div class="timeline-item left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">2023 - 2027</span>
+              <h3>B.Tech in Computer Science &amp; Engineering</h3>
+              <h4 class="timeline-institution">Massachusetts Institute of Technology (MIT)</h4>
+              <p>Focused on artificial intelligence foundations, deep learning, distributed systems, and advanced algorithm design. Actively researching cognitive software integrations.</p>
+            </div>
+          </div>
+
+          <!-- Timeline Item 2 -->
+          <div class="timeline-item right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-content">
+              <span class="timeline-date">Professional Track</span>
+              <h3>Selected Certifications</h3>
+              <h4 class="timeline-institution">Continuous Learning</h4>
+              <p>Google Cloud Professional Cloud Architect, AWS Certified Solutions Architect, and NVIDIA Deep Learning Institute Specialist.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Contact Section -->
+    <section id="contact" class="scene">
+      <div class="container small">
+        <h2 class="section-title center">Initiate Connection</h2>
+        <p class="section-subtitle center">Let's discuss deep systems, cognitive engineering, or potential integrations.</p>
+        
+        <div class="contact-card">
+          <form class="contact-form" onsubmit="event.preventDefault(); alert('Message sent! (Mock implementation)');">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" required placeholder="e.g. John Doe">
+              </div>
+              <div class="form-group">
+                <label for="email">Your Email</label>
+                <input type="email" id="email" required placeholder="e.g. john@example.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="message">Your Message</label>
+              <textarea id="message" rows="6" required placeholder="Describe your project or inquiry..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Transmit Message</button>
+          </form>
+
+          <div class="contact-socials-wrapper">
+            <p>Or find me on other terminal nodes</p>
+            <div class="social-row">
+              <a href="https://github.com/aditya0si" target="_blank" rel="noopener" class="social-icon-btn" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+              </a>
+              <a href="tel:7651982009" class="social-icon-btn" aria-label="Phone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              </a>
+              <a href="mailto:oliaditya05@gmail.com" class="social-icon-btn" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+          <p>&copy; 2026 Aditya Singh. Engineered with pure passion using Vanilla JS, GSAP &amp; Lenis.</p>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- CDNs: GSAP Core, ScrollTrigger Plugin, Lenis Smooth Scroll -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+
+  <!-- Interactive Scripts -->
+  <script src="js/particles.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
