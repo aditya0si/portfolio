@@ -1,0 +1,8 @@
+{
+  "name": "Aditya Singh Portfolio",
+  "description": "Portfolio of Aditya Singh showcasing agentic AI systems, guardrails, RAG pipelines, and orchestration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
