@@ -586,6 +586,16 @@
         });
 
         latest.textContent = monthYear.format(new Date(live[0].pushed_at)).toUpperCase();
+
+        // Live repo counts (hero + about). The API returns max 100 per page,
+        // so only trust the count when it's under the page cap.
+        var total = repos.filter(function (repo) { return !repo.fork; }).length;
+        if (total > 0 && total < 100) {
+          ['hero-repo-count', 'about-repo-count'].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.textContent = String(total);
+          });
+        }
       })
       .catch(function () {
         // API down or rate-limited: the static fallback already in the DOM stays.

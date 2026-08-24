@@ -10,8 +10,8 @@
   <meta property="og:title" content="Aditya Singh — Agentic AI Systems">
   <meta property="og:description" content="Guardrails, RAG pipelines and orchestration. Every project links to real code.">
   <meta property="og:type" content="website">
-  <!-- TODO: absolute URL after deploy, e.g. https://<your-domain>/og.png -->
-  <meta property="og:image" content="og.png">
+  <meta property="og:url" content="https://adityasingh.ai.studio/">
+  <meta property="og:image" content="https://adityasingh.ai.studio/og.png">
   <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23F4F1EA'/%3E%3Crect x='28' y='28' width='44' height='44' fill='%234101F5'/%3E%3C/svg%3E">
@@ -65,7 +65,7 @@
           <a class="btn btn-primary" href="#work" data-scroll>View work ↓</a>
           <a class="btn" href="https://github.com/aditya0si" target="_blank" rel="noopener">GitHub ↗</a>
         </div>
-        <p class="hero-meta reveal">B.TECH CSE · MIT ’27&ensp;—&ensp;17 PUBLIC REPOS&ensp;—&ensp;INDIA (IST)</p>
+        <p class="hero-meta reveal">B.TECH CSE · MIT ’27&ensp;—&ensp;<span id="hero-repo-count">17</span> PUBLIC REPOS&ensp;—&ensp;INDIA (IST)</p>
         <p class="scroll-cue" aria-hidden="true">SCROLL ↓ THE STORY</p>
       </div>
     </section>
@@ -115,7 +115,7 @@
             Everything on this page links to code you can actually read.</p>
         </div>
         <dl class="about-stats reveal">
-          <div><dt>Public repos</dt><dd>17</dd></div>
+          <div><dt>Public repos</dt><dd><span id="about-repo-count">17</span></dd></div>
           <div><dt>Core domains</dt><dd>03</dd></div>
           <div><dt>Degree</dt><dd>CSE ’27</dd></div>
           <div><dt>Latest push</dt><dd id="latest-push">—</dd></div>
@@ -181,16 +181,16 @@
         <h3 class="gh-title reveal">▮ LIVE FROM GITHUB <span class="gh-hint">— newest pushes first</span></h3>
         <div id="gh-strip" class="reveal" aria-live="polite">
           <!-- Static fallback: replaced by the live API list when it loads -->
-          <a class="gh-row" href="https://github.com/aditya0si/DevAtlas" target="_blank" rel="noopener"><span class="gh-name">DevAtlas</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/Cyber" target="_blank" rel="noopener"><span class="gh-name">Cyber</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/solarwinds" target="_blank" rel="noopener"><span class="gh-name">solarwinds</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/weathergpt" target="_blank" rel="noopener"><span class="gh-name">weathergpt</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/stormcast" target="_blank" rel="noopener"><span class="gh-name">stormcast</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/Sentinel" target="_blank" rel="noopener"><span class="gh-name">Sentinel</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/agentic_rag_system" target="_blank" rel="noopener"><span class="gh-name">agentic_rag_system</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/CoverAI" target="_blank" rel="noopener"><span class="gh-name">CoverAI</span><span class="gh-meta">TYPESCRIPT</span><span class="gh-meta">JUL 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/HealthCareOCR" target="_blank" rel="noopener"><span class="gh-name">HealthCareOCR</span><span class="gh-meta">PYTHON</span><span class="gh-meta">JUL 2026</span></a>
           <a class="gh-row" href="https://github.com/aditya0si/PulseGrid" target="_blank" rel="noopener"><span class="gh-name">PulseGrid</span><span class="gh-meta">—</span><span class="gh-meta">AUG 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/CosmosSteller" target="_blank" rel="noopener"><span class="gh-name">CosmosSteller</span><span class="gh-meta">TYPESCRIPT</span><span class="gh-meta">JUL 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/revenue-ops-orchestration" target="_blank" rel="noopener"><span class="gh-name">revenue-ops-orchestration</span><span class="gh-meta">PYTHON</span><span class="gh-meta">JUL 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/autonomus-sdr" target="_blank" rel="noopener"><span class="gh-name">autonomus-sdr</span><span class="gh-meta">PYTHON</span><span class="gh-meta">JUL 2026</span></a>
-          <a class="gh-row" href="https://github.com/aditya0si/intent-signal-engine" target="_blank" rel="noopener"><span class="gh-name">intent-signal-engine</span><span class="gh-meta">PYTHON</span><span class="gh-meta">JUL 2026</span></a>
+          <a class="gh-row" href="https://github.com/aditya0si/DevAtlas" target="_blank" rel="noopener"><span class="gh-name">DevAtlas</span><span class="gh-meta">PYTHON</span><span class="gh-meta">AUG 2026</span></a>
         </div>
-        <a class="btn gh-more reveal" href="https://github.com/aditya0si?tab=repositories" target="_blank" rel="noopener">All 17 repositories ↗</a>
+        <a class="btn gh-more reveal" href="https://github.com/aditya0si?tab=repositories" target="_blank" rel="noopener">All repositories ↗</a>
       </div>
     </section>
 
@@ -259,9 +259,7 @@
       <div class="contact-actions reveal">
         <a class="btn btn-primary" href="mailto:oliaditya05@gmail.com">oliaditya05@gmail.com</a>
         <a class="btn" href="https://github.com/aditya0si" target="_blank" rel="noopener">GitHub ↗</a>
-        <!-- TODO: add LinkedIn profile URL, then uncomment:
-        <a class="btn" href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LinkedIn ↗</a>
-        -->
+        <a class="btn" href="https://www.linkedin.com/in/aditya-singh-387774295/" target="_blank" rel="noopener">LinkedIn ↗</a>
       </div>
     </section>
 
