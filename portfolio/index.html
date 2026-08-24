@@ -179,6 +179,38 @@
       </div>
 
       <div class="gh-block">
+        <h3 class="gh-title reveal">▮ LIVE DEMO — WEATHERGPT <span class="gh-hint">— real forecast data, fetched now</span></h3>
+        <div class="demo-panel reveal" id="wg-demo">
+          <form class="demo-form" id="wg-form">
+            <input class="demo-input" id="wg-city" type="text" value="Mumbai"
+              placeholder="Try: Mumbai, Delhi, Guwahati…" aria-label="City name" autocomplete="off" spellcheck="false">
+            <button class="btn btn-primary demo-btn" id="wg-go" type="submit">FETCH ▸</button>
+          </form>
+          <p class="demo-status" id="wg-status" aria-live="polite">Connecting to live API…</p>
+          <div class="demo-current" id="wg-current" hidden>
+            <div class="demo-temp-block">
+              <span class="demo-icon" id="wg-icon" aria-hidden="true"></span>
+              <span class="demo-temp"><span id="wg-temp">—</span>°C</span>
+            </div>
+            <div class="demo-cond">
+              <p class="demo-desc" id="wg-desc">—</p>
+              <p class="demo-place" id="wg-place">—</p>
+            </div>
+            <dl class="demo-metrics">
+              <div><dt>HUMIDITY</dt><dd id="wg-hum">—</dd></div>
+              <div><dt>WIND</dt><dd id="wg-wind">—</dd></div>
+              <div><dt>RAIN CHANCE</dt><dd id="wg-pop">—</dd></div>
+            </dl>
+          </div>
+          <ul class="demo-days" id="wg-days" hidden></ul>
+          <div class="demo-foot">
+            <a href="https://github.com/aditya0si/weathergpt" target="_blank" rel="noopener">SOURCE ↗</a>
+            <span class="demo-foot-meta" id="wg-latency"></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="gh-block">
         <h3 class="gh-title reveal">▮ LIVE FROM GITHUB <span class="gh-hint">— newest pushes first</span></h3>
         <div id="gh-strip" class="reveal" aria-live="polite">
           <!-- Static fallback: replaced by the live API list when it loads -->

@@ -23,6 +23,7 @@
     initMagnetic();
     initHeroMouseParallax();
     initGitHubStrip();
+    initWeatherDemo();
     document.getElementById('year').textContent = new Date().getFullYear();
   });
 
@@ -536,6 +537,216 @@
   }
 
   /* --- Live GitHub strip ---------------------------------------------------------- */
+
+  /* --- WeatherGPT live demo --------------------------------------------- */
+
+  function initWeatherDemo() {
+    var form = document.getElementById('wg-form');
+    var input = document.getElementById('wg-city');
+    var btn = document.getElementById('wg-go');
+    var statusEl = document.getElementById('wg-status');
+    var currentEl = document.getElementById('wg-current');
+    var daysEl = document.getElementById('wg-days');
+    if (!form || !input || !window.fetch) return;
+
+    // Primary: the deployed WeatherGPT FastAPI backend. Fallback: direct
+    // Open-Meteo call so the demo still works when the free tier sleeps.
+    var API_BASES = [
+      'https://weathergpt-api.onrender.com',
+      'https://api.open-meteo.com/v1'
+    ];
+    var apiBaseIndex = -1; // resolved on first successful fetch
+
+    // WMO weather codes → icon + label
+    var WMO = {
+      0: ['☀', 'Clear sky'], 1: ['🌤', 'Mainly clear'], 2: ['⛅', 'Partly cloudy'],
+      3: ['☁', 'Overcast'], 45: ['🌫', 'Fog'], 48: ['🌫', 'Rime fog'],
+      51: ['🌦', 'Light drizzle'], 53: ['🌦', 'Drizzle'], 55: ['🌧', 'Heavy drizzle'],
+      61: ['🌧', 'Light rain'], 63: ['🌧', 'Rain'], 65: ['🌧', 'Heavy rain'],
+      71: ['🌨', 'Light snow'], 73: ['🌨', 'Snow'], 75: ['❄', 'Heavy snow'],
+      80: ['🌦', 'Rain showers'], 81: ['🌧', 'Showers'], 82: ['⛈', 'Violent showers'],
+      95: ['⛈', 'Thunderstorm'], 96: ['⛈', 'Storm w/ hail'], 99: ['⛈', 'Storm w/ hail']
+    };
+    function wmo(code) { return WMO[code] || ['·', '—']; }
+
+    function setStatus(text, isError) {
+      statusEl.textContent = text;
+      statusEl.classList.toggle('demo-error', !!isError);
+    }
+
+    function setBusy(busy) {
+      btn.disabled = busy;
+      btn.textContent = busy ? '…' : 'FETCH ▸';
+    }
+
+    function geocode(city) {
+      return window.fetch(
+        'https://geocoding-api.open-meteo.com/v1/search' +
+        '?name=' + encodeURIComponent(city) + '&count=1&language=en&format=json'
+      ).then(function (res) {
+        if (!res.ok) throw new Error('geocode ' + res.status);
+        return res.json();
+      }).then(function (data) {
+        var hit = data && data.results && data.results[0];
+        if (!hit) throw new Error('City not found — try another spelling');
+        return hit;
+      });
+    }
+
+    // Fetch via whichever base works; returns normalized payload.
+    function fetchForecast(place, lat, lon) {
+      var attempt = function (idx) {
+        if (idx >= API_BASES.length) throw new Error('All API endpoints unreachable');
+        apiBaseIndex = idx;
+        var base = API_BASES[idx];
+        var url;
+        if (base.indexOf('weathergpt') !== -1) {
+          url = base + '/api/v1/weather/forecast?location=' +
+            encodeURIComponent(place) + '&days=5';
+          return window.fetch(url).then(function (res) {
+            if (!res.ok) throw new Error('backend ' + res.status);
+            return res.json().then(function (j) {
+              return {
+                via: 'WeatherGPT API',
+                current: j.current,
+                daily: (j.daily || []).slice(0, 5)
+              };
+            });
+          });
+        }
+        // Direct Open-Meteo fallback
+        url = base + '/forecast?latitude=' + lat + '&longitude=' + lon +
+          '&current=temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m' +
+          '&daily=weather_code,temperature_2m_max,temperature_2m_min,' +
+          'precipitation_probability_max&timezone=auto&forecast_days=5';
+        return window.fetch(url).then(function (res) {
+          if (!res.ok) throw new Error('open-meteo ' + res.status);
+          return res.json();
+        }).then(function (j) {
+          return {
+            via: 'Open-Meteo direct',
+            current: {
+              temperature_c: j.current.temperature_2m,
+              relative_humidity_pct: j.current.relative_humidity_2m,
+              weather_code: j.current.weather_code,
+              wind_speed_kmh: j.current.wind_speed_10m,
+              weather_desc: wmo(j.current.weather_code)[1]
+            },
+            daily: (j.daily.time || []).map(function (d, i) {
+              return {
+                date: d,
+                weather_code: j.daily.weather_code[i],
+                temperature_max_c: j.daily.temperature_2m_max[i],
+                temperature_min_c: j.daily.temperature_2m_min[i],
+                precipitation_probability_pct: j.daily.precipitation_probability_max[i]
+              };
+            })
+          };
+        });
+      };
+
+      return attempt(apiBaseIndex === -1 ? 0 : apiBaseIndex)
+        .catch(function () { return attempt(apiBaseIndex === 0 ? 1 : 0); });
+    }
+
+    function render(data, place, ms) {
+      var cur = data.current;
+      var icon = wmo(cur.weather_code);
+      document.getElementById('wg-icon').textContent = icon[0];
+      document.getElementById('wg-temp').textContent = Math.round(cur.temperature_c);
+      document.getElementById('wg-desc').textContent =
+        cur.weather_desc || icon[1];
+      document.getElementById('wg-place').textContent = place.toUpperCase();
+      document.getElementById('wg-hum').textContent =
+        Math.round(cur.relative_humidity_pct) + '%';
+      document.getElementById('wg-wind').textContent =
+        Math.round(cur.wind_speed_kmh) + ' KM/H';
+
+      var dayNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+      daysEl.innerHTML = '';
+      (data.daily || []).forEach(function (d) {
+        var dt = new Date(d.date + 'T12:00:00');
+        var li = document.createElement('li');
+        li.className = 'demo-day';
+        li.innerHTML =
+          '<span class="demo-day-name"></span>' +
+          '<span class="demo-day-icon" aria-hidden="true"></span>' +
+          '<span class="demo-day-temp"></span>' +
+          '<span class="demo-day-pop"></span>';
+        li.children[0].textContent = dayNames[dt.getDay()];
+        li.children[1].textContent = wmo(d.weather_code)[0];
+        li.children[2].textContent =
+          Math.round(d.temperature_max_c) + '° / ' + Math.round(d.temperature_min_c) + '°';
+        li.children[3].textContent =
+          d.precipitation_probability_pct != null
+            ? d.precipitation_probability_pct + '%'
+            : '—';
+        daysEl.appendChild(li);
+      });
+
+      currentEl.hidden = false;
+      daysEl.hidden = false;
+      document.getElementById('wg-latency').textContent =
+        data.via + ' · ' + ms + 'MS · LIVE DATA';
+      setStatus('');
+      statusEl.hidden = true;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var city = input.value.trim();
+      if (!city) return;
+
+      setBusy(true);
+      statusEl.hidden = false;
+      currentEl.hidden = true;
+      daysEl.hidden = true;
+      setStatus('Fetching forecast for “' + city + '”…');
+
+      var t0 = performance.now();
+      geocode(city)
+        .then(function (hit) {
+          var label = [hit.name, hit.admin1, hit.country]
+            .filter(Boolean).join(', ');
+          return fetchForecast(label, hit.latitude, hit.longitude)
+            .then(function (data) {
+              render(data, label, Math.round(performance.now() - t0));
+            });
+        })
+        .catch(function (err) {
+          setStatus(err.message || 'Fetch failed — try again', true);
+        })
+        .then(function () { setBusy(false); });
+    });
+
+    // Auto-load on scroll into view so visitors see live data immediately.
+    if ('IntersectionObserver' in window) {
+      var seen = false;
+      new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting && !seen) {
+            seen = true;
+            obs.disconnect();
+
+            var t0 = performance.now();
+            geocode('Mumbai')
+              .then(function (hit) {
+                return fetchForecast(hit.name + ', India', hit.latitude, hit.longitude)
+                  .then(function (data) {
+                    render(data, hit.name + ', India',
+                      Math.round(performance.now() - t0));
+                  });
+              })
+              .catch(function () {
+                setStatus('Live API waking up — type a city and hit FETCH', true);
+              });
+          }
+        });
+      }, { threshold: 0.3 }).observe(document.getElementById('wg-demo'));
+    }
+  }
+
+  /* --- Live from GitHub --------------------------------------------------- */
 
   function initGitHubStrip() {
     var strip = document.getElementById('gh-strip');

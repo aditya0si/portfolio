@@ -543,6 +543,131 @@ body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; }
 .stack-group li:last-child { border-bottom: none; }
 .stack-group li::before { content: '▮ '; color: var(--accent); font-size: 0.6em; }
 
+/* --- WeatherGPT live demo ------------------------------------------------------ */
+.demo-panel {
+  border: 1px solid var(--line);
+  background: var(--bg);
+  padding: 1.6rem 1.6rem 1.2rem;
+}
+
+.demo-form { display: flex; gap: 0.8rem; }
+
+.demo-input {
+  flex: 1;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  color: var(--text, inherit);
+  background: transparent;
+  border: 1px solid var(--line-strong);
+  padding: 0.7rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s var(--ease);
+}
+.demo-input:focus { border-color: var(--accent); }
+.demo-btn { white-space: nowrap; }
+
+.demo-status {
+  margin-top: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  min-height: 1.2em;
+}
+.demo-status.demo-error { color: #C43A2F; }
+
+.demo-current {
+  display: flex;
+  align-items: center;
+  gap: 1.4rem;
+  flex-wrap: wrap;
+  margin-top: 1.2rem;
+}
+.demo-temp-block { display: flex; align-items: center; gap: 0.5rem; }
+.demo-icon { font-size: 2.6rem; line-height: 1; }
+.demo-temp {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  line-height: 1;
+}
+.demo-desc {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+.demo-place {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  margin-top: 0.25rem;
+}
+
+.demo-metrics {
+  display: flex;
+  gap: 1.8rem;
+  margin-left: auto;
+}
+.demo-metrics dt {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+.demo-metrics dd {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.15rem;
+  margin-top: 0.3rem;
+}
+
+.demo-days {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  margin-top: 1.3rem;
+}
+.demo-day {
+  background: var(--bg);
+  padding: 0.7rem 0.5rem;
+  text-align: center;
+  display: grid;
+  gap: 0.25rem;
+  justify-items: center;
+}
+.demo-day-name {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+}
+.demo-day-icon { font-size: 1.3rem; line-height: 1; }
+.demo-day-temp { font-size: 0.85rem; font-weight: 500; }
+.demo-day-pop {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent);
+}
+
+.demo-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.8rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+}
+.demo-foot a { color: var(--accent); text-decoration: none; }
+.demo-foot a:hover { text-decoration: underline; }
+.demo-foot-meta { color: var(--muted); }
+
 /* --- Services ------------------------------------------------------------------ */
 .services-grid {
   display: grid;
