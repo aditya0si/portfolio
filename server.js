@@ -1,24 +1,33 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import next from 'next';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const app = express();
+// Run from the Next app directory so Tailwind/postcss resolve their configs
+// in dev mode too (production builds `cd portfolio && next build` anyway).
+const PORTFOLIO_DIR = path.join(__dirname, 'portfolio');
+process.chdir(PORTFOLIO_DIR);
+
+const dev = process.env.NODE_ENV !== 'production';
+const nextApp = next({ dev, dir: '.' });
+const handle = nextApp.getRequestHandler();
+
 const PORT = 3000;
 
-const portfolioDir = path.join(__dirname, 'portfolio');
-const researchDir = path.join(__dirname, 'research');
+nextApp.prepare().then(() => {
+  const app = express();
 
-app.use(express.static(portfolioDir));
-app.use('/research', express.static(researchDir));
+  const researchDir = path.join(__dirname, 'research');
+  app.use('/research', express.static(researchDir));
 
-// Fallback to index.html
-app.get('*', (req, res) => {
-  res.sendFile(path.join(portfolioDir, 'index.html'));
-});
+  app.all('*', (req, res) => {
+    return handle(req, res);
+  });
 
-app.listen(PORT, '0.0.0.0', () => {
-  console.log(`Portfolio server running on http://0.0.0.0:${PORT}`);
+  app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Portfolio server running on http://0.0.0.0:${PORT}`);
+  });
 });

@@ -1,18 +1,17 @@
 {
-  "name": "portfolio",
+  "name": "portfolio-site",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node server.js",
-    "test": "node portfolio/test/concepts.test.js",
-    "build": "node portfolio/test/concepts.test.js && cd portfolio && next build",
-    "start": "node server.js",
-    "lint": "cd portfolio && next lint"
+    "dev": "next dev",
+    "test": "node test/concepts.test.js",
+    "build": "node test/concepts.test.js && next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "express": "^4.21.2",
     "lucide-react": "^0.475.0",
     "next": "^14.2.24",
     "react": "^18.3.1",

@@ -1,2 +1,24 @@
-.vercel
+# Dependencies
+node_modules/
+
+# Next.js build
+.next/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# Environment
+.env*
+
+# Vercel & tools
+.vercel/
 .playwright-mcp/
+.agents/
+ORIGINAL_REQUEST.md
+
+# Screenshots & scratch files
+shots/
+variants/
+home-desktop-full.png
+REBUILD_PROMPT.md
+

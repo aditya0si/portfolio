@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   ENGINEER'S BLUEPRINT — Next.js port
+   Cream/ink base · one electric violet accent · Clash Display + Satoshi +
+   JetBrains Mono · sharp corners · hairlines · no gradients, no glass.
+   ========================================================================== */
+
+@layer base {
+  :root {
+    --bg: #f4f1ea;
+    --ink: #16150f;
+    --ink2: rgba(22, 21, 15, 0.78);
+    --muted: #6e6b60;
+    --line: rgba(22, 21, 15, 0.14);
+    --line-strong: rgba(22, 21, 15, 0.34);
+    --accent: #4101f5;
+    --accent-soft: rgba(65, 1, 245, 0.07);
+    --surface: #ece8de;
+  }
+
+  [data-theme="b"] {
+    --bg: #0d0d0f;
+    --ink: #efeee8;
+    --ink2: rgba(239, 238, 232, 0.78);
+    --muted: #96948a;
+    --line: rgba(239, 238, 232, 0.14);
+    --line-strong: rgba(239, 238, 232, 0.36);
+    --accent: #8b6bff;
+    --accent-soft: rgba(139, 107, 255, 0.09);
+    --surface: #151518;
+  }
+
+  *,
+  ::before,
+  ::after {
+    border-color: var(--line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-bg text-ink font-sans;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .marquee-track,
+    .cursor-blink,
+    .pulse-dot {
+      animation: none !important;
+    }
+    .js .reveal {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+  }
+}
+
+@layer components {
+  .mono-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-muted;
+  }
+
+  .skip-link {
+    position: fixed;
+    top: -100px;
+    left: 1rem;
+    z-index: 100;
+    padding: 0.6rem 1rem;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-jbmono), Consolas, monospace;
+    font-size: 0.8rem;
+    text-decoration: none;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* HUD bar — translucent over page bg */
+  .hud-blur {
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  /* Schematic box — one step of a pipeline diagram */
+  .schematic-box {
+    @apply border border-line px-2.5 py-1.5 font-mono text-[10px] uppercase tracking-[0.12em] text-ink2 whitespace-nowrap;
+  }
+
+  .chip {
+    @apply inline-block border border-line px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.12em] text-muted;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-ink px-6 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-bg transition-colors hover:bg-accent hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent hover:text-accent;
+  }
+
+  /* Faint blueprint grid, theme-aware */
+  .blueprint-bg {
+    background-image:
+      linear-gradient(to right, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px),
+      linear-gradient(to bottom, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+}
+
+@layer utilities {
+  /* Scroll reveal — gated on .js so no-JS visitors see everything */
+  .js .reveal {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .js .reveal.revealed {
+    opacity: 1;
+    transform: none;
+  }
+
+  .cursor-blink {
+    animation: blink 1.1s steps(1) infinite;
+  }
+
+  .pulse-dot {
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
+  }
+  .marquee:hover .marquee-track {
+    animation-play-state: paused;
+  }
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes blink {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes pulse-dot {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.35;
+    }
+  }
+}
