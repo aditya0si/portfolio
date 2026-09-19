@@ -39,7 +39,7 @@
 - schemeGPT: 71 pytest tests passed; deployment, live data, and RAGAS execution remain unverified.
 - DevAtlas: 202 tests passed against Docker-backed PostgreSQL/Redis on a repaired local working tree; fixes are not yet published.
 
-## Unresolved gates
+## Unresolved Execution and measurement limits
 
 1. Replace CSP inline allowances with nonce/hash-based policy if compatible with static generation.
 2. Improve Lighthouse LCP/TBT and establish real-user Core Web Vitals/RUM; lab data is not field data.
