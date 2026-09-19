@@ -5,26 +5,34 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "test": "node portfolio/test/concepts.test.js",
-    "build": "node portfolio/test/concepts.test.js && cd portfolio && next build",
+    "test": "node portfolio/test/concepts.test.js && node portfolio/test/evidence_reconciliation.test.js",
+    "test:e2e": "playwright test",
+    "build": "node portfolio/test/concepts.test.js && node portfolio/test/evidence_reconciliation.test.js && cd portfolio && next build",
     "start": "node server.js",
-    "lint": "cd portfolio && next lint"
+    "start:e2e": "cd portfolio && next start -H 127.0.0.1 -p 3000",
+    "lint": "eslint portfolio e2e playwright.config.ts"
   },
   "dependencies": {
     "clsx": "^2.1.1",
-    "express": "^4.21.2",
+    "express": "^5.2.1",
     "lucide-react": "^0.475.0",
-    "next": "^14.2.24",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
+    "next": "16.3.5",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
     "tailwind-merge": "^3.0.1"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.13.0",
+    "@eslint/eslintrc": "^3.3.7",
+    "@playwright/test": "^1.50.0",
+    "@types/express": "^5.0.0",
     "@types/node": "^22.13.4",
-    "@types/react": "^18.3.18",
-    "@types/react-dom": "^18.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
     "autoprefixer": "^10.5.4",
-    "postcss": "^8.5.26",
+    "eslint": "^9.20.1",
+    "eslint-config-next": "16.3.5",
+    "postcss": "^8.5.2",
     "tailwindcss": "^3.4.17",
     "typescript": "^5.7.3"
   }

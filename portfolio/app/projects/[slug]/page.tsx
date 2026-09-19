@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Reveal from "../../components/Reveal";
 import Flow from "../../components/Flow";
-import { flagships, profile } from "@/lib/data";
+import { flagships } from "@/lib/data";
 
 export function generateStaticParams() {
   return flagships.map((p) => ({ slug: p.slug }));
@@ -12,9 +12,10 @@ export function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const project = flagships.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const project = flagships.find((p) => p.slug === slug);
   if (!project) return {};
   return {
     title: `${project.name} — ${project.status}`,
@@ -22,12 +23,13 @@ export async function generateMetadata({
   };
 }
 
-export default function ProjectPage({
+export default async function ProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const project = flagships.find((p) => p.slug === params.slug);
+  const { slug } = await params;
+  const project = flagships.find((p) => p.slug === slug);
   if (!project) notFound();
 
   const next = flagships[(flagships.indexOf(project) + 1) % flagships.length];
@@ -36,10 +38,10 @@ export default function ProjectPage({
     <div className="blueprint-bg min-h-[calc(100vh-3.5rem)]">
       <div className="mx-auto max-w-sheet px-5 py-14 sm:px-8 sm:py-20">
         <Link
-          href="/#work"
+          href="/#products"
           className="mono-label inline-block transition-colors hover:text-accent"
         >
-          ← ALL WORK
+          ← ALL PRODUCTS
         </Link>
 
         <Reveal className="mt-10">
@@ -50,8 +52,32 @@ export default function ProjectPage({
             <h1 className="font-display text-[clamp(2.5rem,7vw,5.5rem)] font-semibold leading-[0.95] tracking-[-0.02em]">
               {project.name}
             </h1>
-            <span className="chip">{project.status}</span>
+            <span className="chip border-accent/40 font-mono text-[11px] text-accent">
+              {project.status}
+            </span>
           </div>
+
+          {/* Evidence & Execution State Banner */}
+          <div className="mt-5 rounded border border-line bg-surface/60 p-4 font-mono text-[12px] text-muted">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="font-semibold text-accent">[EXECUTION STATUS]</span>
+              <span className="text-ink2">{project.executionState}</span>
+            </div>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <span className="font-semibold text-accent">[EVIDENCE ID]</span>
+              <a
+                href={project.evidenceUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="underline decoration-line underline-offset-2 hover:text-accent"
+              >
+                {project.evidenceId} ↗
+              </a>
+              <span className="text-line">|</span>
+              <span className="text-muted">{project.evidenceStrength}</span>
+            </div>
+          </div>
+
           <p className="mt-5 max-w-3xl text-lg leading-relaxed text-ink2 sm:text-xl">
             {project.tagline}
           </p>
@@ -67,7 +93,7 @@ export default function ProjectPage({
                 rel="noopener noreferrer"
                 className={i === 0 ? "btn-primary" : "btn-ghost"}
               >
-                {link.label === "SOURCE" ? "View source" : link.label} ↗
+                {link.label === "SOURCE" ? "View source repository" : link.label} ↗
               </a>
             ))}
           </div>
@@ -83,8 +109,8 @@ export default function ProjectPage({
                 </p>
               </section>
 
-              <section aria-label="What I built" className="mt-10">
-                <p className="mono-label mb-3">WHAT I BUILT</p>
+              <section aria-label="What was built" className="mt-10">
+                <p className="mono-label mb-3">WHAT WAS BUILT</p>
                 <ul className="space-y-3">
                   {project.built.map((item) => (
                     <li

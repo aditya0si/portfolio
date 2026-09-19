@@ -14,24 +14,25 @@ const jbMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(profile.site),
   title: {
-    default: "Aditya Singh — AI/LLM Engineer · Agent Systems",
+    default: "Aditya Singh — Systems Engineering & Agent Architectures",
     template: "%s — Aditya Singh",
   },
   description:
-    "I build agentic AI systems that survive production — guardrails, RAG pipelines and eval harnesses. B.Tech CCE '27 @ MIT Manipal. Ex-IBM, ex-HCL intern.",
+    "Systems engineering portfolio of Aditya Singh — agent architectures, guardrails, evaluation harnesses, and distributed streaming pipelines. B.Tech CCE @ MIT Manipal.",
   keywords: [
     "Aditya Singh",
-    "AI engineer",
-    "LLM",
-    "agentic AI",
-    "RAG",
-    "guardrails",
-    "portfolio",
+    "Systems Engineer",
+    "AI Systems",
+    "Agent Architectures",
+    "Guardrails",
+    "RAG Pipelines",
+    "Evaluation Harnesses",
+    "Portfolio",
   ],
   openGraph: {
-    title: "Aditya Singh — AI/LLM Engineer · Agent Systems",
+    title: "Aditya Singh — Systems Engineering & Agent Architectures",
     description:
-      "I build agentic AI systems that survive production — guardrails, RAG pipelines and eval harnesses. Ex-IBM, ex-HCL intern. 34 public repos.",
+      "Systems engineering portfolio of Aditya Singh — agent architectures, guardrails, evaluation harnesses, and distributed streaming pipelines. B.Tech CCE @ MIT Manipal.",
     url: profile.site,
     siteName: "Aditya Singh",
     type: "website",
@@ -39,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aditya Singh — AI/LLM Engineer · Agent Systems",
+    title: "Aditya Singh — Systems Engineering & Agent Architectures",
     description:
-      "I build agentic AI systems that survive production — guardrails, RAG pipelines and eval harnesses.",
+      "Systems engineering portfolio of Aditya Singh — agent architectures, guardrails, evaluation harnesses, and distributed streaming pipelines. B.Tech CCE @ MIT Manipal.",
   },
   robots: { index: true, follow: true },
 };
@@ -70,6 +71,8 @@ export default function RootLayout({
         <link
           href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap"
           rel="stylesheet"
+          integrity="sha384-3WuAYeWwFlTK6nHfipy136z9/xQECkxofRrklER1CudS1CEFlYg3FuQIGkxB3hKn"
+          crossOrigin="anonymous"
         />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>

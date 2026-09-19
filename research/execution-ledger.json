@@ -1,0 +1,223 @@
+{
+  "schema_version": "1.0",
+  "recorded_at": "2026-09-19T20:59:49+05:30",
+  "environment": {
+    "os": "Windows 11",
+    "python": "3.11.16",
+    "go": "1.27.0 windows/amd64",
+    "docker": "29.6.2"
+  },
+  "records": [
+    {
+      "id": "EXEC-SENTINEL-PYTEST-20260919",
+      "repo": "Sentinel",
+      "commit_sha": "ab0f2cee433ebc1d8d7c47f936fc236d75a5a027",
+      "working_tree_clean": true,
+      "command": "python -m pytest -q",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "62 passed in 1.62s",
+      "scope": "Local pytest suite; no deployment or load benchmark verification."
+    },
+    {
+      "id": "EXEC-MCP-PYTEST-20260919",
+      "repo": "mcp-from-scratch",
+      "commit_sha": "59fbaa0ed89d67ffb3632337d7552e5b7de49ca6",
+      "working_tree_clean": true,
+      "command": "python -m pytest -q",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "29 passed in 0.63s",
+      "scope": "Local pytest suite; no deployed transport verification."
+    },
+    {
+      "id": "EXEC-TENANT-UNIT-20260919",
+      "repo": "tenant-api-platform",
+      "commit_sha": "a6f715aac1d4e46b2ef30e12fb42d4719672f7f5",
+      "working_tree_clean": true,
+      "command": "SKIP_DB_TESTS=1 go test -count=1 ./...",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "Unit-mode package tests passed.",
+      "scope": "Database-backed integration behavior and RLS enforcement were not executed because SKIP_DB_TESTS=1."
+    },
+    {
+      "id": "EXEC-TENANT-STATIC-20260919",
+      "repo": "tenant-api-platform",
+      "commit_sha": "a6f715aac1d4e46b2ef30e12fb42d4719672f7f5",
+      "working_tree_clean": true,
+      "command": "go vet ./... && go build ./...",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "Go vet and build passed.",
+      "scope": "Compile/static-analysis evidence only."
+    },
+    {
+      "id": "EXEC-EVENT-STATIC-20260919",
+      "repo": "event-stream-platform",
+      "commit_sha": "4ecb068d032a155c74dc2911c2d8cf0a713ce857",
+      "working_tree_clean": true,
+      "command": "go vet ./... && go build ./...",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "Go vet and build passed.",
+      "scope": "Compile/static-analysis evidence only."
+    },
+    {
+      "id": "EXEC-EVENT-TEST-20260919",
+      "repo": "event-stream-platform",
+      "commit_sha": "4ecb068d032a155c74dc2911c2d8cf0a713ce857",
+      "working_tree_clean": true,
+      "command": "go test -count=1 ./...",
+      "result": "SUPERSEDED",
+      "exit_code": 1,
+      "summary": "Initial run was blocked before Docker Desktop was started; superseded by EXEC-EVENT-DOCKER-20260919.",
+      "scope": "Historical environment-blocked attempt retained for traceability."
+    },
+    {
+      "id": "EXEC-SCHEMEGPT-PYTEST-20260919",
+      "repo": "schemeGPT",
+      "commit_sha": "f030ad35b4a574dc0e3b463fa68435926c123202",
+      "working_tree_clean": true,
+      "command": "uv run --with-requirements requirements.txt --with pytest --with pytest-asyncio python -m pytest -q",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "71 passed in 105.03s",
+      "scope": "Local test suite in an isolated uv environment; does not verify deployment, live data sources, or RAGAS execution."
+    },
+    {
+      "id": "EXEC-DEVATLAS-PYTEST-20260919",
+      "repo": "DevAtlas",
+      "commit_sha": "7d266b3305c366f67f70d866ea32d3f4b2bce546",
+      "working_tree_clean": true,
+      "command": "uv run --isolated --python 3.11 --with-requirements requirements.txt python -m pytest -q",
+      "result": "SUPERSEDED",
+      "exit_code": 1,
+      "summary": "Initial 128-pass/74-error run was superseded after Docker-backed PostgreSQL/Redis provisioning and a local integration repair.",
+      "scope": "Historical environment-blocked attempt retained for traceability."
+    },
+    {
+      "id": "CI-SCHEMEGPT-20260919",
+      "repo": "schemeGPT",
+      "commit_sha": "f030ad35b4a574dc0e3b463fa68435926c123202",
+      "evidence_type": "CI_OBSERVED",
+      "command": "gh run list --repo aditya0si/schemeGPT --limit 5 --json databaseId,workflowName,status,conclusion,headSha,createdAt,updatedAt,url",
+      "result": "PASS",
+      "summary": "Latest CI run completed successfully on the audited commit.",
+      "run_url": "https://github.com/aditya0si/schemeGPT/actions/runs/34871798476",
+      "recorded_at": "2026-09-19T04:10:55+05:30"
+    },
+    {
+      "id": "CI-SENTINEL-20260919",
+      "repo": "Sentinel",
+      "commit_sha": "ab0f2cee433ebc1d8d7c47f936fc236d75a5a027",
+      "evidence_type": "CI_OBSERVED",
+      "command": "gh run list --repo aditya0si/Sentinel --limit 5 --json databaseId,workflowName,status,conclusion,headSha,createdAt,updatedAt,url",
+      "result": "PASS",
+      "summary": "Latest Sentinel Quality Gate completed successfully on the audited commit.",
+      "run_url": "https://github.com/aditya0si/Sentinel/actions/runs/33509493282",
+      "recorded_at": "2026-09-19T04:10:55+05:30"
+    },
+    {
+      "id": "CI-MCP-20260919",
+      "repo": "mcp-from-scratch",
+      "commit_sha": "59fbaa0ed89d67ffb3632337d7552e5b7de49ca6",
+      "evidence_type": "CI_OBSERVED",
+      "command": "gh run list --repo aditya0si/mcp-from-scratch --limit 5 --json databaseId,workflowName,status,conclusion,headSha,createdAt,updatedAt,url",
+      "result": "NO_RUNS_FOUND",
+      "summary": "GitHub returned no workflow runs; no CI-success claim is made.",
+      "recorded_at": "2026-09-19T04:10:55+05:30"
+    },
+    {
+      "id": "CI-TENANT-20260919",
+      "repo": "tenant-api-platform",
+      "commit_sha": "a6f715aac1d4e46b2ef30e12fb42d4719672f7f5",
+      "evidence_type": "CI_OBSERVED",
+      "command": "gh run list --repo aditya0si/tenant-api-platform --limit 5 --json databaseId,workflowName,status,conclusion,headSha,createdAt,updatedAt,url",
+      "result": "PASS",
+      "summary": "Latest ci workflow completed successfully on the audited commit.",
+      "run_url": "https://github.com/aditya0si/tenant-api-platform/actions/runs/34558220324",
+      "recorded_at": "2026-09-19T04:10:55+05:30"
+    },
+    {
+      "id": "CI-EVENT-20260919",
+      "repo": "event-stream-platform",
+      "commit_sha": "4ecb068d032a155c74dc2911c2d8cf0a713ce857",
+      "evidence_type": "CI_OBSERVED",
+      "command": "gh run list --repo aditya0si/event-stream-platform --limit 5 --json databaseId,workflowName,status,conclusion,headSha,createdAt,updatedAt,url",
+      "result": "PASS",
+      "summary": "Latest ci workflow completed successfully on the audited commit.",
+      "run_url": "https://github.com/aditya0si/event-stream-platform/actions/runs/34623119770",
+      "recorded_at": "2026-09-19T04:10:55+05:30"
+    },
+    {
+      "id": "EXEC-EVENT-DOCKER-20260919",
+      "repo": "event-stream-platform",
+      "commit_sha": "4ecb068d032a155c74dc2911c2d8cf0a713ce857",
+      "working_tree_clean": true,
+      "evidence_type": "TEST_EXECUTED",
+      "command": "docker compose up -d --build; DATABASE_URL=[REDACTED] REDIS_ADDR=localhost:6380 KAFKA_BROKERS=localhost:19092 go test -count=1 ./...; python scripts/smoke_compose.py",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "All 86 Go tests passed with PostgreSQL, Redis, and Redpanda running; the Compose smoke test also passed.",
+      "scope": "Local Docker-backed integration at the audited commit; historical load artifact was not reproduced."
+    },
+    {
+      "id": "EXEC-TENANT-DB-20260919",
+      "repo": "tenant-api-platform",
+      "commit_sha": "a6f715aac1d4e46b2ef30e12fb42d4719672f7f5",
+      "working_tree_clean": true,
+      "evidence_type": "TEST_EXECUTED",
+      "command": "TEST_DATABASE_URL=[REDACTED] TEST_MIGRATE_DATABASE_URL=[REDACTED] TEST_REDIS_URL=redis://localhost:6379/1 go test -count=1 ./...",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "The full Go package suite passed against Docker-backed PostgreSQL and Redis.",
+      "scope": "Database-backed local integration. The repository's -race target could not compile because the installed Windows C compiler lacks 64-bit support; the non-race suite passed."
+    },
+    {
+      "id": "CI-ECOSYSTEM-RECONCILIATION-20260919",
+      "repo": "aditya0si GitHub ecosystem",
+      "commit_sha": null,
+      "evidence_type": "CI_OBSERVED",
+      "command": "node research/reconcile_ci.js",
+      "result": "PARTIAL",
+      "exit_code": 0,
+      "summary": "47 snapshots reconciled: 21 successful runs at audited SHAs, 21 with no runs at the audited SHA, 4 with runs but no success, and 1 missing an audited SHA.",
+      "scope": "Per-repository immutable run evidence is stored in research/ci-reconciliation.json; workflow files alone were not counted as success."
+    },
+    {
+      "id": "PERF-PORTFOLIO-LIGHTHOUSE-20260919",
+      "repo": "Portfolio",
+      "commit_sha": null,
+      "evidence_type": "TEST_EXECUTED",
+      "command": "npx --yes lighthouse@13.5.0 http://127.0.0.1:3000 --chrome-flags='--headless --no-sandbox'",
+      "result": "PASS_WITH_FINDINGS",
+      "exit_code": 0,
+      "summary": "Lighthouse lab scores: Performance 72, Accessibility 100, Best Practices 100, SEO 100; LCP 4.7 s, FCP 2.6 s, TBT 320 ms, CLS 0.",
+      "scope": "Single local mobile-simulation run against next start; not CrUX or real-user field data."
+    },
+    {
+      "id": "SEC-PORTFOLIO-ZAP-20260919",
+      "repo": "Portfolio",
+      "commit_sha": null,
+      "evidence_type": "TEST_EXECUTED",
+      "command": "zaproxy/zaproxy:stable zap-baseline.py -t http://host.docker.internal:3000",
+      "result": "PASS_WITH_WARNINGS",
+      "exit_code": 2,
+      "summary": "OWASP ZAP baseline reported 0 FAIL alerts and 65 passing passive rules. Two medium warning categories remain: script-src unsafe-inline (3 observed instances) and style-src unsafe-inline (5 observed instances).",
+      "scope": "Authorized local production server only; passive baseline scan, not an exploit test."
+    },
+    {
+      "id": "EXEC-DEVATLAS-DOCKER-REPAIR-20260919",
+      "repo": "DevAtlas",
+      "commit_sha": "7d266b3305c366f67f70d866ea32d3f4b2bce546",
+      "working_tree_clean": false,
+      "evidence_type": "TEST_EXECUTED",
+      "command": "TEST_DATABASE_URL=[REDACTED] REDIS_URL=redis://localhost:56379/0 uv run --isolated --python 3.11 --with-requirements requirements.txt python -m pytest -q",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "202 passed, 18 warnings in 28.80s against Docker-backed PostgreSQL 16 with PostGIS/pgvector and Redis.",
+      "scope": "Verified on a repaired but uncommitted DevAtlas working tree based on commit 7d266b3; this is not evidence that the audited Git commit itself passes unchanged."
+    }
+  ]
+}

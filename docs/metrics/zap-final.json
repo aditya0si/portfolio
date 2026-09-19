@@ -1,0 +1,337 @@
+{
+	"@programName": "ZAP",
+	"@version": "2.17.0",
+	"@generated": "Sat, 19 Sept 2026 15:18:43",
+	"created": "2026-09-19T15:18:43.633423992Z",
+	"insights":[
+		{
+			"level": "Low",
+			"reason": "Warning",
+			"site": "",
+			"key": "insight.log.warn",
+			"description": "ZAP warnings logged - see the zap.log file for details",
+			"statistic": "17"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.code.2xx",
+			"description": "Percentage of responses with status code 2xx",
+			"statistic": "100"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.application/javascript",
+			"description": "Percentage of endpoints with content type application/javascript",
+			"statistic": "47"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.application/xml",
+			"description": "Percentage of endpoints with content type application/xml",
+			"statistic": "4"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.font/woff2",
+			"description": "Percentage of endpoints with content type font/woff2",
+			"statistic": "4"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.image/png",
+			"description": "Percentage of endpoints with content type image/png",
+			"statistic": "4"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.text/css",
+			"description": "Percentage of endpoints with content type text/css",
+			"statistic": "4"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.text/html",
+			"description": "Percentage of endpoints with content type text/html",
+			"statistic": "28"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.ctype.text/plain",
+			"description": "Percentage of endpoints with content type text/plain",
+			"statistic": "4"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.method.GET",
+			"description": "Percentage of endpoints with method GET",
+			"statistic": "100"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.endpoint.total",
+			"description": "Count of total endpoints",
+			"statistic": "21"
+		},
+		{
+			"level": "Info",
+			"reason": "Informational",
+			"site": "http://host.docker.internal:3000",
+			"key": "insight.response.slow",
+			"description": "Percentage of slow responses",
+			"statistic": "82"
+		}
+	],
+	"site":[
+		{
+			"@name": "http://host.docker.internal:3000",
+			"@host": "host.docker.internal",
+			"@port": "3000",
+			"@ssl": "false",
+			"alerts": [
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-5",
+					"alert": "CSP: script-src unsafe-inline",
+					"name": "CSP: script-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[
+						{
+							"id": "1",
+							"uri": "http://host.docker.internal:3000",
+							"nodeName": "http:\/\/host.docker.internal:3000",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "script-src includes unsafe-inline."
+						},
+						{
+							"id": "15",
+							"uri": "http://host.docker.internal:3000/projects/mcp-from-scratch",
+							"nodeName": "http:\/\/host.docker.internal:3000\/projects\/mcp-from-scratch",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "script-src includes unsafe-inline."
+						},
+						{
+							"id": "13",
+							"uri": "http://host.docker.internal:3000/projects/schemegpt",
+							"nodeName": "http:\/\/host.docker.internal:3000\/projects\/schemegpt",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "script-src includes unsafe-inline."
+						}
+					],
+					"count": "3",
+					"systemic": true,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>script-src includes unsafe-inline.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10055",
+					"alertRef": "10055-6",
+					"alert": "CSP: style-src unsafe-inline",
+					"name": "CSP: style-src unsafe-inline",
+					"riskcode": "2",
+					"confidence": "3",
+					"riskdesc": "Medium (High)",
+					"desc": "<p>Content Security Policy (CSP) is an added layer of security that helps to detect and mitigate certain types of attacks. Including (but not limited to) Cross Site Scripting (XSS), and data injection attacks. These attacks are used for everything from data theft to site defacement or distribution of malware. CSP provides a set of standard HTTP headers that allow website owners to declare approved sources of content that browsers should be allowed to load on that page \u2014 covered types are JavaScript, CSS, HTML frames, fonts, images and embeddable objects such as Java applets, ActiveX, audio and video files.</p>",
+					"instances":[
+						{
+							"id": "5",
+							"uri": "http://host.docker.internal:3000",
+							"nodeName": "http:\/\/host.docker.internal:3000",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"id": "3",
+							"uri": "http://host.docker.internal:3000/",
+							"nodeName": "http:\/\/host.docker.internal:3000\/",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"id": "16",
+							"uri": "http://host.docker.internal:3000/projects/mcp-from-scratch",
+							"nodeName": "http:\/\/host.docker.internal:3000\/projects\/mcp-from-scratch",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"id": "14",
+							"uri": "http://host.docker.internal:3000/projects/schemegpt",
+							"nodeName": "http:\/\/host.docker.internal:3000\/projects\/schemegpt",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "style-src includes unsafe-inline."
+						},
+						{
+							"id": "21",
+							"uri": "http://host.docker.internal:3000/projects/tenant-api-platform",
+							"nodeName": "http:\/\/host.docker.internal:3000\/projects\/tenant-api-platform",
+							"method": "GET",
+							"param": "Content-Security-Policy",
+							"attack": "",
+							"evidence": "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+							"otherinfo": "style-src includes unsafe-inline."
+						}
+					],
+					"count": "5",
+					"systemic": false,
+					"solution": "<p>Ensure that your web server, application server, load balancer, etc. is properly configured to set the Content-Security-Policy header.</p>",
+					"otherinfo": "<p>style-src includes unsafe-inline.</p>",
+					"reference": "<p>https://www.w3.org/TR/CSP/</p><p>https://caniuse.com/#search=content+security+policy</p><p>https://content-security-policy.com/</p><p>https://github.com/HtmlUnit/htmlunit-csp</p><p>https://web.dev/articles/csp#resource-options</p>",
+					"cweid": "693",
+					"wascid": "15",
+					"sourceid": "6"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049-3",
+					"alert": "Storable and Cacheable Content",
+					"name": "Storable and Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, and may be retrieved directly from the cache, rather than from the origin server by the caching servers, in response to similar requests from other users. If the response data is sensitive, personal or user-specific, this may result in sensitive information being leaked. In some cases, this may even result in a user gaining complete control of the session of another user, depending on the configuration of the caching components in use in their environment. This is primarily an issue where \"shared\" caching servers such as \"proxy\" caches are configured on the local network. This configuration is typically found in corporate or educational environments, for instance.</p>",
+					"instances":[
+						{
+							"id": "6",
+							"uri": "http://host.docker.internal:3000",
+							"nodeName": "http:\/\/host.docker.internal:3000",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=31536000",
+							"otherinfo": ""
+						},
+						{
+							"id": "7",
+							"uri": "http://host.docker.internal:3000/",
+							"nodeName": "http:\/\/host.docker.internal:3000\/",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "s-maxage=31536000",
+							"otherinfo": ""
+						},
+						{
+							"id": "12",
+							"uri": "http://host.docker.internal:3000/_next/static/chunks/0cz1d0mv5g_q7.js",
+							"nodeName": "http:\/\/host.docker.internal:3000\/_next\/static\/chunks\/0cz1d0mv5g_q7.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=31536000",
+							"otherinfo": ""
+						},
+						{
+							"id": "9",
+							"uri": "http://host.docker.internal:3000/_next/static/chunks/22i43cg4l4-dq.js",
+							"nodeName": "http:\/\/host.docker.internal:3000\/_next\/static\/chunks\/22i43cg4l4-dq.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=31536000",
+							"otherinfo": ""
+						},
+						{
+							"id": "11",
+							"uri": "http://host.docker.internal:3000/_next/static/chunks/turbopack-1b6uko1cu_h42.js",
+							"nodeName": "http:\/\/host.docker.internal:3000\/_next\/static\/chunks\/turbopack-1b6uko1cu_h42.js",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=31536000",
+							"otherinfo": ""
+						}
+					],
+					"count": "5",
+					"systemic": true,
+					"solution": "<p>Validate that the response does not contain sensitive, personal or user-specific information. If it does, consider the use of the following HTTP response headers, to limit, or prevent the content being stored and retrieved from the cache by another user:</p><p>Cache-Control: no-cache, no-store, must-revalidate, private</p><p>Pragma: no-cache</p><p>Expires: 0</p><p>This configuration directs both HTTP 1.0 and HTTP 1.1 compliant caching servers to not store the response, and to not retrieve the response (without validation) from the cache, in response to a similar request.</p>",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "1"
+				},
+				{
+					"pluginid": "10049",
+					"alertRef": "10049-2",
+					"alert": "Storable but Non-Cacheable Content",
+					"name": "Storable but Non-Cacheable Content",
+					"riskcode": "0",
+					"confidence": "2",
+					"riskdesc": "Informational (Medium)",
+					"desc": "<p>The response contents are storable by caching components such as proxy servers, but will not be retrieved directly from the cache, without validating the request upstream, in response to similar requests from other users.</p>",
+					"instances":[
+						{
+							"id": "10",
+							"uri": "http://host.docker.internal:3000/icon.png?icon.00cpg8nvoom0-.png",
+							"nodeName": "http:\/\/host.docker.internal:3000\/icon.png (icon.00cpg8nvoom0-.png)",
+							"method": "GET",
+							"param": "",
+							"attack": "",
+							"evidence": "max-age=0",
+							"otherinfo": ""
+						}
+					],
+					"count": "1",
+					"systemic": false,
+					"solution": "",
+					"otherinfo": "",
+					"reference": "<p>https://datatracker.ietf.org/doc/html/rfc7234</p><p>https://datatracker.ietf.org/doc/html/rfc7231</p><p>https://www.w3.org/Protocols/rfc2616/rfc2616-sec13.html</p>",
+					"cweid": "524",
+					"wascid": "13",
+					"sourceid": "43"
+				}
+			]
+		}
+	],
+	"sequences":[
+	]
+
+}

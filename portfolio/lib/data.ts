@@ -1,11 +1,12 @@
-// All content below is sourced from real data: github.com/aditya0si (API + repo READMEs)
-// and user-confirmed details. Do not add metrics or claims that aren't real.
+// All content below is sourced strictly from verified evidence in research/evidence-ledger.json,
+// docs/portfolio/project-scores.json, docs/portfolio/INITIAL-AUDIT.md, and .agent/MASTER_STATE.md.
+// No unsupported claims, unverified metrics, or speculative biographical entries.
 
 export const profile = {
   name: "Aditya Singh",
-  role: "AI/LLM Engineer — Agent Systems",
-  headline: "I build agentic AI systems that survive production.",
-  sub: "Retrieval quality, offline evals tied to online metrics, and segmentation that decides what ships — across RAG pipelines, guardrails and the OCR data pipelines that feed them. Final-year B.Tech CCE @ MIT Manipal, two AI internships, everything on this page runs from a public repo.",
+  role: "AI Systems & Backend Engineer",
+  headline: "Systems-first engineering across agent architectures, guardrails, and backend pipelines.",
+  sub: "Computer & Communication Engineering student at MIT Manipal, focused on agent systems, evaluation harnesses, and backend infrastructure. Status labels distinguish code inspection from checks executed in this audit.",
   email: "oliaditya05@gmail.com",
   github: "https://github.com/aditya0si",
   githubUser: "aditya0si",
@@ -14,30 +15,33 @@ export const profile = {
 } as const;
 
 export const evidence = [
-  { k: "EX-IBM", v: "SWE INTERN · OCR + RAG" },
-  { k: "EX-HCL", v: "GENAI INTERN · LANGGRAPH" },
-  { k: "43", v: "PUBLIC REPOS" },
-  { k: "NPM", v: "OPENCODE-TEAMWORK" },
-  { k: "SIH 2026", v: "FLOODLENS · BUSTWATCH" },
+  { k: "TESTS", v: "VERIFIED LOCAL TEST RUNS" },
+  { k: "CODEC", v: "RAW JSON-RPC 2.0 MCP" },
+  { k: "REPOS", v: "27 DEEPER EVIDENCE REVIEWS" },
+  { k: "EDUCATION", v: "B.TECH CCE · MIT MANIPAL" },
 ] as const;
 
 export const marqueeItems = [
-  "AGENTIC SYSTEMS",
+  "AGENT SYSTEMS",
   "RAG PIPELINES",
   "GUARDRAILS",
-  "LLM EVALS",
-  "MCP",
-  "OCR PIPELINES",
-  "OBSERVABILITY",
+  "EVAL HARNESSES",
+  "MCP PROTOCOL",
+  "DISTRIBUTED STREAMING",
+  "SYSTEM OBSERVABILITY",
   "FULL-STACK",
 ] as const;
+
+export type RoleCategory = "ALL" | "AI ENGINEER" | "FORWARD DEPLOYED" | "BACKEND/SYSTEMS";
 
 export type Flagship = {
   slug: string;
   repo: string; // actual GitHub repository name
   index: string;
   name: string;
-  status: string;
+  status: string; // explicitly indicates candidate / provisional status
+  executionState: string; // execution and deployment status verified by audit
+  roles: RoleCategory[];
   tagline: string;
   problem: string;
   built: string[];
@@ -46,6 +50,9 @@ export type Flagship = {
   metrics: { value: string; label: string }[];
   flow: string[];
   links: { label: string; href: string }[];
+  evidenceId: string;
+  evidenceUrl: string; // immutable GitHub path pinned to audited commit
+  evidenceStrength: string;
 };
 
 export const flagships: Flagship[] = [
@@ -53,177 +60,221 @@ export const flagships: Flagship[] = [
     slug: "schemegpt",
     repo: "schemeGPT",
     index: "P.01",
-    name: "SchemeGPT",
-    status: "PRODUCTION RAG",
+    name: "schemeGPT",
+    status: "PROVISIONAL CANDIDATE · 71 TESTS PASSED",
+    executionState:
+      "71 pytest tests passed at commit f030ad3 in an isolated uv environment. Next.js 16 and FastAPI/pgvector dependencies were code-observed; deployment, live data sources, and RAGAS execution remain unverified.",
+    roles: ["AI ENGINEER", "FORWARD DEPLOYED"],
     tagline:
-      "Decision-support RAG for Indian government schemes — hybrid retrieval tuned against offline RAGAS evals, quote verification as the online quality metric, bilingual answers.",
+      "Repository documentation describes hybrid pgvector + PostgreSQL full-text retrieval with Reciprocal Rank Fusion, quote attribution, and bilingual query handling; these behaviors were not executed in this audit.",
     problem:
-      "Welfare schemes are scattered across 30+ ministry and state portals. Dense eligibility rules and language barriers stop qualifying citizens from claiming entitlements.",
+      "The project targets discovery and interpretation of welfare-scheme eligibility guidance spread across government sources.",
     built: [
-      "Hybrid dense + sparse retrieval: pgvector embeddings fused with PostgreSQL full-text search via Reciprocal Rank Fusion",
-      "Exact quote verification — every generated claim must match indexed source text before it's shown, with inline citations",
-      "Deterministic citizen-profile matching and bilingual (English/Hindi) SSE-streamed answers on a Next.js 15 frontend",
+      "README-claimed hybrid retrieval combining pgvector and PostgreSQL full-text search through Reciprocal Rank Fusion",
+      "Code-observed quote-verification path intended to check generated claims against indexed source text",
+      "Next.js 16 interface and FastAPI route structure observed in the pinned repository snapshot",
     ],
     highlights: [
-      "RAGAS offline evaluation suite runs as a CI gate — answer regressions fail the build, not the user",
-      "Groq gpt-oss-120b inference behind a multi-step tool-calling agent",
-      "Docker Compose one-liner deployment with a production VPS runbook",
+      "71 pytest tests passed locally; this does not establish deployed retrieval quality or RAGAS execution",
+      "Next.js 16 and React 19 versions verified from web/package.json",
+      "Custom retrieval evaluation files are present; their benchmark outputs and the README RAGAS claim were not independently executed",
+      "Docker Compose and PostgreSQL/pgvector configuration observed in the repository tree",
     ],
-    stack: ["Python", "FastAPI", "Next.js 15", "PostgreSQL", "pgvector", "RRF", "RAGAS", "Groq", "Docker"],
+    stack: ["Python", "FastAPI", "Next.js 16", "PostgreSQL", "pgvector", "RRF", "Sentence-Transformers", "Docker Compose"],
     metrics: [
-      { value: "2-WAY", label: "HYBRID RETRIEVAL → RRF" },
-      { value: "EN/HI", label: "BILINGUAL ANSWERS" },
-      { value: "RAGAS", label: "EVAL GATE IN CI" },
-      { value: "100%", label: "QUOTE-VERIFIED CLAIMS" },
+      { value: "HYBRID", label: "PGVECTOR + FTS CLAIM" },
+      { value: "71", label: "PYTESTS PASSED" },
+      { value: "NEXT 16", label: "APP ROUTER WEB UI" },
+      { value: "QUOTE", label: "SUBSTRING VERIFICATION" },
     ],
-    flow: ["QUERY (EN/HI)", "HYBRID RETRIEVAL · PGVECTOR + FTS", "RRF FUSION", "QUOTE VERIFICATION", "GROQ LLM", "CITED ANSWER"],
-    links: [{ label: "SOURCE", href: "https://github.com/aditya0si/schemeGPT" }],
+    flow: ["QUERY (EN/HI)", "HYBRID RETRIEVAL (PGVECTOR + FTS)", "RRF FUSION (TOP-4 DIVERSE)", "QUOTE VERIFICATION", "SSE STREAMING", "CITED ANSWER"],
+    links: [
+      { label: "SOURCE", href: "https://github.com/aditya0si/schemeGPT" },
+      { label: "CI", href: "https://github.com/aditya0si/schemeGPT/actions/runs/34871798476" },
+    ],
+    evidenceId: "EV-SG-RETRIEVAL",
+    evidenceUrl: "https://github.com/aditya0si/schemeGPT/blob/f030ad35b4a574dc0e3b463fa68435926c123202/app/retrieval.py",
+    evidenceStrength: "VERIFIED TEST RUN (71 pytest passed; deployment and RAGAS claims remain unverified)",
   },
   {
     slug: "sentinel",
     repo: "Sentinel",
     index: "P.02",
     name: "Sentinel",
-    status: "OPEN SOURCE · MIT",
+    status: "PROVISIONAL CANDIDATE · 62 TESTS PASSED",
+    executionState:
+      "62 pytest unit and integration tests passed in physical execution; OpenTelemetry tracer exporting to Jaeger and Prometheus metrics observed; latency benchmark claims unverified per EV-SEN-METRICS-CLAIM.",
+    roles: ["AI ENGINEER", "BACKEND/SYSTEMS"],
     tagline:
-      "Quality gates for agentic AI — a validation proxy that segments every failure by guardrail type and turns golden-set evals into a ship/block experiment on each PR.",
+      "Quality and reliability proxy for agentic workflows — validation proxy enforcing Pydantic schemas, PII redaction, toxicity filters, and grounding checks with OpenTelemetry distributed tracing.",
     problem:
-      "Autonomous agents ship unvalidated JSON, leak PII and hallucinate mid-run. Most stacks have no shared quality gate that works identically in CI and on live traffic.",
+      "Autonomous agent pipelines emit malformed JSON, leak sensitive PII, and generate ungrounded completions without shared quality gates between development and execution.",
     built: [
-      "FastAPI validation proxy + embeddable Python library enforcing schema, PII, toxicity and grounding checks on every completion",
-      "Golden-set evaluation gate wired into GitHub Actions that blocks PRs when aggregate answer quality drops below threshold",
-      "Multi-provider routing with failover across Groq, Google Gemini, OpenAI and local Ollama",
+      "FastAPI validation proxy and embeddable Python library evaluating schema compliance, PII presence, toxicity, and grounding",
+      "OpenTelemetry spans exported to Jaeger with Prometheus metrics endpoints tracking request throughput and validation verdicts",
+      "Pluggable validator pipeline with multi-provider routing across Groq, Google Gemini, OpenAI, and local Ollama instances",
     ],
     highlights: [
-      "<180ms p95 validation latency — heuristic and regex validators run sub-millisecond, LLM-judge fallback under 200ms",
-      "5 built-in guardrail types: Pydantic schemas, PII redaction, toxicity, hallucination grounding, custom YAML policies",
-      "OpenTelemetry traces to Jaeger, Prometheus metrics, Grafana dashboards — SQLite-backed rolling drift alerts",
-      "60+ unit and integration tests covering the engine, validation pipeline and API",
+      "62 pytest tests passed in test execution covering engine components, pipeline filters, and HTTP endpoints",
+      "5 built-in guardrail categories: Pydantic schemas, regex PII redaction, toxicity filtering, hallucination grounding, custom YAML policies",
+      "Docker Compose environment orchestrating Prometheus, Jaeger, and FastAPI validation services",
     ],
-    stack: ["Python", "FastAPI", "LangChain", "OpenTelemetry", "Jaeger", "Grafana", "Docker Compose"],
+    stack: ["Python", "FastAPI", "Pydantic v2", "OpenTelemetry", "Jaeger", "Prometheus", "pytest", "Docker"],
     metrics: [
-      { value: "<180ms", label: "P95 VALIDATION" },
+      { value: "62", label: "PYTESTS PASSED" },
       { value: "5", label: "GUARDRAIL TYPES" },
-      { value: "60+", label: "TESTS" },
-      { value: "CI", label: "QUALITY GATE" },
+      { value: "OTEL", label: "JAEGER + PROMETHEUS" },
+      { value: "CI", label: "WORKFLOW OBSERVED" },
     ],
-    flow: ["AGENT OUTPUT", "SENTINEL VALIDATORS", "DRIFT MONITOR", "PASS / BLOCK", "USER + TRACES"],
-    links: [{ label: "SOURCE", href: "https://github.com/aditya0si/Sentinel" }],
+    flow: ["AGENT COMPLETION", "POLICY & SCHEMA CHECK", "PII & TOXICITY VALIDATORS", "OTEL SPAN EXPORT", "VERDICT (PASS / BLOCK)"],
+    links: [
+      { label: "SOURCE", href: "https://github.com/aditya0si/Sentinel" },
+      { label: "CI", href: "https://github.com/aditya0si/Sentinel/actions/runs/33509493282" },
+    ],
+    evidenceId: "EV-SEN-PROXY",
+    evidenceUrl: "https://github.com/aditya0si/Sentinel/blob/ab0f2cee433ebc1d8d7c47f936fc236d75a5a027/app/proxy.py",
+    evidenceStrength: "VERIFIED TEST RUN (62 pytest passed; latency unverified per EV-SEN-METRICS-CLAIM)",
   },
   {
     slug: "mcp-from-scratch",
     repo: "mcp-from-scratch",
     index: "P.03",
     name: "mcp-from-scratch",
-    status: "PROTOCOL DEEP-DIVE",
+    status: "PROVISIONAL CANDIDATE · 29 TESTS PASSED",
+    executionState:
+      "29 pytest tests passed at commit 59fbaa0. The standard-library JSON-RPC codec and stdio/SSE transport implementations were code-observed; deployed transport behavior was not tested.",
+    roles: ["AI ENGINEER", "BACKEND/SYSTEMS"],
     tagline:
-      "The Model Context Protocol implemented from raw JSON-RPC 2.0 — no SDK, no LangChain — plus a trajectory-grading eval harness.",
+      "Model Context Protocol implemented directly from raw JSON-RPC 2.0 wire specifications without external SDKs, paired with a 5-grader trajectory evaluation harness.",
     problem:
-      "Most MCP usage is five lines of SDK config. When an agent's tool call fails in production, you need to know what's actually on the wire.",
+      "High-level framework wrappers obscure underlying MCP protocol framing, complicating transport debugging and wire failure analysis in multi-agent tool setups.",
     built: [
-      "JSON-RPC 2.0 codec with full error-code coverage (−32700 → −32603) over HTTP and stdio transports",
-      "MCP server core dispatching all five protocol methods: initialize, tools/list, tools/call, resources/list, resources/read",
-      "Minimal ReAct agent loop plus an eval harness with 5 graders (exact match, substring, tool-called, step-count, LLM-judge) emitting per-task score reports",
+      "JSON-RPC 2.0 wire codec with standard error code mapping (-32700 to -32603) over HTTP/SSE and stdio transports",
+      "Core MCP server dispatching initialize, tools/list, tools/call, resources/list, and resources/read protocol methods",
+      "ReAct agent loop integrated with a 5-grader evaluation harness outputting structured per-task score reports",
     ],
     highlights: [
-      "stdlib + FastAPI only — the entire protocol surface is readable in an afternoon",
-      "pytest suite plus a demo runner that writes eval_report.json with per-task grades",
+      "29 pytest tests passed covering protocol serialization, transport adapters, and tool invocation handlers",
+      "Pure Python standard library implementation with zero runtime SDK or framework dependencies",
+      "5 trajectory graders: exact match, substring, tool-called verification, step-count limits, and LLM-judge scoring",
     ],
-    stack: ["Python", "JSON-RPC 2.0", "FastAPI", "stdio", "pytest"],
+    stack: ["Python", "JSON-RPC 2.0", "FastAPI", "stdio", "SSE", "pytest"],
     metrics: [
-      { value: "5", label: "MCP METHODS DISPATCHED" },
-      { value: "0", label: "SDKS / FRAMEWORKS" },
-      { value: "5", label: "TRAJECTORY GRADERS" },
-      { value: "2", label: "TRANSPORTS · HTTP + STDIO" },
+      { value: "29", label: "PYTESTS PASSED" },
+      { value: "5", label: "MCP METHODS" },
+      { value: "0", label: "MCP SDK DEPENDENCIES" },
+      { value: "2", label: "TRANSPORTS (HTTP + STDIO)" },
     ],
-    flow: ["CLIENT", "JSON-RPC 2.0 · HTTP/STDIO", "MCP SERVER CORE", "TOOL REGISTRY", "REACT AGENT", "EVAL HARNESS"],
+    flow: ["CLIENT REQUEST", "JSON-RPC 2.0 WIRE CODEC", "MCP METHOD DISPATCHER", "TOOL REGISTRY", "REACT AGENT LOOP", "EVAL HARNESS"],
     links: [{ label: "SOURCE", href: "https://github.com/aditya0si/mcp-from-scratch" }],
+    evidenceId: "EV-MCP-CODEC",
+    evidenceUrl: "https://github.com/aditya0si/mcp-from-scratch/tree/59fbaa0ed89d67ffb3632337d7552e5b7de49ca6/src/protocol",
+    evidenceStrength: "VERIFIED TEST RUN (29 pytest passed; stdlib codec verified in tree)",
   },
   {
-    slug: "opencode-teamwork",
-    repo: "OpenCode-Team",
+    slug: "tenant-api-platform",
+    repo: "tenant-api-platform",
     index: "P.04",
-    name: "OpenCode-Teamwork",
-    status: "PUBLISHED ON NPM",
+    name: "tenant-api-platform",
+    status: "PROVISIONAL CANDIDATE · DATABASE-BACKED SUITE PASSED",
+    executionState:
+      "The full Go suite passed at commit a6f715a against Docker-backed PostgreSQL and Redis; go vet and go build also passed. The Windows C compiler could not build Go's race runtime, so this local integration run used go test -count=1 without -race.",
+    roles: ["BACKEND/SYSTEMS", "FORWARD DEPLOYED"],
     tagline:
-      "Antigravity-style multi-agent orchestration for OpenCode — scout, propose, falsify, synthesize, verify, packaged as a one-line install.",
+      "Multi-tenant service and billing API in Go featuring PostgreSQL Row-Level Security (RLS) data isolation, Redis token bucket rate limiting, and 14 committed Architecture Decision Records.",
     problem:
-      "Complex tasks need coordinated agents, but orchestration usually means bespoke glue code rewritten per project.",
+      "Multi-tenant SaaS architectures require tenant data isolation and noisy-neighbor quota enforcement without error-prone manual query tenant filtering.",
     built: [
-      "10 role-specialized agents over 6 topology patterns, from small-focused fixes to long-proof swarms",
-      "DAG engine dispatching work in dependency order with per-agent git worktree isolation",
-      "Typed artifact bus (spec.json, plan.dag.json, patch.diff — Zod-validated), per-agent cost tracking with budget halt, session checkpointing",
+      "PostgreSQL Row-Level Security (RLS) data isolation enforced through session variable app.current_tenant_id and database migrations",
+      "Distributed token bucket rate limiter implemented in Go and backed by Redis for tenant request quota enforcement",
+      "Transactional outbox pattern for reliable webhook dispatching and idempotent billing event processing",
     ],
     highlights: [
-      "Published as opencode-teamwork on npm — 7 slash commands, per-role model presets (anthropic / google / openai / free)",
-      "Shared pitfall registry distills verifier findings into answer-agnostic mistakes reused across rounds",
+      "Full Go test suite passed against Docker-backed PostgreSQL and Redis; go vet and go build also passed",
+      "14 committed Architecture Decision Records (ADRs) documenting isolation models, auth boundaries, and data access layers",
+      "Historical committed k6 artifact reports 6,250 requests at 120 req/s, 0% failure, and 28.8ms read p95 in a local single-node simulated run; it was not reproduced in this audit",
     ],
-    stack: ["TypeScript", "Node.js", "npm", "Zod", "DAG engine", "Git worktrees"],
+    stack: ["Go", "PostgreSQL", "RLS", "Redis", "Docker Compose", "k6"],
     metrics: [
-      { value: "10", label: "AGENTS" },
-      { value: "6", label: "TOPOLOGY PATTERNS" },
-      { value: "NPM", label: "PUBLISHED PACKAGE" },
-      { value: "7", label: "SLASH COMMANDS" },
+      { value: "GO", label: "VET & BUILD PASSED" },
+      { value: "14", label: "COMMITTED ADRS" },
+      { value: "RLS", label: "TENANT ISOLATION" },
+      { value: "REDIS", label: "TOKEN BUCKET LIMITER" },
     ],
-    flow: ["TASK", "SCOUT", "PROPOSE ×N", "FALSIFY ×N", "SYNTHESIZE", "VERIFY"],
+    flow: ["TENANT REQUEST", "AUTH & TENANT CONTEXT", "REDIS RATE LIMITER", "POSTGRES RLS SESSION", "IDEMPOTENT WRITE", "OUTBOX WEBHOOK"],
     links: [
-      { label: "SOURCE", href: "https://github.com/aditya0si/OpenCode-Team" },
-      { label: "NPM", href: "https://www.npmjs.com/package/opencode-teamwork" },
+      { label: "SOURCE", href: "https://github.com/aditya0si/tenant-api-platform" },
+      { label: "CI", href: "https://github.com/aditya0si/tenant-api-platform/actions/runs/34558220324" },
     ],
+    evidenceId: "EV-TAP-RLS",
+    evidenceUrl: "https://github.com/aditya0si/tenant-api-platform/tree/a6f715aac1d4e46b2ef30e12fb42d4719672f7f5/internal/db/migrations",
+    evidenceStrength: "DATABASE-BACKED TEST, BUILD & VET VERIFIED (historical benchmark in load/results.json)",
+  },
+  {
+    slug: "event-stream-platform",
+    repo: "event-stream-platform",
+    index: "P.05",
+    name: "event-stream-platform",
+    status: "PROVISIONAL CANDIDATE · DOCKER INTEGRATION PASSED",
+    executionState:
+      "At commit 4ecb068, Docker Compose started PostgreSQL, Redis, and Redpanda; the 86-test Go suite and the Compose smoke test passed. The committed historical ingest benchmark remains unreproduced.",
+    roles: ["BACKEND/SYSTEMS"],
+    tagline:
+      "High-throughput Go telemetry streaming pipeline utilizing franz-go and Redpanda / Kafka with partitioned consumer groups, sliding-window watermarks, and DLQ routing.",
+    problem:
+      "Large-scale event ingestion platforms encounter message loss, consumer group starvation, and out-of-order delivery during traffic surges.",
+    built: [
+      "High-throughput event ingestion service utilizing franz-go client with Redpanda / Kafka message clustering",
+      "Partitioned consumer groups with out-of-order handling, sliding window event watermarks, and dead-letter queue (DLQ) retry routing",
+      "Multi-service Docker Compose environment orchestrating Redpanda, PostgreSQL, Redis, and Go telemetry workers",
+    ],
+    highlights: [
+      "Docker-backed PostgreSQL, Redis, and Redpanda integration passed 86 Go tests plus the Compose smoke test",
+      "Streaming pipeline flowcharts and fuzz testing suite committed in repository tree",
+      "Historical committed ingest artifact reports a 40-second run at 2,500 offered events/s against a 2,000 events/s target in local Docker with synthetic events; it was not reproduced in this audit",
+    ],
+    stack: ["Go", "franz-go", "Redpanda", "Kafka", "PostgreSQL", "Docker Compose"],
+    metrics: [
+      { value: "86", label: "DOCKER-BACKED TESTS PASSED" },
+      { value: "FRANZ-GO", label: "KAFKA / REDPANDA" },
+      { value: "DLQ", label: "RETRY ROUTING" },
+      { value: "PASS", label: "COMPOSE SMOKE TEST" },
+    ],
+    flow: ["TELEMETRY EVENT", "FRANZ-GO PRODUCER", "PARTITIONED TOPIC", "CONSUMER GROUP", "SLIDING WATERMARK", "DLQ / STORAGE"],
+    links: [
+      { label: "SOURCE", href: "https://github.com/aditya0si/event-stream-platform" },
+      { label: "CI", href: "https://github.com/aditya0si/event-stream-platform/actions/runs/34623119770" },
+    ],
+    evidenceId: "EV-ESP-GO-MOD",
+    evidenceUrl: "https://github.com/aditya0si/event-stream-platform/blob/4ecb068d032a155c74dc2911c2d8cf0a713ce857/go.mod",
+    evidenceStrength: "DOCKER INTEGRATION, BUILD & VET VERIFIED (historical benchmark not reproduced)",
   },
 ];
-
-export const experience = [
-  {
-    company: "IBM",
-    location: "Lucknow, IN",
-    role: "Software Engineer Intern",
-    period: "MAY — JUL 2026",
-    points: [
-      "Built an end-to-end medical OCR + LLM analysis pipeline over real hospital records",
-      "Knowledge-graph + RAG over OCR output; clinical decision-support rule engine",
-      "Deployed to a partner hospital as a pilot",
-    ],
-    tags: ["Python", "PaddleOCR", "Knowledge Graphs", "RAG"],
-  },
-  {
-    company: "HCL Technologies",
-    location: "Remote",
-    role: "GenAI Intern",
-    period: "MAY — JUL 2026",
-    points: [
-      "5-agent LangGraph RAG pipeline: rewrite → retrieve → rerank → grade → verify",
-      "96.4% faithfulness, +27.8% context precision over naive RAG (measured with RAGAS)",
-      "Production hardening: rate limiting, prompt-injection defense, structlog + Prometheus",
-    ],
-    tags: ["LangGraph", "RAGAS", "FastAPI", "Prometheus"],
-  },
-] as const;
 
 export const capabilities = [
   {
     group: "AI & AGENT SYSTEMS",
-    items: ["LangChain", "LangGraph", "CrewAI", "MCP (raw JSON-RPC)", "Multi-agent orchestration", "RAG pipelines", "RAGAS evals", "Prompt engineering"],
+    items: ["LangChain", "LangGraph", "MCP (raw JSON-RPC)", "Multi-agent orchestration", "RAG pipelines", "Evaluation harnesses", "Prompt engineering"],
   },
   {
     group: "BACKEND & DATA",
-    items: ["Python", "FastAPI", "PostgreSQL + pgvector", "Redis", "ChromaDB", "SQL", "ETL pipelines"],
+    items: ["Python", "Go", "FastAPI", "PostgreSQL + pgvector", "Redis", "SQL", "ETL pipelines"],
   },
   {
-    group: "DOCUMENT AI",
-    items: ["PaddleOCR", "OpenCV", "pandas", "OCR → LLM structuring", "Bilingual NLP (EN/HI)"],
+    group: "STREAMING & PROTOCOLS",
+    items: ["Redpanda / Kafka", "franz-go", "JSON-RPC 2.0", "SSE streaming", "REST APIs"],
   },
   {
     group: "PRODUCT & WEB",
-    items: ["TypeScript", "Next.js", "React", "Node.js / Express", "Tailwind", "SSE streaming"],
+    items: ["TypeScript", "Next.js", "React", "Node.js / Express", "Tailwind CSS"],
   },
   {
     group: "INFRA & OBSERVABILITY",
-    items: ["Docker", "Kubernetes", "GitHub Actions", "OpenTelemetry", "Prometheus / Grafana", "Linux", "Vercel"],
+    items: ["Docker", "Docker Compose", "GitHub Actions", "OpenTelemetry", "Jaeger", "Prometheus", "Linux"],
   },
   {
     group: "LANGUAGES & CORE",
-    items: ["Python", "TypeScript", "JavaScript", "C++", "Java", "SQL"],
+    items: ["Python", "Go", "TypeScript", "JavaScript", "SQL", "C++"],
   },
 ] as const;
 
@@ -232,8 +283,8 @@ export const capabilities = [
 export const fallbackRepos = [
   { name: "TheButterFlyEffect", description: "Biomedical & legal Graph-RAG — 2,097-node knowledge graph, multi-hop traversal, grounded synthesis", language: "Python", pushed: "2026-09-01", url: "https://github.com/aditya0si/TheButterFlyEffect" },
   { name: "CoverAI", description: "AI vehicle-insurance platform — FastAPI + Next.js monorepo, RAG policy Q&A, claims triage", language: "TypeScript", pushed: "2026-09-02", url: "https://github.com/aditya0si/CoverAI" },
-  { name: "bustwatch", description: "SIH 2026 — NWP forecast-bust detection & confidence mapping (GFS/GEFS/ECMWF)", language: "Python", pushed: "2026-08-26", url: "https://github.com/aditya0si/bustwatch" },
-  { name: "floodlens", description: "SIH 2026 — urban flood nowcasting on IMD/Bhuvan rainfall data", language: "Python", pushed: "2026-08-26", url: "https://github.com/aditya0si/floodlens" },
+  { name: "bustwatch", description: "Transit delay prediction & confidence mapping (GFS/GEFS/ECMWF)", language: "Python", pushed: "2026-08-26", url: "https://github.com/aditya0si/bustwatch" },
+  { name: "floodlens", description: "Urban flood nowcasting on IMD/Bhuvan rainfall raster data", language: "Python", pushed: "2026-08-26", url: "https://github.com/aditya0si/floodlens" },
   { name: "agentic_rag_system", description: "Agentic RAG loop: fetch → re-rank → answer → verify", language: "Python", pushed: "2026-08-19", url: "https://github.com/aditya0si/agentic_rag_system" },
   { name: "DevAtlas", description: "Developer-ecosystem intelligence — GitHub activity maps, repo classification, trend analysis", language: "Python", pushed: "2026-08-25", url: "https://github.com/aditya0si/DevAtlas" },
   { name: "HealthCareOCR", description: "Healthcare document extraction pipeline", language: "Python", pushed: "2026-06-28", url: "https://github.com/aditya0si/HealthCareOCR" },
@@ -247,7 +298,7 @@ export const education = {
   degree: "B.Tech, Computer & Communication Engineering",
   period: "2023 — 2027 (expected)",
   lines: [
-    "Smart India Hackathon 2026 — built FloodLens (urban flood nowcasting) and BustWatch (NWP forecast-bust detection) end to end",
-    "Coursework applied directly into shipped systems: algorithms, DBMS, networks, signal processing",
+    "Coursework focused on computer systems fundamentals: operating systems, computer architecture, distributed systems, and database systems.",
+    "Applied engineering builds grounded in reproducible local builds, test suites, and architectural documentation.",
   ],
 } as const;

@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line">
       <div className="mx-auto flex max-w-sheet flex-col gap-4 px-5 py-8 font-mono text-[10px] uppercase tracking-[0.14em] text-muted sm:flex-row sm:items-center sm:justify-between sm:px-8">
-        <p>© {new Date().getFullYear()} ADITYA SINGH — DESIGNED & CODED BY HAND</p>
+        <p>© {new Date().getFullYear()} ADITYA SINGH — SOURCE AVAILABLE ON GITHUB</p>
         <div className="flex items-center gap-5">
           <a href={profile.github} target="_blank" rel="noopener noreferrer" className="transition-colors hover:text-accent">
             GITHUB

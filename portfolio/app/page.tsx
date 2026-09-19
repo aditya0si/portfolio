@@ -1,14 +1,12 @@
-import Link from "next/link";
 import Reveal from "./components/Reveal";
 import Marquee from "./components/Marquee";
-import Flow from "./components/Flow";
 import GitHubLive from "./components/GitHubLive";
 import AiConcepts from "./components/AiConcepts";
+import ProductsCatalog from "./components/ProductsCatalog";
+import ConceptualSystems from "./components/ConceptualSystems";
 import {
   profile,
   evidence,
-  flagships,
-  experience,
   capabilities,
   education,
 } from "@/lib/data";
@@ -47,7 +45,7 @@ export default function Home() {
         <div className="mx-auto max-w-sheet px-5 pb-16 pt-16 sm:px-8 sm:pb-24 sm:pt-24">
           <Reveal>
             <div className="mb-8 flex items-center justify-between font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-              <span>PORTFOLIO — 2026 · AGENTIC SYSTEMS</span>
+              <span>PORTFOLIO — 2026 · SYSTEMS & AGENT ARCHITECTURES</span>
               <span className="hidden items-center gap-2 sm:flex">
                 <span className="pulse-dot inline-block h-1.5 w-1.5 rounded-full bg-accent" />
                 OPEN TO WORK
@@ -64,9 +62,9 @@ export default function Home() {
 
           <Reveal delay={120}>
             <p className="mt-6 max-w-3xl font-display text-[clamp(1.35rem,3vw,2.25rem)] font-medium leading-snug">
-              I build{" "}
-              <span className="text-accent">agentic AI systems</span> that
-              survive production.
+              Systems-first engineering across{" "}
+              <span className="text-accent">agent architectures</span>, guardrails,
+              and backend pipelines.
             </p>
           </Reveal>
 
@@ -78,8 +76,8 @@ export default function Home() {
 
           <Reveal delay={240}>
             <div className="mt-10 flex flex-wrap items-center gap-3">
-              <a href="#work" className="btn-primary">
-                View work ↓
+              <a href="#products" className="btn-primary">
+                View products ↓
               </a>
               <a
                 href={profile.github}
@@ -117,179 +115,42 @@ export default function Home() {
 
       <Marquee />
 
-      {/* ============ FEATURED WORK ============ */}
-      <section id="work" className="scroll-mt-14">
+      {/* ============ PRODUCTS ============ */}
+      <section id="products" className="scroll-mt-14">
         <div className="mx-auto max-w-sheet px-5 py-16 sm:px-8 sm:py-24">
           <SectionHeader
             index="01"
-            label="FEATURED WORK"
-            title="Systems, not slides."
-            note="Four builds that show the full arc — infrastructure, production RAG, protocol internals, published tooling. Every claim links back to source."
+            label="PRODUCTS"
+            title="Engineering Product Candidates."
+            note="Five provisional candidates selected for complementary role coverage. Each card separates source observations, executed checks, historical artifacts, and unresolved verification."
           />
-
-          <div>
-            {flagships.map((project, i) => (
-              <Reveal key={project.slug}>
-                <article className="border-t border-line py-12 sm:py-14">
-                  <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
-                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                      <span className="font-mono text-[12px] text-accent">
-                        {project.index}
-                      </span>
-                      <h3 className="font-display text-3xl font-medium tracking-[-0.01em] sm:text-4xl">
-                        {project.name}
-                      </h3>
-                      <span className="chip">{project.status}</span>
-                    </div>
-                    <div className="flex items-center gap-5 font-mono text-[11px] uppercase tracking-[0.14em]">
-                      {project.links.map((link) => (
-                        <a
-                          key={link.label}
-                          href={link.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-muted transition-colors hover:text-accent"
-                        >
-                          {link.label} ↗
-                        </a>
-                      ))}
-                      <Link
-                        href={`/projects/${project.slug}`}
-                        className="text-ink transition-colors hover:text-accent"
-                      >
-                        DOSSIER →
-                      </Link>
-                    </div>
-                  </div>
-
-                  <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink2 sm:text-lg">
-                    {project.tagline}
-                  </p>
-
-                  <div className="mt-8 grid gap-10 md:grid-cols-12">
-                    <div className="md:col-span-7">
-                      <p className="mono-label mb-2">PROBLEM</p>
-                      <p className="text-sm leading-relaxed text-muted">
-                        {project.problem}
-                      </p>
-                      <p className="mono-label mb-2 mt-6">WHAT I BUILT</p>
-                      <ul className="space-y-2">
-                        {project.built.map((item) => (
-                          <li
-                            key={item}
-                            className="flex gap-3 text-sm leading-relaxed text-ink2"
-                          >
-                            <span aria-hidden className="mt-0.5 text-accent">
-                              ▸
-                            </span>
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    <div className="md:col-span-5">
-                      <p className="mono-label mb-2">STACK</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {project.stack.map((tech) => (
-                          <span key={tech} className="chip">
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                      <p className="mono-label mb-3 mt-6">BY THE NUMBERS</p>
-                      <div className="grid grid-cols-2 gap-px border border-line bg-line">
-                        {project.metrics.map((metric) => (
-                          <div key={metric.label} className="bg-bg p-3.5">
-                            <p className="font-mono text-lg text-ink">
-                              {metric.value}
-                            </p>
-                            <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">
-                              {metric.label}
-                            </p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-8">
-                    <Flow steps={project.flow} />
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <ProductsCatalog />
         </div>
       </section>
 
-      {/* ============ EXPERIENCE ============ */}
-      <section id="experience" className="scroll-mt-14 border-t border-line">
+      {/* ============ CONCEPTUAL SYSTEMS (R&D) ============ */}
+      <section id="systems" className="scroll-mt-14 border-t border-line">
         <div className="mx-auto max-w-sheet px-5 py-16 sm:px-8 sm:py-24">
           <SectionHeader
             index="02"
-            label="EXPERIENCE"
-            title="Where I've shipped."
-            note="Two internships, both building AI systems on real data — not shadowing."
+            label="CONCEPTUAL SYSTEMS (R&D)"
+            title="Future Systems Architecture."
+            note="Architectural proposals addressing verified matrix gaps in inference economics, real-time drift, and distributed consensus. All entries are explicitly labeled FUTURE / UNBUILT R&D."
           />
-
-          <div>
-            {experience.map((job) => (
-              <Reveal key={job.company}>
-                <article className="grid gap-4 border-t border-line py-10 md:grid-cols-12 md:gap-8">
-                  <div className="md:col-span-3">
-                    <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink">
-                      {job.period}
-                    </p>
-                    <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                      {job.location}
-                    </p>
-                  </div>
-                  <div className="md:col-span-9">
-                    <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                      <h3 className="font-display text-2xl font-medium sm:text-3xl">
-                        {job.company}
-                      </h3>
-                      <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-                        {job.role}
-                      </span>
-                    </div>
-                    <ul className="mt-4 space-y-2">
-                      {job.points.map((point) => (
-                        <li
-                          key={point}
-                          className="flex gap-3 text-sm leading-relaxed text-ink2 sm:text-base"
-                        >
-                          <span aria-hidden className="mt-0.5 text-accent">
-                            ▸
-                          </span>
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-                    <div className="mt-5 flex flex-wrap gap-1.5">
-                      {job.tags.map((tag) => (
-                        <span key={tag} className="chip">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </article>
-              </Reveal>
-            ))}
-          </div>
+          <Reveal>
+            <ConceptualSystems />
+          </Reveal>
         </div>
       </section>
 
-      {/* ============ STACK ============ */}
+      {/* ============ STACK / CAPABILITIES ============ */}
       <section id="stack" className="scroll-mt-14 border-t border-line">
         <div className="mx-auto max-w-sheet px-5 py-16 sm:px-8 sm:py-24">
           <SectionHeader
             index="03"
             label="STACK"
             title="Tools I reach for."
-            note="Grouped by what I've actually shipped with — everything above appears in the projects and internships on this page."
+            note="Grouped from repository manifests and code observations; presence does not imply production operation or expert-level proficiency."
           />
 
           <Reveal>
@@ -320,7 +181,7 @@ export default function Home() {
             index="04"
             label="AI FIELD NOTES"
             title="Concepts & Mechanics."
-            note="Bite-sized engineering breakdowns on the modern AI/LLM stack. One concept at a time, distilled for production reality."
+            note="Bite-sized engineering breakdowns on the modern AI/LLM stack. One concept at a time, distilled for systems reality."
           />
           <Reveal>
             <AiConcepts />
@@ -335,7 +196,7 @@ export default function Home() {
             index="05"
             label="GITHUB"
             title="Everything else, live."
-            note="The repos beyond the flagships — AI and agent systems ranked first, newest pushes after that. Live from the GitHub API; falls back to a cached snapshot."
+            note="The repositories beyond the provisional flagships — AI and systems projects ranked first, newest pushes after that. Live from the GitHub API; falls back to a cached snapshot."
           />
           <Reveal>
             <GitHubLive />
@@ -351,10 +212,10 @@ export default function Home() {
             <article className="grid gap-4 border-t border-line py-10 md:grid-cols-12 md:gap-8">
               <div className="md:col-span-3">
                 <p className="font-mono text-[12px] uppercase tracking-[0.14em] text-ink">
-                  2023 — 2027
+                  {education.period}
                 </p>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-                  EXPECTED
+                  {education.short}
                 </p>
               </div>
               <div className="md:col-span-9">
@@ -392,9 +253,9 @@ export default function Home() {
               <span className="cursor-blink text-accent">▮</span>
             </h2>
             <p className="mt-6 max-w-xl text-base leading-relaxed text-ink2 sm:text-lg">
-              Open to software engineering and AI engineering internships — and
-              the occasional hard problem. If your team ships LLM systems and
-              cares about what happens after the demo, we&rsquo;ll get along.
+              Open to software engineering and systems engineering roles. If your
+              team builds reliable agent platforms, streaming backends, or evaluation
+              infrastructure, let&rsquo;s connect.
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-3">
               <a href={`mailto:${profile.email}`} className="btn-primary">

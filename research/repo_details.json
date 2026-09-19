@@ -1,0 +1,4635 @@
+[
+  {
+    "name": "DevAtlas",
+    "url": "https://github.com/aditya0si/DevAtlas",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-07-16T12:10:48Z",
+    "updatedAt": "2026-09-14T14:44:59Z",
+    "pushedAt": "2026-09-17T22:02:27Z",
+    "description": "AI-powered developer ecosystem intelligence ΓÇö GitHub activity maps, repo classification, and trend analysis (FastAPI + PostGIS + Next.js + MapLibre)",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 658748,
+      "TypeScript": 366367,
+      "JavaScript": 32155,
+      "HCL": 15291,
+      "CSS": 9532,
+      "Shell": 3084,
+      "Batchfile": 2519,
+      "Dockerfile": 1097,
+      "Mako": 617
+    },
+    "rootFiles": [
+      {
+        "name": ".firebaserc",
+        "type": "file",
+        "size": 166
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 642
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 11674
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "deploy",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "firebase.json",
+        "type": "file",
+        "size": 497
+      },
+      {
+        "name": "firestore.indexes.json",
+        "type": "file",
+        "size": 955
+      },
+      {
+        "name": "firestore.rules",
+        "type": "file",
+        "size": 862
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "functions",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "monitoring",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "railway.json",
+        "type": "file",
+        "size": 336
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "size": 742
+      }
+    ],
+    "workflows": [
+      "ci.yml",
+      "sync-github-india.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# DevAtlas\n\nAI-powered developer-ecosystem intelligence: it ingests public GitHub activity, classifies and geocodes repositories, and serves an interactive geospatial dashboard.\n\n[![CI](https://github.com/aditya0si/DevAtlas/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/DevAtlas/actions/workflows/ci.yml)\n\n## Overview\n\nDevAtlas collects public GitHub repository and event data, enriches it with AI-based domain classification, embeddings, and location intelligence, and exposes it through a FastAPI service and a Next.js + MapLibre dashboard. The repository contains two data paths that share the same frontend surface:\n\n- A **FastAPI + PostgreSQL/PostGIS** backend with workers for incremental sync, classification, embeddings, activity/ecosystem scoring, and analytics.\n- A **Firebase path** where a GitHub Actions worker writes enriched documents to Firestore and the dashboard subscribes with `onSnapshot` for realtime map updates.\n\n## Architecture\n\n```mermaid\nflowchart LR\n  GH[GitHub Events / REST API] --> SYNC[Incremental sync workers<br/>ARQ + Redis]\n  SYNC --> PG[(PostgreSQL + PostGIS)]\n  PG --> AI[AI classification + embeddings<br/>OpenAI / Gemini / Groq / Ollama]\n  AI --> PG\n  PG --> API[FastAPI<br/>/api/v1 + /api/v2 + /ws]\n  API --> WEB[Next.js dashboard<br/>MapLibre GL + Tailwind]\n\n  GHA[GitHub Actions sync<br/>scripts/firebase-sync] --> FS[(Firestore)]\n  FS -->|onSnapshot| WEB\n```\n\n- **Ingestion (backend):** GitHub API clients feed incremental sync workers ",
+    "error": null,
+    "fullReadmeLength": 11662
+  },
+  {
+    "name": "CoverAI",
+    "url": "https://github.com/aditya0si/CoverAI",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-05-28T11:27:49Z",
+    "updatedAt": "2026-09-14T17:47:49Z",
+    "pushedAt": "2026-09-14T17:26:14Z",
+    "description": "AI-powered vehicle insurance platform ΓÇö FastAPI + Next.js monorepo with RAG policy Q&A, claims triage, RBAC, and DPDP-compliant data handling",
+    "homepageUrl": "https://cover-ai-web-adityasinghprojects.vercel.app",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 425149,
+      "Python": 324209,
+      "JavaScript": 27004,
+      "Dockerfile": 3191,
+      "CSS": 2423,
+      "Makefile": 875,
+      "Mako": 704,
+      "Procfile": 62
+    },
+    "rootFiles": [
+      {
+        "name": ".dockerignore",
+        "type": "file",
+        "size": 177
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 2257
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 1128
+      },
+      {
+        "name": ".hoplite",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "Makefile",
+        "type": "file",
+        "size": 875
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 7876
+      },
+      {
+        "name": "apps",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 2733
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "e2e",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 615
+      },
+      {
+        "name": "packages",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "playwright.config.js",
+        "type": "file",
+        "size": 2205
+      },
+      {
+        "name": "pnpm-lock.yaml",
+        "type": "file",
+        "size": 147638
+      },
+      {
+        "name": "pnpm-workspace.yaml",
+        "type": "file",
+        "size": 387
+      },
+      {
+        "name": "render.yaml",
+        "type": "file",
+        "size": 2345
+      },
+      {
+        "name": "turbo.json",
+        "type": "file",
+        "size": 280
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# CoverAI — Production-Ready AI Vehicle Insurance Monorepo\n\nWelcome to the **CoverAI** monorepo workspace. This project is structured as a premium, highly optimized full-stack monorepo integrating a high-performance Python FastAPI backend, a Next.js 14 React frontend, shared schemas, and database container stacks.\n\n---\n\n## 🛠️ Monorepo Structure\n\n```\ncoverai/\n├── apps/\n│   ├── web/                → Next.js 14 frontend (App Router, strict TypeScript, Tailwind CSS)\n│   └── api/                → FastAPI backend (Python 3.11, Poetry, SQLAlchemy 2.0 Async)\n├── packages/\n│   ├── shared-types/       → Centralized Zod schemas & types for validation (User, Vehicle, Policy, Claim)\n│   └── ui/                 → Workspace-shared visual components (built with shadcn/ui \"new-york\" preset)\n├── .env.example            → Core template configuration for credentials and connections\n├── docker-compose.yml      → Local multi-service infrastructure (postgres, redis, api, web)\n├── turbo.json              → Workspace pipeline configuration for Turborepo caching\n├── Makefile                → Orchestration entrypoints for development operations\n├── .gitignore              → Workspace ignore definitions for Node, Python, IDEs, and credentials\n└── README.md               → Developer instructions and platform guides\n```\n\n---\n\n## 🚀 Getting Started\n\n### Prerequisites\n\nMake sure you have the following installed on your machine:\n*   [Node.js](https://nodejs.org/) (v18 or newer, v20+ recommended)\n*   [pnpm](",
+    "error": null,
+    "fullReadmeLength": 7722
+  },
+  {
+    "name": "schemeGPT",
+    "url": "https://github.com/aditya0si/schemeGPT",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-18T20:02:07Z",
+    "updatedAt": "2026-09-14T17:47:48Z",
+    "pushedAt": "2026-09-14T16:57:32Z",
+    "description": "Production RAG for Indian government schemes. Hybrid pgvector + FTS with RRF, RAGAS-evaluated, quote-verified answers, bilingual EN/HI, FastAPI + Next.js 15.",
+    "homepageUrl": "https://schemegpt-web-adityasinghprojects.vercel.app",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 391192,
+      "TypeScript": 31356,
+      "CSS": 1575,
+      "Dockerfile": 1434,
+      "JavaScript": 81
+    },
+    "rootFiles": [
+      {
+        "name": ".dockerignore",
+        "type": "file",
+        "size": 345
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 1989
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 391
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 978
+      },
+      {
+        "name": "Dockerfile.render",
+        "type": "file",
+        "size": 872
+      },
+      {
+        "name": "Dockerfile.streamlit",
+        "type": "file",
+        "size": 328
+      },
+      {
+        "name": "EXPERIMENTS.md",
+        "type": "file",
+        "size": 5182
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "PLAN_push-and-improve-readme.md",
+        "type": "file",
+        "size": 3993
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 25874
+      },
+      {
+        "name": "README_POLISH_PROMPT.md",
+        "type": "file",
+        "size": 1667
+      },
+      {
+        "name": "app",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 2257
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "eval",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "fly.toml",
+        "type": "file",
+        "size": 889
+      },
+      {
+        "name": "loadtest",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "render.yaml",
+        "type": "file",
+        "size": 1540
+      },
+      {
+        "name": "requirements-api.txt",
+        "type": "file",
+        "size": 179
+      },
+      {
+        "name": "requirements-dev.txt",
+        "type": "file",
+        "size": 193
+      },
+      {
+        "name": "requirements-eval.txt",
+        "type": "file",
+        "size": 203
+      },
+      {
+        "name": "requirements-streamlit.txt",
+        "type": "file",
+        "size": 35
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 1017
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "streamlit_app.py",
+        "type": "file",
+        "size": 76911
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "web",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml",
+      "eval.yml",
+      "generation-eval.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# SchemeGPT 🇮🇳\n\n[![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/downloads/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.141-009688.svg)](https://fastapi.tiangolo.com/)\n[![Next.js 16](https://img.shields.io/badge/Next.js-16-black.svg)](https://nextjs.org/)\n[![pgvector](https://img.shields.io/badge/pgvector-PostgreSQL%2016-336791.svg)](https://github.com/pgvector/pgvector)\n[![Groq gpt-oss](https://img.shields.io/badge/LLM-Groq%20gpt-oss--120b-orange.svg)](https://groq.com/)\n[![Docker Compose](https://img.shields.io/badge/Docker-Compose-2496ED.svg)](https://www.docker.com/)\n[![Quality Evaluation](https://img.shields.io/badge/Eval-Hit%404%20%2B%20MRR%404-green.svg)](eval/retrieval_gate.py)\n[![CI](https://github.com/aditya0si/schemeGPT/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/schemeGPT/actions/workflows/ci.yml)\n[![Retrieval quality gate](https://github.com/aditya0si/schemeGPT/actions/workflows/eval.yml/badge.svg)](https://github.com/aditya0si/schemeGPT/actions/workflows/eval.yml)\n\n> **SchemeGPT** is an open-source, domain-specific Retrieval-Augmented Generation (RAG) and decision-support engine for Indian Government Schemes, Central Acts, and State/UT Public Welfare Directories. It combines three-channel hybrid retrieval — pgvector dense embeddings, PostgreSQL `tsvector` full-text search, and a lexical scheme-name channel — fused with Reciprocal Rank Fusion, with the final top-4 kept source-diverse (one c",
+    "error": null,
+    "fullReadmeLength": 25543
+  },
+  {
+    "name": "grounded-knowledge-platform",
+    "url": "https://github.com/aditya0si/grounded-knowledge-platform",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-11T21:21:18Z",
+    "updatedAt": "2026-09-11T22:21:03Z",
+    "pushedAt": "2026-09-11T22:20:59Z",
+    "description": "Enterprise-grade RAG: ACL-enforced hybrid retrieval (pgvector + tsvector + RRF) with retrieval quality measured against gold chunk labels and gated in CI.",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 180574,
+      "Makefile": 970,
+      "Mako": 506
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 1256
+      },
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 539
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 934
+      },
+      {
+        "name": ".hermes",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".pre-commit-config.yaml",
+        "type": "file",
+        "size": 777
+      },
+      {
+        "name": ".python-version",
+        "type": "file",
+        "size": 5
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "Makefile",
+        "type": "file",
+        "size": 970
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 9606
+      },
+      {
+        "name": "alembic.ini",
+        "type": "file",
+        "size": 781
+      },
+      {
+        "name": "corpus",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 1412
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "eval",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 3489
+      },
+      {
+        "name": "results",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "uv.lock",
+        "type": "file",
+        "size": 475641
+      }
+    ],
+    "workflows": [
+      "ci.yml",
+      "eval.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# Grounded Knowledge Platform\n\n[![ci](https://github.com/aditya0si/grounded-knowledge-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/grounded-knowledge-platform/actions/workflows/ci.yml)\n[![python](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)\n[![mypy](https://img.shields.io/badge/mypy-strict-blue.svg)](https://mypy-lang.org/)\n[![license](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)\n\n**Enterprise-grade RAG where the retrieval numbers are measured, not asserted.**\n\nACL-enforced hybrid retrieval over an internal-docs corpus. Retrieval quality is\nmeasured against gold chunk labels and gated in CI; permission boundaries are\nenforced *inside* the retrieval predicate rather than filtered after the fact.\n\n---\n\n## Why this exists\n\nMost RAG projects, including the prototype this one replaces, report an\nimpressive faithfulness score produced by a harness that **could not have\nfailed**. In the predecessor repo the evaluation corpus came to 151 words in\nthree chunks while the retriever requested `top-k=6` — so retrieval returned the\nentire corpus on every query, and every published metric was a measurement of\ngeneration alone. The test set carried no gold chunk identifiers, which meant\nrecall@k, MRR, and nDCG were not computable at all.\n\nThe pipeline was fine. The **harness** was the problem, and a harness that cannot\nfail cannot defend an improvement.\n\nThis project is built the other way round: the evaluation ha",
+    "error": null,
+    "fullReadmeLength": 9529
+  },
+  {
+    "name": "event-stream-platform",
+    "url": "https://github.com/aditya0si/event-stream-platform",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-11T12:34:07Z",
+    "updatedAt": "2026-09-11T16:38:06Z",
+    "pushedAt": "2026-09-11T16:38:01Z",
+    "description": "Event-driven telemetry pipeline in Go: partitioned log (Redpanda), idempotent consumers, Postgres sink, DLQ with replay, and SSE fan-out to a live map",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Go": 404190,
+      "Python": 77082,
+      "HTML": 7029,
+      "JavaScript": 6566,
+      "Makefile": 5393,
+      "Dockerfile": 2182
+    },
+    "rootFiles": [
+      {
+        "name": ".dockerignore",
+        "type": "file",
+        "size": 511
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 2816
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 1424
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 2182
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "Makefile",
+        "type": "file",
+        "size": 5393
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 12667
+      },
+      {
+        "name": "cmd",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 11293
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "go.mod",
+        "type": "file",
+        "size": 1259
+      },
+      {
+        "name": "go.sum",
+        "type": "file",
+        "size": 6809
+      },
+      {
+        "name": "internal",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "load",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# event-stream-platform\n\nAn event-driven telemetry pipeline in Go: a partitioned log, idempotent consumers, a durable\nPostgres sink, dead-letter handling with replay, and a live browser fan-out over SSE.\n\n## Status\n\n**M7 complete: the pipeline is measured, and the numbers are in this file.** `docker compose up\n--build` brings up Postgres, Redis, Redpanda, a one-shot migration container, the ingest service,\nthe consumer, and the SSE gateway; `docker compose --profile demo up -d simulate` adds a\ndeterministic fleet so the viewer at `http://localhost:8082/` has something to draw.\n`POST /v1/events` validates a batch, gives each event an identity, and publishes it to\n`telemetry.raw.v1` **keyed by vehicle** — so one vehicle's events share a partition in produce\norder, which is what the per-vehicle ordering guarantee\n([ADR-005](docs/adr/ADR-005-ordering-and-late-data.md)) actually rests on. A consumer group reads\nthat log, applies each event to Postgres exactly once, commits its offsets only after the\ntransaction that applied them has committed, and records what it cannot apply in two places: a row\nan operator can query, and a copy on `telemetry.dlq.v1` that survives the queryable store being\nunavailable. `cmd/replay` puts a refusal back on the log it came from. `cmd/gateway` streams what\nthe consumer commits to browsers over SSE, and a reconnecting client gets exactly the frames it\nmissed, read from Postgres rather than reconstructed from the bus.\n\nWhat exists today, and what does ",
+    "error": null,
+    "fullReadmeLength": 12596
+  },
+  {
+    "name": "tenant-api-platform",
+    "url": "https://github.com/aditya0si/tenant-api-platform",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-11T01:52:17Z",
+    "updatedAt": "2026-09-11T03:23:00Z",
+    "pushedAt": "2026-09-11T03:22:57Z",
+    "description": "Multi-tenant billing API in Go: RLS tenant isolation, idempotency keys, Redis rate limiting, append-only audit, webhooks via transactional outbox with DLQ and replay",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Go": 1078985,
+      "PLpgSQL": 33892,
+      "JavaScript": 13110,
+      "Python": 8644,
+      "Makefile": 4053,
+      "Dockerfile": 747
+    },
+    "rootFiles": [
+      {
+        "name": ".dockerignore",
+        "type": "file",
+        "size": 35
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 3454
+      },
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 501
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 721
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 747
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "Makefile",
+        "type": "file",
+        "size": 4053
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 9147
+      },
+      {
+        "name": "cmd",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 4341
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "go.mod",
+        "type": "file",
+        "size": 1280
+      },
+      {
+        "name": "go.sum",
+        "type": "file",
+        "size": 6965
+      },
+      {
+        "name": "internal",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "load",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# tenant-api-platform\n\n[![ci](https://github.com/aditya0si/tenant-api-platform/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/tenant-api-platform/actions/workflows/ci.yml)\n\nA multi-tenant billing API in Go. Many tenants share one Postgres database and their data cannot\nmix: isolation is enforced in the application's type system, and again by row-level security inside\nthe database. It implements the parts of a billing backend that are hard to get right — idempotent\nwrites, distributed rate limiting, an append-only audit trail, compare-and-set state transitions,\nand webhook delivery that survives a crash between committing a change and announcing it.\n\nThe design documents came first: [`docs/DESIGN.md`](docs/DESIGN.md) states the requirements, data\nmodel, request flows, and failure table; [`docs/adr/`](docs/adr/) records the fourteen decisions\nthat shaped the code.\n\n## What it covers\n\n| Area | Implemented |\n|---|---|\n| Tenancy | Tenants, users, memberships, `owner > admin > member`, permission map in code |\n| Auth | argon2id passwords; 10-minute HS256 access tokens; refresh tokens in rotating families with reuse detection; `ak_` API keys stored as SHA-256 |\n| Billing | Invoices with line items; money as `int64` minor units; `draft → open → paid` and `void` transitions guarded by compare-and-set; append-only invoice events |\n| Cross-cutting | HMAC-signed keyset pagination; `Idempotency-Key` protocol; Redis Lua rate limiting; append-only audit log; webhooks via ",
+    "error": null,
+    "fullReadmeLength": 9097
+  },
+  {
+    "name": "portfolio",
+    "url": "https://github.com/aditya0si/portfolio",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-06-01T06:45:21Z",
+    "updatedAt": "2026-09-10T22:09:00Z",
+    "pushedAt": "2026-09-10T22:08:56Z",
+    "description": "",
+    "homepageUrl": "https://portfolio-gray-five-72.vercel.app",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 73592,
+      "JavaScript": 12062,
+      "CSS": 4329
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 44
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 269
+      },
+      {
+        "name": "DESIGN_RESEARCH.md",
+        "type": "file",
+        "size": 8169
+      },
+      {
+        "name": "metadata.json",
+        "type": "file",
+        "size": 271
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "size": 84460
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 794
+      },
+      {
+        "name": "plans",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "portfolio",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "research",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "server.js",
+        "type": "file",
+        "size": 966
+      },
+      {
+        "name": "vercel.json",
+        "type": "file",
+        "size": 98
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "vibe-odds",
+    "url": "https://github.com/aditya0si/vibe-odds",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-08T21:37:17Z",
+    "updatedAt": "2026-09-08T21:42:06Z",
+    "pushedAt": "2026-09-08T21:37:30Z",
+    "description": "Tennis win-probability analytics: Elo + Markov + calibrated LightGBM (Brier 0.2141), 5-tab FastAPI site",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 200700,
+      "HTML": 32310
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 244
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 111
+      },
+      {
+        "name": "HANDOFF.md",
+        "type": "file",
+        "size": 14536
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 6676
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 346
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Vibe-Odds — ATP tennis analytics: model vs the market\n\nBest-price comparison + ML verdicts + full model evidence for ATP men's\ntennis (US Open best-of-5 + ATP Tour best-of-3).\n\n18+ only. Check your state/country laws. Data for information, not financial advice. Bet responsibly.\nIf gambling stops being fun, US: 1-800-GAMBLER.\n\n## Verified numbers (2026-09-07 frozen ledgers, n=5978 matches 2024–25)\n\n| Arm | Accuracy | Brier |\n|---|---|---|\n| GBM (served default) | 65.31% | **0.2141** |\n| Adaptive ensemble | 64.99% | 0.2157 |\n| Frozen ensemble | 64.84% | 0.2177 |\n| Elo only | 63.75% | 0.2196 |\n\n- Paired block 95% CIs (tournament-month blocks, seed 7): adaptive−frozen\n  −0.00199 [−0.00274,−0.00126]; gbm−adaptive −0.00161 [−0.00273,−0.00048];\n  gbm−frozen −0.00360 [−0.00524,−0.00192].\n- Calibration validation (fit 2022–23, test 2024–25): raw GBM 0.2141 /\n  ECE 0.0136 beats temperature, logistic and isotonic (all gain ≤ 0) — ships uncalibrated.\n- Ablation (walk-forward 2024–25): only dropping GBM hurts (+0.0024 Brier);\n  all other signals are noise (±0.0002).\n- Confidence: ≥0.60 → 72.9% acc / 0.191 Brier (n=3364); ≥0.65 → 76.9% /\n  0.174 (n=2318). The model knows when it knows.\n- Paper trading, half-Kelly vs Elo fair line **no vig** (skill-vs-line, not\n  profit): 1522 posts, win 64.3%, +11.04u, ROI-on-staked 17.6%, maxDD 0.48u.\n  Policy bake-off on identical matches: bandit +11.04u < post_all +21.12u <\n  frozen ev≥0.03 +20.57u → bandit demoted to shadow.\n- Column tournament (4 ti",
+    "error": null,
+    "fullReadmeLength": 6590
+  },
+  {
+    "name": "E-commerce-Dashboard",
+    "url": "https://github.com/aditya0si/E-commerce-Dashboard",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-04-01T18:47:24Z",
+    "updatedAt": "2026-09-08T21:08:49Z",
+    "pushedAt": "2026-09-08T21:06:28Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 35828,
+      "Jupyter Notebook": 10999
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 130
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 170
+      },
+      {
+        "name": ".streamlit",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "METRICS.md",
+        "type": "file",
+        "size": 3355
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2149
+      },
+      {
+        "name": "dashboard",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "notebooks",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 300
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "sql",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Olist E-commerce BI\n\nDeployable BI product over the Brazilian Olist marketplace dataset\n(99,441 orders, Sep 2016 – Oct 2018). Headline: **R$ 13.22M delivered revenue**\nacross **96,478 delivered orders** (AOV R$ 137.04).\n\n## Pages (Streamlit)\n\n| Page | Content |\n|---|---|\n| Home | KPI snapshot + how-to-read |\n| Overview | revenue trend, seasonality, payment mix, top states |\n| Category | revenue / orders / AOV / share by category |\n| Cohorts / Retention | monthly cohort retention matrix |\n| Customers / RFM | RFM segments + realised LTV |\n| Funnel | created → approved → carrier → delivered → reviewed |\n\nMetric definitions: [`METRICS.md`](METRICS.md). Validation: [`docs/EVAL.md`](docs/EVAL.md).\n\n## Quickstart (local)\n\n```bash\npip install -r requirements.txt\npython -m scripts.pipeline      # builds data/processed/ + SQLite marts + views\npython -m pytest tests/ -q      # 8 passed\nstreamlit run dashboard/app.py  # http://localhost:8501\n```\n\nNotebook: `notebooks/eda.ipynb` (regenerate with `python scripts/build_notebook.py`;\nevery finding recomputes from `data/raw/`).\n\n## Deploy (Streamlit Community Cloud, free)\n\n1. Push this repo to GitHub (make it public) — `data/raw/*.csv` is already tracked.\n2. Go to <https://share.streamlit.io> → New app → select repo/branch →\n   main file path **`dashboard/app.py`**.\n3. No secrets needed. On first launch the app builds its SQLite marts from\n   `data/raw/` automatically (≈1 min cold start, then cached).\n4. Optional PostgreSQL: set `POSTGRES_*",
+    "error": null,
+    "fullReadmeLength": 2129
+  },
+  {
+    "name": "skyguard",
+    "url": "https://github.com/aditya0si/skyguard",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-05T22:30:48Z",
+    "updatedAt": "2026-09-08T05:11:31Z",
+    "pushedAt": "2026-09-05T22:30:54Z",
+    "description": "Multi-paradigm anomaly detection and telemetry diagnostics for automatic weather stations (SIH 2026)",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 137467,
+      "JavaScript": 39486,
+      "HTML": 1019,
+      "CSS": 753
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 775
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 676
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1073
+      },
+      {
+        "name": "PLAN_skyguard_anomaly_detection.md",
+        "type": "file",
+        "size": 13030
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 10756
+      },
+      {
+        "name": "SPEC.md",
+        "type": "file",
+        "size": 356
+      },
+      {
+        "name": "evals",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1829
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 317
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "uv.lock",
+        "type": "file",
+        "size": 517495
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# 🛡️ SkyGuard AI (SIH26073)\n\n### Industrial-Grade Multi-Paradigm Anomaly Detection & Telemetry Diagnostics for Automatic Weather Stations (AWS)\n\n[![CI](https://github.com/aditya0si/skyguard/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/skyguard/actions)\n[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)\n[![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.109+-009688.svg)](https://fastapi.tiangolo.com)\n[![React 18](https://img.shields.io/badge/React-18.3+-61DAFB.svg)](https://reactjs.org)\n[![Vite](https://img.shields.io/badge/Vite-5.3+-646CFF.svg)](https://vitejs.dev)\n\n---\n\n## 📌 Problem Statement & Overview\n\n**Automatic Weather Stations (AWS)** deployed across national meteorological networks (such as the India Meteorological Department - IMD, NOAA, and WMO networks) operate continuously in harsh environments. Sensors measuring **temperature, relative humidity, barometric pressure, wind speed, solar irradiance, precipitation, and battery bus voltage** are vulnerable to a wide spectrum of failures:\n1. **Physical & Environmental Degradation**: Biofouling, dust accumulation on pyranometer domes, transducer degradation.\n2. **Electrical & Communication Faults**: Voltage sags, electromagnetic interference (EMI) spikes, ADC freezing, telemetry packet corruption.\n3. **Subtle Meteorological Calibration Drifts**: Sl",
+    "error": null,
+    "fullReadmeLength": 10726
+  },
+  {
+    "name": "aditya0si",
+    "url": "https://github.com/aditya0si/aditya0si",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-25T16:25:19Z",
+    "updatedAt": "2026-09-08T05:11:32Z",
+    "pushedAt": "2026-09-02T19:18:14Z",
+    "description": "GitHub profile",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 1233
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Aditya Singh\n\nSoftware Engineer | Backend • Full-Stack • AI Systems\n\nI build production-grade backend and AI systems — FastAPI services, data pipelines, and LLM-powered products with real observability, testing, and compliance discipline.\n\n## Currently building\n\n- **[JARVIS](https://github.com/aditya0si/visionpro)** — spatial/3D command-center web app (WIP)\n\n## Featured projects\n\n- **[CoverAI](https://github.com/aditya0si/CoverAI)** — AI vehicle-insurance platform: RAG policy Q&A, claims triage, RBAC, DPDP-compliant data handling (FastAPI + Next.js)\n- **[DevAtlas](https://github.com/aditya0si/DevAtlas)** — developer-ecosystem intelligence: GitHub activity maps, repo classification, trend analysis (FastAPI + PostGIS + MapLibre)\n- **[Sentinel](https://github.com/aditya0si/Sentinel)** — guardrails & quality-gate framework for agentic AI: schema, safety, hallucination, and business-rule validation (Python + OpenTelemetry)\n\n## Technical focus\n\nBackend • Distributed Systems • Databases • Cloud • LLM Systems\n\n## Experience\n\nIBM · HCLTech\n\n## Links\n\n[LinkedIn](https://www.linkedin.com/in/aditya-singh-387774295) · [Email](mailto:oliaditya05@gmail.com) · [Portfolio](https://adityasingh.ai.studio)\n",
+    "error": null,
+    "fullReadmeLength": 1208
+  },
+  {
+    "name": "hardware-npi-lab",
+    "url": "https://github.com/aditya0si/hardware-npi-lab",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:50:48Z",
+    "updatedAt": "2026-09-08T05:11:37Z",
+    "pushedAt": "2026-09-02T15:51:30Z",
+    "description": "End-to-end NPI lab ΓÇö one 4-layer board through DFM/DFT, SI/PI, PDN/thermal, ASIC/DFT, ATE, BOM AI (6 live demos)",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "HTML": 992
+    },
+    "rootFiles": [
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 3359
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 992
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# hardware-npi-lab — End-to-End NPI: From Spec to Shipment\n\n<p align=\"center\">\n  <img src=\"https://img.shields.io/badge/NPI-Spec%20%E2%86%92%20Shipment-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/yield-98%25-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/DFT-100%25-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/MTBF-185k%20hrs-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/cost--23%25-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>One board, six labs, one NPI story — how a 4-layer network board goes from idea to 88-up panel to 42s automated test.</i></p>\n\n---\n\n### Story (What a Cisco GSC Hiring Manager Sees in 60s)\n\n```\nSpec (100Mbps RMII, 3 rails, 54 nets DFT) \n  → Design   [pcb-dfm-dft] 4L 100×80mm Isola 370HR, 487 nets, DFM 0\n  → SI/PI    [si-pi-lab] 49.2Ω SE, 312mV eye, -35dB xtalk, <10mΩ PDN\n  → Power    [pdn-thermal-lab] 94.2% peak, 62° PM, Tj 67°C → 52°C w/ TIM, FMEA\n  → Silicon  [asic-crc-engine] CRC+FIFO 412 tests 100% cov, 98.7% fault, SDC\n  → Test     [ate-fixture-lab] 54-pogo fixture, 42s, 7/7 pytest, 10/10 traceability\n  → Supply   [bom-intelligence] LLM 41 alts, 11→0 single-source, -23% cost, 42s\n  → Ship     88 boards/panel, 98% yield, 7.2yr life\n```\n\n**One link per stage, all live:**\n\n| Stage | Lab | Live Demo | Key Metric for Resume |\n|-------|-----|-----------|----------------------|\n| Design | [pcb-dfm-dft](https://github.com/aditya0si/pcb-dfm-dft) ",
+    "error": null,
+    "fullReadmeLength": 3294
+  },
+  {
+    "name": "pharmforge",
+    "url": "https://github.com/aditya0si/pharmforge",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:51:21Z",
+    "updatedAt": "2026-09-08T05:11:38Z",
+    "pushedAt": "2026-09-02T15:51:26Z",
+    "description": "PharmForge ΓÇö Scientific Agentic Integration Platform: hybrid RAG + RDKit (Morgan/Tanimoto/QED) + 5-agent DAG + sandbox code-gen + feedback loop for drug discovery",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 110532,
+      "Dockerfile": 485
+    },
+    "rootFiles": [
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 238
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 485
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 14552
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 992
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "eval",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "observability",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pharmforge",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1172
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# PharmForge — Scientific Agentic Integration Platform\n\n> **RAG + RDKit + code-gen for drug discovery workflows.** Ask *“Find molecules similar to imatinib with better solubility, predict ADME, and generate a docking prep script”* — PharmForge RAGs over a curated chemical dataset, computes RDKit Morgan fingerprints & ADME descriptors, validates via a critic, and returns a provenance-traced answer plus a runnable Python analysis script that executes in a sandbox.\n\nBuilt for **DESRES swe agentic AI pipeline 923** — demonstrates integrating AI with scientific software, intelligent data workflows, and feedback loops for ML training. Single-command local run, no paid APIs required.\n\n---\n\n## Why PharmForge vs. alternatives?\n\n| Need | Without PharmForge | With PharmForge |\n|---|---|---|\n| Chemical search | Keyword grep over SDF | Hybrid vector (Chroma 384-d) + FTS5 BM25 + RRF — quote-verified provenance |\n| RDKit ops | Ad-hoc notebooks | Typed `chem.*` toolchain (validate, Morgan/Tanimoto, QED/LogP/TPSA, ETKDG conformers) |\n| Agentic workflow | Single LLM call, hallucinated citations | 5-agent DAG (planner→retriever→chemist→critic→reporter) — each emits Pydantic artifacts, hallucinations flagged |\n| Code generation | LLM dumps untrusted code | Template + sandbox (5 s timeout, banned-token scan, subprocess isolated) — DESRES “automated code generation” signal |\n| Feedback loop | Queries vanish | Every trace JSONL + `feedback-export` for fine-tuning — “improve quality/efficiency of ML",
+    "error": null,
+    "fullReadmeLength": 14346
+  },
+  {
+    "name": "aegis",
+    "url": "https://github.com/aditya0si/aegis",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:51:10Z",
+    "updatedAt": "2026-09-08T05:11:39Z",
+    "pushedAt": "2026-09-02T15:51:15Z",
+    "description": "AEGIS ΓÇö Agentic AI Security Mesh: MCP-aware proxy enforcing OWASP LLM Top-10 (injection, secrets, trajectory) with 100% red-team coverage, 74 tests, OTel",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 84030,
+      "Dockerfile": 229
+    },
+    "rootFiles": [
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 163
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 229
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 14425
+      },
+      {
+        "name": "aegis",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "demo",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 1058
+      },
+      {
+        "name": "observability",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "policy.yaml.example",
+        "type": "file",
+        "size": 714
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1092
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 311
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# AEGIS — Agentic AI Security Mesh\n\n[![CI](https://github.com/aditya-singh/aegis/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya-singh/aegis/actions/workflows/ci.yml)\n[![Python 3.11](https://img.shields.io/badge/python-3.11-blue)](https://python.org)\n[![Tests](https://img.shields.io/badge/tests-74%20passed-brightgreen)](#latest-eval-real-run-windows-11-python-31116)\n[![OWASP](https://img.shields.io/badge/OWASP%20LLM%20Top--10-100%25-brightgreen)](#owasp-llm-top-10-coverage)\n[![License MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)\n\n**Drop-in MCP-aware sidecar proxy that enforces OWASP LLM Top-10 on any agent workflow — without touching agent code.**\n\nIf you run `opencode-teamwork`, LangGraph, or any MCP/LangChain agent, put AEGIS in front and get allowlist/denylist tool auth, prompt-injection blocking, secrets redaction, trajectory anomaly detection, and red-team-gated CI — all via one proxy endpoint.\n\n> Built for DESRES-style agentic pipelines: automated code-gen, scientific workflow integration, and secure DevSecOps. Runs headless on Windows 11 + RTX 5060, no paid APIs, full OTel observability.\n\n**Target roles**: DESRES InfoSec Agentic AI (pipeline 960) + SWE Agentic AI (pipeline 923) — demonstrates “secure agentic AI systems” + “automated code-gen + scientific integration + feedback loops” in one repo.\n\n\n---\n\n## Why AEGIS vs Sentinel vs NeMo Guardrails\n\n| Capability | **AEGIS** | **Sentinel** (guardrails) | **NVIDIA NeMo** |\n|---|---|---|---|",
+    "error": null,
+    "fullReadmeLength": 13222
+  },
+  {
+    "name": "bom-intelligence",
+    "url": "https://github.com/aditya0si/bom-intelligence",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:17:19Z",
+    "updatedAt": "2026-09-08T05:11:41Z",
+    "pushedAt": "2026-09-02T15:49:24Z",
+    "description": "BOM cost & risk engine ΓÇö LLM + Pandas, -23% cost, 41 alternates, ethical AI",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 4901,
+      "Jupyter Notebook": 1646
+    },
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 105
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "06b-Edge-AI-Inspector",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2782
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 4817
+      },
+      {
+        "name": "notebooks",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 4817
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# bom-intelligence — BOM Cost & Risk Engine\n\n[![CI](https://github.com/aditya0si/bom-intelligence/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/bom-intelligence/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/bom-intelligence/)\n  <img src=\"https://img.shields.io/badge/saving--23%25%20(%248.84)-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/alternates-41-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/single--source-11%E2%86%920-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/time-4h%E2%86%9242s%20(99.7%25)-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/AI-LLM%20%2B%20Pandas-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>Turn a 67-line BoM into a risk dashboard in 42 seconds — propose with AI, verify with API, decide with a human.</i></p>\n\n### What it does\nInput `data/bom_input.csv` (from pcb-dfm-dft) → Pandas parser → parametric filter → **LLM proposer** → LCSC/Mouser API verify → risk scorer → HTML dashboard.\n\n### Results on the demo BoM\n| Before | After | Impact |\n|--------|-------|--------|\n| $38.42 | **$29.58** | **-23%** |\n| 11 single-source | **0** | risk eliminated |\n| 2 NRND/EOL flagged | 2 with replacements | proactive |\n| 0 alternates | **41** | resilience |\n| 3 leads >16w | 0 | NPI on-time |\n| 4h manual | **42s** | **99.7% faster** |\n\n##",
+    "error": null,
+    "fullReadmeLength": 2730
+  },
+  {
+    "name": "ate-fixture-lab",
+    "url": "https://github.com/aditya0si/ate-fixture-lab",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:17:11Z",
+    "updatedAt": "2026-09-08T05:11:43Z",
+    "pushedAt": "2026-09-02T15:49:20Z",
+    "description": "Pogo-pin JTAG ATE ΓÇö 42s automated test, PyVISA/pytest/OpenOCD, 98.2% fault",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 2870
+    },
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 143
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2215
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "hardware",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 7479
+      },
+      {
+        "name": "software",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 7479
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# ate-fixture-lab — Pogo-Pin JTAG ATE + Python Automation\n\n[![CI](https://github.com/aditya0si/ate-fixture-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/ate-fixture-lab/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/ate-fixture-lab/)\n  <img src=\"https://img.shields.io/badge/time-42s%20vs%204m10s%20(-83%25)-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/coverage-98.2%25%20fault-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/probed-54%20nails%20%7C%20100%25%20nets-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/stack-Python%20%2B%20PyVISA%20%2B%20OpenOCD-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/pytest-7%2F7%20PASS-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>From hand-probing to fixture: one clamp, 42 seconds, HTML report.</i></p>\n\n### Fixture\n54× P75 pogo pins (100mil grid, bottom-only), 3D-printed base (~$22), alignment pins. Maps to pcb-dfm-dft's 54 test points + JTAG chain. PogoMap in `hardware/pogomap.csv`.\n\n### Flow (pytest, 42s)\n| Step | Method | Time |\n|------|--------|------|\n| Continuity | PyVISA DMM | 4.2s |\n| Power rails | INA219 I2C | 1.8s |\n| JTAG scan | OpenOCD IDCODE | 0.8s |\n| Boundary scan EXTEST | BSDL | 6.4s |\n| Flash + CRC | SWD + UART | 8.1s |\n| PHY loopback | RMII | 5.2s |\n| Functional | UART/LED | 15.5s |\n\nManual",
+    "error": null,
+    "fullReadmeLength": 2190
+  },
+  {
+    "name": "asic-crc-engine",
+    "url": "https://github.com/aditya0si/asic-crc-engine",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:17:03Z",
+    "updatedAt": "2026-09-08T05:11:45Z",
+    "pushedAt": "2026-09-02T15:49:17Z",
+    "description": "Pipelined CRC32 + FIFO ΓÇö Verilog/SV 412 tests 100% cov, 98.7% fault scan, SDC, MBIST",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Verilog": 6312,
+      "SystemVerilog": 1741,
+      "Shell": 784,
+      "Python": 574,
+      "Tcl": 395
+    },
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 105
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2214
+      },
+      {
+        "name": "constraints",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 5922
+      },
+      {
+        "name": "rtl",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tb",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 5922
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# asic-crc-engine — Pipelined CRC32 + FIFO, DFT-ready\n\n[![CI](https://github.com/aditya0si/asic-crc-engine/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/asic-crc-engine/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/asic-crc-engine/)\n  <img src=\"https://img.shields.io/badge/coverage-100%25%20line-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/fault-98.7%25-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/tests-412%20SV-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/Fmax-142MHz-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/area-87%20LUTs-lightgrey?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>Small block, real ASIC flow: RTL → constrained-random TB → coverage → scan → SDC → FPGA.</i></p>\n\n### Block\n- **CRC32** IEEE 802.3, pipelined, 8-bit parallel, poly 0x04C11DB7, 1-cycle latency, 800Mbps @100MHz\n- **Async FIFO** 64×32, dual-clock, gray pointers, almost-full\n- **DFT** scan chain (8 flops, 1 chain, 0.8% area), 124 ATPG patterns, **98.7% stuck-at**, JTAG TAP (4-bit IR)\n\n### Results\n| Metric | Value |\n|--------|-------|\n| TB | SystemVerilog, 412 tests, constrained random |\n| Line / Branch / Functional | **100% / 98.4% / 96.7%** |\n| Fault (ATPG) | **98.7%** (604/612) |\n| FPGA | Artix-7 (Basys3), 87 LUTs, 62 FFs, 0 BRAM |\n| Timing | SDC 100MHz, slack +1.2ns, Fmax ",
+    "error": null,
+    "fullReadmeLength": 2182
+  },
+  {
+    "name": "pdn-thermal-lab",
+    "url": "https://github.com/aditya0si/pdn-thermal-lab",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:16:55Z",
+    "updatedAt": "2026-09-08T05:11:47Z",
+    "pushedAt": "2026-09-02T15:49:13Z",
+    "description": "Power delivery & thermal lab ΓÇö 94.2% buck, MTBF 185k hrs, FMEA, thermal (Mil-HDBK-217)",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 858
+    },
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 105
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2325
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 7248
+      },
+      {
+        "name": "sim",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 7248
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# pdn-thermal-lab — Power Delivery & Thermal Lab\n\n[![CI](https://github.com/aditya0si/pdn-thermal-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/pdn-thermal-lab/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/pdn-thermal-lab/)\n  <img src=\"https://img.shields.io/badge/efficiency-94.2%25%20peak-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/system-88.4%25-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/MTBF-185k%20hrs-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/Tj-67%C2%B0C%20%40%2025%C2%B0C-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/PM-62%C2%B0-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>Power that stays flat under load and stays cool in a 1U box.</i></p>\n\n### Rails (12V → 3.3V 2A → 1.8V 1.5A → 1.0V 3A ASIC core)\nBuck: TPS54360 (3.3V), TLV62569 (1.8V), TPS54821 (1.0V) — all dual-sourced LCSC Basic.\n\n| Rail | Eff | Ripple | Load step | Phase margin |\n|------|-----|--------|-----------|--------------|\n| 12→3.3V 580kHz | 92.8% @1.5A | 18mV | 42mV/5A/µs | 62° |\n| 3.3→1.8V 1MHz | 91.2% | 12mV | 28mV | — |\n| 3.3→1.0V 800kHz | **94.2% peak @2.5A** | 15mV | 35mV | 62° |\n| **System** | **88.4%** | — | — | — |\n\nThermal: 2oz copper + 12 thermal vias/IC → θJA 28°C/W → Tj 67°C @25°C. With 3W/mK TIM + heatsink 6°C/W → Tj 52°C (-15°C). Fits 55°C data",
+    "error": null,
+    "fullReadmeLength": 2257
+  },
+  {
+    "name": "si-pi-lab",
+    "url": "https://github.com/aditya0si/si-pi-lab",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:16:47Z",
+    "updatedAt": "2026-09-08T05:11:49Z",
+    "pushedAt": "2026-09-02T15:49:09Z",
+    "description": "Signal & Power Integrity lab ΓÇö eye 312mV, 50╬⌐/100╬⌐, crosstalk -35dB, PDN <10m╬⌐ (Saturn/LTspice)",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 143
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 2402
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 6695
+      },
+      {
+        "name": "sim",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 6695
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# si-pi-lab — Signal & Power Integrity Lab\n\n[![CI](https://github.com/aditya0si/si-pi-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/si-pi-lab/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/si-pi-lab/)\n  <img src=\"https://img.shields.io/badge/SI-eye%20312mV-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/PI-%3C10m%CE%A9-purple?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/crosstalk--35.2dB-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/stackup-4L%20Isola%20370HR-lightgrey?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/tools-Saturn%20%7C%20LTspice%20%7C%20HyperLynx-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>Not just routing — measuring. Eye, TDR, crosstalk, and PDN for the same 4-layer board.</i></p>\n\n### What was probed\n- **RMII 50MHz** (MCU↔PHY, 65mm, 50Ω SE) — eye before/after 33Ω series\n- **100BASE-TX diff** (42mm, 100Ω diff) — TDR + crosstalk\n- **SDRAM 100MHz** — intra-byte skew < 50mil\n- **PDN** — 3.3V/1.8V/1.0V plane impedance <10mΩ\n\n### Results\n| Parameter | Target | Measured | \n|-----------|--------|----------|\n| SE impedance | 50Ω ±10% | **49.2Ω** |\n| Diff impedance | 100Ω ±10% | **96.8Ω** |\n| Eye height | >250mV | **312mV** (5.8ns width, 420ps jitter) |\n| Crosstalk @6mil (3W) | < -30dB | **-35.2dB** |\n| Skew | <50mil | **18mil** (12ps) |\n| PD",
+    "error": null,
+    "fullReadmeLength": 2353
+  },
+  {
+    "name": "pcb-dfm-dft",
+    "url": "https://github.com/aditya0si/pcb-dfm-dft",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-02T15:16:38Z",
+    "updatedAt": "2026-09-08T05:11:50Z",
+    "pushedAt": "2026-09-02T15:49:05Z",
+    "description": "Four-layer network board ΓÇö DFM 0 errors, 54 test points DFT, JTAG boundary scan, IPC Class 2",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": ".gitattributes",
+        "type": "file",
+        "size": 441
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 143
+      },
+      {
+        "name": ".nojekyll",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 3394
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "hardware",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 6084
+      },
+      {
+        "name": "viewer.html",
+        "type": "file",
+        "size": 6084
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# pcb-dfm-dft — Four-Layer Network Board\n\n[![CI](https://github.com/aditya0si/pcb-dfm-dft/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/pcb-dfm-dft/actions)\n\n<p align=\"center\">\n\n[![Live Demo](https://img.shields.io/badge/Live%20Demo-GitHub%20Pages-0ea5e9?style=flat-square)](https://aditya0si.github.io/pcb-dfm-dft/)\n  <img src=\"https://img.shields.io/badge/PCB-4%20Layer%20%7C%20100%C3%9780mm-blue?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/DFM-0%20errors-success?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/DFT-54%20test%20points%20%7C%20100%25-orange?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/IPC-Class%202-lightgrey?style=flat-square\" />\n  <img src=\"https://img.shields.io/badge/status-fabrication%20ready-informational?style=flat-square\" />\n</p>\n\n<p align=\"center\"><i>A production-minded 4-layer board — designed for manufacturing, not just the schematic.</i></p>\n\n---\n\n### Why this exists\nMost student boards stop at \"it works on bench.\" This one is built for NPI: panelized, alternate-sourced, 100% probeable, and DFM-clean — the kind of board you'd hand to a CM and get 88 boards/panel back with >98% yield.\n\n### Snapshot\n| Spec | Detail |\n|------|--------|\n| **MCU + PHY + Memory** | STM32H743 + LAN8742A (RMII 50MHz) + 32MB SDRAM + QSPI |\n| **Size / Stackup** | 100×80mm, 4L (Signal-GND-Power-Signal), Isola 370HR, ENIG |\n| **Nets / Components** | 487 nets, 67 components |\n| **DFM** | JLCPCB DFM **0 errors**,",
+    "error": null,
+    "fullReadmeLength": 3335
+  },
+  {
+    "name": "Sentinel",
+    "url": "https://github.com/aditya0si/Sentinel",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-07-30T17:58:43Z",
+    "updatedAt": "2026-09-08T05:11:53Z",
+    "pushedAt": "2026-09-01T12:46:03Z",
+    "description": "Pluggable guardrails and quality-gate framework for agentic AI. Hand-rolled validation, OpenTelemetry tracing, Jaeger + Grafana, CI golden-set gate.",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 126675
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 1066
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 141
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 18789
+      },
+      {
+        "name": "README_POLISH_PROMPT.md",
+        "type": "file",
+        "size": 2334
+      },
+      {
+        "name": "api",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "demo",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 1923
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "grafana-dashboards",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "grafana-datasources.yml",
+        "type": "file",
+        "size": 160
+      },
+      {
+        "name": "guardrails",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "monitoring",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "observability",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "otel-collector-config.yaml",
+        "type": "file",
+        "size": 672
+      },
+      {
+        "name": "prometheus.yml",
+        "type": "file",
+        "size": 167
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1910
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 522
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "quality-gate.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# Sentinel — Guardrails & Quality-Gate Framework for Agentic AI\n\nSentinel is an open-source guardrails and quality-gate framework designed for agentic AI architectures in production. It intercepts LLM completions and agent tool executions to enforce schema conformity, PII redaction, toxicity filtering, and semantic alignment before responses reach end users. Built for platform teams and AI engineers, Sentinel operates as an automated CI/CD quality gate and runtime validation proxy across multi-provider LLM pipelines.\n\n[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)\n[![Python 3.11+](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)\n[![LangChain](https://img.shields.io/badge/LangChain-Enabled-1C3C3C.svg?logo=langchain&logoColor=white)](https://www.langchain.com/)\n[![OpenTelemetry](https://img.shields.io/badge/OpenTelemetry-Tracing%20%26%20Metrics-F5A800.svg?logo=opentelemetry&logoColor=white)](https://opentelemetry.io/)\n[![Docker](https://img.shields.io/badge/Docker-Compose-2496ED.svg?logo=docker&logoColor=white)](https://www.docker.com/)\n[![CI](https://img.shields.io/badge/CI-Passing-brightgreen.svg)](https://github.com/aditya0si/Sentinel/actions)\n\n<p align=\"center\">\n  <img src=\"docs/demo.gif\" alt=\"Sentinel demo\"/>\n</p>\n\n## Why This Exists\n\nAutonomous AI agents frequently generate unvalidated ",
+    "error": null,
+    "fullReadmeLength": 17690
+  },
+  {
+    "name": "TheButterFlyEffect",
+    "url": "https://github.com/aditya0si/TheButterFlyEffect",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-01T12:26:58Z",
+    "updatedAt": "2026-09-08T05:11:54Z",
+    "pushedAt": "2026-09-01T12:42:12Z",
+    "description": "Biomedical and legal Graph-RAG with multi-agent decision support. Knowledge graph, e2e verification harness, FastAPI + WebGL frontend.",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 143493,
+      "JavaScript": 28542,
+      "CSS": 18689,
+      "HTML": 9978
+    },
+    "rootFiles": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 206
+      },
+      {
+        "name": "Biomedical_Graph_Constellation.md",
+        "type": "file",
+        "size": 5974
+      },
+      {
+        "name": "Legal_Graph_Constellation.md",
+        "type": "file",
+        "size": 7282
+      },
+      {
+        "name": "PLAN_biomed.md",
+        "type": "file",
+        "size": 11159
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 23593
+      },
+      {
+        "name": "README_POLISH_PROMPT.md",
+        "type": "file",
+        "size": 1832
+      },
+      {
+        "name": "agents",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "biomed",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "e2e_verify.py",
+        "type": "file",
+        "size": 2684
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "network_data.json",
+        "type": "file",
+        "size": 2905013
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# The Butterfly Effect: Dual-Constellation GraphRAG Engine\n\n[![Python Version](https://img.shields.io/badge/python-3.11%2B-blue.svg)](https://www.python.org/)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)\n[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](e2e_verify.py)\n[![API Framework](https://img.shields.io/badge/API-FastAPI-009688.svg)](https://fastapi.tiangolo.com/)\n[![Visualization](https://img.shields.io/badge/WebGL-Three.js_r128-black.svg)](https://threejs.org/)\n[![Inference](https://img.shields.io/badge/Inference-Groq_LLaMA_3.3_70B-orange.svg)](https://groq.com/)\n\nThe Butterfly Effect is an open-source GraphRAG platform that maps unstructured clinical symptoms and legal scenarios into interactive 3D knowledge constellations. By combining deterministic colloquial lexicons, in-memory vector search, and multi-hop graph traversals over SQLite, the system retrieves deterministic subgraphs before generating evidence-grounded syntheses with an LLM. This eliminates ungrounded hallucinations while providing real-time 3D visual feedback of active knowledge pathways.\n\n---\n\n## Demo & Visual Interface\n\n```\n+---------------------------------------------------------------------------------------+\n|  [ AURA-MED ] Cosmic GraphRAG 3.0           [Mode: Symptom Checker]   [2,097 Active] |\n+---------------------------------------------------------------------------------------+\n|                     ",
+    "error": null,
+    "fullReadmeLength": 23265
+  },
+  {
+    "name": "mcp-from-scratch",
+    "url": "https://github.com/aditya0si/mcp-from-scratch",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-09-01T12:20:56Z",
+    "updatedAt": "2026-09-08T05:11:55Z",
+    "pushedAt": "2026-09-01T12:21:01Z",
+    "description": "From-scratch MCP server + trajectory eval harness. Raw stdlib + FastAPI, no LangChain, no SDK.",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 60554
+    },
+    "rootFiles": [
+      {
+        "name": "BUILD_PROMPT.md",
+        "type": "file",
+        "size": 4525
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 8692
+      },
+      {
+        "name": "__pycache__",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "app.py",
+        "type": "file",
+        "size": 4950
+      },
+      {
+        "name": "data",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "eval_report.json",
+        "type": "file",
+        "size": 20351
+      },
+      {
+        "name": "examples",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 545
+      },
+      {
+        "name": "requirements_hf.txt",
+        "type": "file",
+        "size": 63
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# mcp-from-scratch\n\nA from-scratch implementation of the Model Context Protocol (MCP): raw JSON-RPC 2.0 server, HTTP and stdio transports, a minimal ReAct agent loop, and a trajectory-grading evaluation harness. Built with stdlib and FastAPI only — no LangChain, no MCP SDK, no third-party agent frameworks.\n\n## Why this exists\n\nMost \"MCP\" code on the internet is `npm install` and five lines of config. When my agent's tool call fails at 3 a.m., I want to be able to read the spec and fix it, not grep through four layers of SDK abstractions. This repo is the smallest version that teaches you what JSON-RPC actually looks like on the wire — and then gives you an eval harness to grade what your agent did with it.\n\n```\n┌──────────┐    HTTP/stdio    ┌─────────────┐\n│  Client  │ ───────────────► │ MCP Server  │\n└──────────┘                  │  (raw JSON- │\n                              │   RPC 2.0)  │\n                              └──────┬──────┘\n                                     │ dispatch\n                              ┌──────┴──────┐\n                              │ Tool/Resource│\n                              │   Registry   │\n                              └──────┬──────┘\n                                     │\n                              ┌──────┴──────┐\n                              │ search_docs  │\n                              │ (corpus.json)│\n                              └─────────────┘\n```\n\n## What's in here\n\n- **`src/mcp_from_scratch/jsonrpc.py`** — JSON-RPC 2.0 codec: `Jso",
+    "error": null,
+    "fullReadmeLength": 8160
+  },
+  {
+    "name": "OpenCode-Team",
+    "url": "https://github.com/aditya0si/OpenCode-Team",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-27T23:26:37Z",
+    "updatedAt": "2026-09-14T17:47:50Z",
+    "pushedAt": "2026-08-28T18:27:23Z",
+    "description": "Antigravity-style multi-agent orchestration plugin for OpenCode. 10 agents, 6 patterns, DAG engine with worktree isolation, typed artifact bus, cost tracking.",
+    "homepageUrl": "https://www.npmjs.com/package/opencode-teamwork",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 68880
+    },
+    "rootFiles": [
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 510
+      },
+      {
+        "name": ".npmignore",
+        "type": "file",
+        "size": 236
+      },
+      {
+        "name": "CHANGELOG.md",
+        "type": "file",
+        "size": 3606
+      },
+      {
+        "name": "CONTRIBUTING.md",
+        "type": "file",
+        "size": 3233
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 12335
+      },
+      {
+        "name": "SECURITY.md",
+        "type": "file",
+        "size": 1851
+      },
+      {
+        "name": "SKILL.md",
+        "type": "file",
+        "size": 8321
+      },
+      {
+        "name": "antigravity-teamwork-preview-reference.md",
+        "type": "file",
+        "size": 30686
+      },
+      {
+        "name": "bun.lock",
+        "type": "file",
+        "size": 8919
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 2909
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "size": 659
+      }
+    ],
+    "workflows": [
+      "ci.yml",
+      "release.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# opencode-teamwork\n\n> Antigravity-style multi-agent orchestration for OpenCode. 6 agents, 4 patterns, 5 slash commands. One-line install.\n\n[![npm version](https://img.shields.io/npm/v/opencode-teamwork.svg)](https://www.npmjs.com/package/opencode-teamwork)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)\n[![OpenCode plugin](https://img.shields.io/badge/opencode-plugin-blueviolet)](https://opencode.ai)\n\nThis is a community replica of Google Antigravity's `/teamwork-preview`,\npackaged as an opencode plugin. The team is opinionated: every run\ngoes scout → propose×N → falsify×N → synthesize → verify, with a\nshared pitfall registry across rounds. You pick the pattern. You pick\nthe model per role. The loop is the same.\n\n```\n/teamwork \"your hardest problem\"\n```\n\n## Quick install\n\n```bash\nbunx opencode-teamwork@latest install\n# or, if you don't have bun:\nnpx opencode-teamwork@latest install\n```\n\nThen run `opencode` and try:\n\n```\n/teamwork-craft                                # Phase 1: 9-step wizard\n/teamwork \"your hardest problem\"               # v2: full DAG + worktrees + cost\n/teamwork --topology small-focused \"rename x\"  # fast path for tiny fixes\n/team-orchestrate \"fix the off-by-one\"         # v1: simpler propose/falsify loop\n/teamwork --topology iterative-coding \"fix the off-by-one in parser.ts\"\n/teamwork --topology distributed-coding \"migrate the auth module to JWT\"\n/teamwork --topology long-proof \"prove Knuth cycles for even n\"\n/teamwork --top",
+    "error": null,
+    "fullReadmeLength": 11499
+  },
+  {
+    "name": "bustwatch",
+    "url": "https://github.com/aditya0si/bustwatch",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-26T13:54:45Z",
+    "updatedAt": "2026-09-08T05:11:57Z",
+    "pushedAt": "2026-08-26T13:54:51Z",
+    "description": "Medium-range NWP forecast bust detection & confidence mapping (SIH 2026) ΓÇö FastAPI + React",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 108812,
+      "TypeScript": 53233,
+      "HTML": 776,
+      "CSS": 572,
+      "JavaScript": 431
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 421
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 661
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1079
+      },
+      {
+        "name": "PLAN_bustwatch.md",
+        "type": "file",
+        "size": 11160
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 13359
+      },
+      {
+        "name": "SPEC.md",
+        "type": "file",
+        "size": 345
+      },
+      {
+        "name": "artifacts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "evals",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1808
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 298
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# ⚡ BustWatch (`bustwatch`) — Medium-Range NWP Forecast Bust Detection & Confidence Mapping System\n\n[![CI](https://github.com/aditya0si/bustwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/bustwatch/actions/workflows/ci.yml)\n[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)\n[![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue)](https://www.python.org/downloads/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)\n[![React 18](https://img.shields.io/badge/Frontend-React%20%2B%20Vite-61DAFB?logo=react&logoColor=black)](https://vitejs.dev/)\n\n> **SIH26079 Operational Solution**: Machine learning system predicting where and when medium-range Numerical Weather Prediction (NWP) models (GFS / GEFS / ECMWF) will suffer extreme forecast busts across Day 1 to Day 10 (24h–240h) lead times, producing calibrated 2D spatial confidence rasters, GeoJSON vectors, and uncertainty bounds.\n\n---\n\n## 🌪️ 1. Problem Statement & Meteorological Context\n\nMedium-range weather forecasts (Day 1–10) from state-of-the-art physics-based NWP systems (such as NOAA's GFS/GEFS and ECMWF's IFS) are the backbone of global weather intelligence. However, atmospheric dynamics are governed by nonlinear chaotic fluid dynamics where small initial state perturbations grow exponentially:\n\n$$\\sigma(t) = \\sigma_0 \\cdot e^{\\lambda_{\\text",
+    "error": null,
+    "fullReadmeLength": 12747
+  },
+  {
+    "name": "floodlens",
+    "url": "https://github.com/aditya0si/floodlens",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-26T13:54:38Z",
+    "updatedAt": "2026-09-08T05:11:59Z",
+    "pushedAt": "2026-08-26T13:54:44Z",
+    "description": "Urban flood nowcasting system (SIH 2026) ΓÇö FastAPI + React + ML on IMD/Bhuvan rainfall data",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 122590,
+      "TypeScript": 73048,
+      "CSS": 967,
+      "HTML": 844,
+      "JavaScript": 675
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 683
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 731
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1079
+      },
+      {
+        "name": "PLAN_floodlens.md",
+        "type": "file",
+        "size": 17013
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 9574
+      },
+      {
+        "name": "SPEC.md",
+        "type": "file",
+        "size": 352
+      },
+      {
+        "name": "_build_log.json",
+        "type": "file",
+        "size": 6173
+      },
+      {
+        "name": "_build_log2.json",
+        "type": "file",
+        "size": 0
+      },
+      {
+        "name": "_swarm_prompt.txt",
+        "type": "file",
+        "size": 1656
+      },
+      {
+        "name": "evals",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 965
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 297
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# FloodLens 🌊 — Urban Flood Nowcasting System\n\n[![CI Pipeline](https://github.com/aditya0si/floodlens/actions/workflows/ci.yml/badge.svg)](https://github.com/aditya0si/floodlens/actions)\n[![Python 3.10+](https://img.shields.io/badge/python-3.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://www.python.org/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg)](https://fastapi.tiangolo.com)\n[![React 18](https://img.shields.io/badge/React-18.2-61dafb.svg)](https://react.dev)\n[![Vite](https://img.shields.io/badge/Vite-5.0-646cff.svg)](https://vitejs.dev)\n[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)\n\n> **Urban flood nowcasting for dense coastal metros**: coupling 0–3h precipitation nowcasts (Open-Meteo & IMD feeds) with 30m Digital Elevation Model (DEM) topography and 2.5D diffusive wave hydrodynamics to forecast street-level inundation depths and risk tiers in real-time.\n> Primary demonstration metro: **Greater Mumbai** (covering the Mithi River catchment, Island City saucer depressions, and Western/Eastern Suburbs).\n\n---\n\n## 📌 Problem Statement\n\nDense tropical coastal metropolises such as **Greater Mumbai** and **Chennai** face recurring catastrophic monsoon flash floods caused by the convergence of:\n1. **Intense Convective Cloudbursts**: Localized precipitation exceeding 70–120 mm/h.\n2. **Extreme Surface Imperviousness**: Over 85–95% concrete coverage generating immediate overland surface runoff.\n3. **Complex Saucer Geomorpholo",
+    "error": null,
+    "fullReadmeLength": 9544
+  },
+  {
+    "name": "stormcast",
+    "url": "https://github.com/aditya0si/stormcast",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-24T19:06:51Z",
+    "updatedAt": "2026-09-08T05:12:04Z",
+    "pushedAt": "2026-08-24T19:07:03Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 145873,
+      "TypeScript": 44505,
+      "HTML": 1038,
+      "CSS": 665,
+      "JavaScript": 656
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 468
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 520
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1079
+      },
+      {
+        "name": "evals",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "models",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1335
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 252
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "stormcast",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "weathergpt",
+    "url": "https://github.com/aditya0si/weathergpt",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-24T19:06:35Z",
+    "updatedAt": "2026-09-08T05:12:09Z",
+    "pushedAt": "2026-08-24T19:06:43Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "master",
+    "languages": {
+      "Python": 161555,
+      "JavaScript": 42388,
+      "HTML": 1035,
+      "CSS": 864
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 1002
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 773
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1089
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 10171
+      },
+      {
+        "name": "artifacts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "evals",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 1181
+      },
+      {
+        "name": "requirements-dev.txt",
+        "type": "file",
+        "size": 129
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 133
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# 🌦️ WeatherGPT (SIH26068)\n### Indic Multilingual Conversational AI Weather & Agro-Meteorological Intelligence Platform\n\n[![CI/CD Pipeline](https://github.com/sih26068/weathergpt/actions/workflows/ci.yml/badge.svg)](https://github.com/sih26068/weathergpt/actions)\n[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)\n[![Python](https://img.shields.io/badge/Python-3.11%20%7C%203.12-3776AB.svg?logo=python&logoColor=white)](https://python.org)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)\n[![React](https://img.shields.io/badge/React-18+-61DAFB.svg?logo=react&logoColor=black)](https://reactjs.org)\n[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4+-38B2AC.svg?logo=tailwind-css&logoColor=white)](https://tailwindcss.com)\n[![Benchmark](https://img.shields.io/badge/Benchmark%20Accuracy-94.59%25-success.svg)](evals/RESULTS.md)\n\n---\n\n## 📌 Problem Statement & Overview\n\nWeather information in India is often fragmented across technical meteorological bulletins, inaccessible to regional farmers, and rarely available in native Northeast Indic languages. **WeatherGPT** bridges this critical gap as an end-to-end conversational weather intelligence system. \n\nBuilt for **SIH26068**, WeatherGPT unites numerical weather prediction (NWP) providers, official India Meteorological Department (IMD) disaster bulletins, NOAA Global Forecast System (GFS) convective atmospheric soundings, and",
+    "error": null,
+    "fullReadmeLength": 10114
+  },
+  {
+    "name": "HandyMan",
+    "url": "https://github.com/aditya0si/HandyMan",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-24T12:57:28Z",
+    "updatedAt": "2026-09-08T05:12:10Z",
+    "pushedAt": "2026-08-24T12:58:54Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 972545,
+      "HTML": 403,
+      "CSS": 299
+    },
+    "rootFiles": [
+      {
+        "name": ".agents",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 373
+      },
+      {
+        "name": ".playwright-mcp",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "IMPLEMENTATION_GUIDE.md",
+        "type": "file",
+        "size": 36479
+      },
+      {
+        "name": "INFRASTRUCTURE.md",
+        "type": "file",
+        "size": 3214
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "PLAN_pearl_orb_news_and_hand_cursor.md",
+        "type": "file",
+        "size": 10101
+      },
+      {
+        "name": "PLAN_phase1.md",
+        "type": "file",
+        "size": 3263
+      },
+      {
+        "name": "PLAN_phase_7_eye_attention.md",
+        "type": "file",
+        "size": 3933
+      },
+      {
+        "name": "PLAN_pinch_zoom_and_dwell_grab.md",
+        "type": "file",
+        "size": 6963
+      },
+      {
+        "name": "PLAN_production_reality_sprint.md",
+        "type": "file",
+        "size": 4304
+      },
+      {
+        "name": "PLAN_realtime_news_google_style_zoom.md",
+        "type": "file",
+        "size": 9289
+      },
+      {
+        "name": "PLAN_saas_identity_persistence_and_billing.md",
+        "type": "file",
+        "size": 7018
+      },
+      {
+        "name": "PROJECT_VISION.md",
+        "type": "file",
+        "size": 14980
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 114691
+      },
+      {
+        "name": "TECHNICAL_SPEC.md",
+        "type": "file",
+        "size": 35537
+      },
+      {
+        "name": "apps",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "figma design prototype",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "improvementplans.md",
+        "type": "file",
+        "size": 30369
+      },
+      {
+        "name": "memory",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "obsidian-v1.png",
+        "type": "file",
+        "size": 295247
+      },
+      {
+        "name": "obsidian-v2-fullstack.png",
+        "type": "file",
+        "size": 275906
+      },
+      {
+        "name": "obsidian-v3-dwell.png",
+        "type": "file",
+        "size": 310786
+      },
+      {
+        "name": "obsidian-v4-locked.png",
+        "type": "file",
+        "size": 291223
+      },
+      {
+        "name": "obsidian-v5-triad.png",
+        "type": "file",
+        "size": 311418
+      },
+      {
+        "name": "obsidian-v6-gestures.png",
+        "type": "file",
+        "size": 277252
+      },
+      {
+        "name": "obsidian-v7-final.png",
+        "type": "file",
+        "size": 287400
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "size": 127373
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 964
+      },
+      {
+        "name": "packages",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": true,
+    "hasDocker": false,
+    "readmeSnippet": "# JARVIS — Spatial Computing Platform\n\n**JARVIS turns any webcam into a gesture-controlled 3D interface**: MediaPipe hand tracking drives a Three.js spatial environment, so you navigate and interact with floating 3D windows using pinches, points, and swipes instead of a mouse.\n\n**Milestone 15 status: Phase 5 part 2 (edge cases, error handling, monitoring) — camera-loss mid-session recovery, degraded-tracking warning, WS reconnect budget + terminal offline, a global error collector with a HUD \"Errors\" counter, and a failure-mode matrix (see the M15 section).** The full vision runs end-to-end: gesture-controlled holographic apps (Dashboard, Notes, LLM Chat, Web Search), a real-time multi-user space with remote hands and owner-only mutation (M12), workspace persistence to disk with Save/Load (M13), and a backend API proxy so Gemini/Custom-Search keys live SERVER-SIDE with per-IP rate limiting (M13). The app is fully usable with the backend down (M11 promise, re-asserted live by v15): offline HUD, local windows + notes, auto-connect when the backend starts. 338 frontend + 43 backend tests and fifteen verifiers green. Phase 5 part 3 (M16 — docs/release) is the only remaining milestone and needs its own brief and your go. See the Milestone 13 section for the key matrix and the multi-user demo guide.\n\n## Monorepo layout\n\n```\nvisionpro/\n├── apps/\n│   ├── frontend/          # Vite + React + TypeScript UI (Three.js scene, camera, hand tracker)\n│   └── backend/           # Node.js + Exp",
+    "error": null,
+    "fullReadmeLength": 113475
+  },
+  {
+    "name": "agentic_rag_system",
+    "url": "https://github.com/aditya0si/agentic_rag_system",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-07-22T08:24:38Z",
+    "updatedAt": "2026-09-08T05:12:11Z",
+    "pushedAt": "2026-08-19T19:33:28Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 1,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 246781,
+      "Dockerfile": 2396
+    },
+    "rootFiles": [
+      {
+        "name": ".dockerignore",
+        "type": "file",
+        "size": 635
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 508
+      },
+      {
+        "name": "Agentic_RAG_Research_Assistant_Documentation.md",
+        "type": "file",
+        "size": 31270
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 2396
+      },
+      {
+        "name": "Dockerfile.frontend",
+        "type": "file",
+        "size": 1105
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "PLAN_agentic_rag_assistant.md",
+        "type": "file",
+        "size": 22738
+      },
+      {
+        "name": "PLAN_generate_architecture_pdf.md",
+        "type": "file",
+        "size": 3531
+      },
+      {
+        "name": "PLAN_hallucination_and_polish.md",
+        "type": "file",
+        "size": 4747
+      },
+      {
+        "name": "PLAN_project_summary.md",
+        "type": "file",
+        "size": 1885
+      },
+      {
+        "name": "PLAN_push_to_github_and_update_pdf.md",
+        "type": "file",
+        "size": 3492
+      },
+      {
+        "name": "PORTFOLIO_SAAS_ROADMAP.md",
+        "type": "file",
+        "size": 4625
+      },
+      {
+        "name": "PROJECT_SUMMARY.md",
+        "type": "file",
+        "size": 7904
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 11411
+      },
+      {
+        "name": "SAAS_TRANSFORMATION_PLAN.md",
+        "type": "file",
+        "size": 30655
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "create_ui_images.py",
+        "type": "file",
+        "size": 11455
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 1986
+      },
+      {
+        "name": "eval",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "generate_architecture_pdf.py",
+        "type": "file",
+        "size": 26459
+      },
+      {
+        "name": "rag_architecture_HCL_internship.pdf",
+        "type": "file",
+        "size": 206180
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "ui_screenshot_chat.png",
+        "type": "file",
+        "size": 108417
+      },
+      {
+        "name": "ui_screenshot_metrics.png",
+        "type": "file",
+        "size": 63874
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# Agentic RAG Research Assistant\n\n[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg)](https://www.python.org/downloads/)\n[![FastAPI](https://img.shields.io/badge/FastAPI-0.115+-green.svg)](https://fastapi.tiangolo.com/)\n[![LangGraph](https://img.shields.io/badge/LangGraph-0.4+-orange.svg)](https://langchain-ai.github.io/langgraph/)\n[![Streamlit](https://img.shields.io/badge/Streamlit-1.38+-red.svg)](https://streamlit.io/)\n[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)\n\nA production-ready **Agentic RAG (Retrieval-Augmented Generation) Research Assistant** that lets users upload documents (PDF, DOCX, TXT, MD) and ask natural-language questions, receiving source-grounded, cited answers produced by a multi-agent LangGraph pipeline.\n\n## 🎯 Key Features\n\n| Feature | Description |\n|---------|-------------|\n| **Multi-Agent Pipeline** | 5 specialized agents: Query Rewriter → Retriever → Relevance Grader → Answer Generator → Hallucination Checker |\n| **Source-Grounded Answers** | Every claim includes inline citations `[1][2]` linking to exact document pages |\n| **Hallucination Detection** | Cross-verifies generated answers against retrieved sources, flags unsupported claims |\n| **Multi-Document Support** | Upload multiple documents, scope questions to specific files |\n| **Conversational Context** | Query Rewriter resolves follow-up questions using chat history |\n| **Quantitative Evaluation** | RAGAS benchmarking: Faithfulness, Answer Relevancy, C",
+    "error": null,
+    "fullReadmeLength": 10941
+  },
+  {
+    "name": "Cyber",
+    "url": "https://github.com/aditya0si/Cyber",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-09T14:41:14Z",
+    "updatedAt": "2026-08-11T18:25:43Z",
+    "pushedAt": "2026-08-11T18:25:14Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 1,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 594880,
+      "TypeScript": 175584,
+      "CSS": 5637,
+      "Jinja": 3568,
+      "Shell": 1733,
+      "Batchfile": 1702,
+      "JavaScript": 673
+    },
+    "rootFiles": [
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 1351
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 623
+      },
+      {
+        "name": ".gitleaks.toml",
+        "type": "file",
+        "size": 883
+      },
+      {
+        "name": ".pre-commit-config.yaml",
+        "type": "file",
+        "size": 1607
+      },
+      {
+        "name": "AUDIT.md",
+        "type": "file",
+        "size": 13394
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 5629
+      },
+      {
+        "name": "RUNNING.md",
+        "type": "file",
+        "size": 3560
+      },
+      {
+        "name": "alembic.ini",
+        "type": "file",
+        "size": 940
+      },
+      {
+        "name": "apps",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "cybersim",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "docker-compose.yml",
+        "type": "file",
+        "size": 3141
+      },
+      {
+        "name": "infra",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "instructions",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "mypy.ini",
+        "type": "file",
+        "size": 642
+      },
+      {
+        "name": "out.txt",
+        "type": "file",
+        "size": 15613
+      },
+      {
+        "name": "py.typed.toml",
+        "type": "file",
+        "size": 152
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 2237
+      },
+      {
+        "name": "ruff.toml",
+        "type": "file",
+        "size": 544
+      },
+      {
+        "name": "run.bat",
+        "type": "file",
+        "size": 1702
+      },
+      {
+        "name": "run.sh",
+        "type": "file",
+        "size": 1733
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "uv.lock",
+        "type": "file",
+        "size": 537844
+      }
+    ],
+    "workflows": [
+      "ci.yml"
+    ],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": true,
+    "hasDocker": true,
+    "readmeSnippet": "# 🛡️ CyberSim AI \n\n**Autonomous Cybersecurity Simulation & Response Platform**\n\n\n[![Python 3.11+](https://img.shields.io/badge/python-3.11+-blue.svg)](https://www.python.org/downloads/release/python-3110/)\n[![Next.js 14](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org/)\n\nCyberSim provides a controlled environment to simulate cyberattacks, generate realistic telemetry, and evaluate AI-driven threat detection and response capabilities. \n\nUnlike traditional static security tools, CyberSim is built around an **evolving attack graph**. As events fire, a LangGraph-powered AI analyst correlates structured telemetry, maps it against the live environment graph, cites RAG-backed evidence, and recommends containment actions. A human operator approves the action — the graph mutates, and the frontend reflects the changes in real-time.\n\n---\n\n## Architecture\n\nOur verified end-to-end architecture ensures determinism, speed, and clear observability. \n\n```text\nSimulation Engine (Event Generators)\n       │\n       ▼\n WebSocket & REST Event Bus (CanonicalEvent Schema)\n       │\n       ├─►  NetworkX Graph Engine (In-Memory Live State)\n       │         └─ Assets, Services, Users, Attack Nodes\n       │\n       ▼\n  LangGraph AI Analyst Pipeline\n       ├─ Threat Detection & Correlation\n       ├─ RAG Evidence Retrieval (MITRE ATT&CK & OWASP)\n       └─ Response Planner (Generates DetectionProposals)\n       │\n       ▼\n Human-in-the-Loop Approval Gate (Dashboard UI)\n       │\n       ▼\n Gr",
+    "error": null,
+    "fullReadmeLength": 5577
+  },
+  {
+    "name": "solarwinds",
+    "url": "https://github.com/aditya0si/solarwinds",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-08-11T07:31:49Z",
+    "updatedAt": "2026-08-25T16:31:49Z",
+    "pushedAt": "2026-08-11T07:38:29Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 10829
+    },
+    "rootFiles": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 55
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 530
+      },
+      {
+        "name": "q2",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "task1_ipv4.py",
+        "type": "file",
+        "size": 2635
+      },
+      {
+        "name": "task1_ipv4_output.txt",
+        "type": "file",
+        "size": 22089
+      },
+      {
+        "name": "task3_merged.json",
+        "type": "file",
+        "size": 15729
+      },
+      {
+        "name": "task3_records_merge.py",
+        "type": "file",
+        "size": 3370
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# SolarWinds Quest\n\nPython solutions and submission artifacts for the three SolarWinds Quest\nquestions.\n\n## Results\n\n- Question 1: 100%\n- Question 2: 100%\n- Question 3: 100%\n\n## Files\n\n- `task1_ipv4.py` and `task1_ipv4_output.txt`: IPv4 normalization.\n- `q2/`: Indian mobile-number normalization and its submission artifacts.\n- `task3_records_merge.py` and `task3_merged.json`: record merging.\n\nThe scripts fetch their respective datasets from the Quest API and can be run\nwith Python 3 and the `requests` package where imported.\n",
+    "error": null,
+    "fullReadmeLength": 530
+  },
+  {
+    "name": "PulseGrid",
+    "url": "https://github.com/aditya0si/PulseGrid",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-08-04T16:39:26Z",
+    "updatedAt": "2026-08-04T16:41:43Z",
+    "pushedAt": "2026-08-04T16:39:27Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1069
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "pipeline_pr-tb",
+    "url": "https://github.com/aditya0si/pipeline_pr-tb",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-21T21:08:40Z",
+    "updatedAt": "2026-08-25T16:27:07Z",
+    "pushedAt": "2026-07-26T20:46:43Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 987474,
+      "TypeScript": 503932,
+      "Jupyter Notebook": 327772,
+      "HTML": 194540,
+      "CSS": 60299,
+      "PowerShell": 11036,
+      "Shell": 2575,
+      "Dockerfile": 629
+    },
+    "rootFiles": [
+      {
+        "name": ".claude",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".coveragerc",
+        "type": "file",
+        "size": 566
+      },
+      {
+        "name": ".env.example",
+        "type": "file",
+        "size": 544
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 1253
+      },
+      {
+        "name": ".gitmodules",
+        "type": "file",
+        "size": 1456
+      },
+      {
+        "name": "AGENTS",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "ALIGNMENT.md",
+        "type": "file",
+        "size": 52435
+      },
+      {
+        "name": "BASELINE_2026-07-24.md",
+        "type": "file",
+        "size": 8214
+      },
+      {
+        "name": "BASELINE_2026-07-24_lazy_gpu.md",
+        "type": "file",
+        "size": 13676
+      },
+      {
+        "name": "BASELINE_2026-07-24_session3.md",
+        "type": "file",
+        "size": 14217
+      },
+      {
+        "name": "CODEBASE_REFERENCE.md",
+        "type": "file",
+        "size": 21572
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 629
+      },
+      {
+        "name": "IMPLEMENTATION_STATUS.md",
+        "type": "file",
+        "size": 9737
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1078
+      },
+      {
+        "name": "Modelfile.biomistral",
+        "type": "file",
+        "size": 415
+      },
+      {
+        "name": "PLAN",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 7187
+      },
+      {
+        "name": "SETUP.md",
+        "type": "file",
+        "size": 13178
+      },
+      {
+        "name": "agent_loader.py",
+        "type": "file",
+        "size": 2911
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "coder.md",
+        "type": "file",
+        "size": 2769
+      },
+      {
+        "name": "demo.md",
+        "type": "file",
+        "size": 8736
+      },
+      {
+        "name": "eval_reports",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "evaluation",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "fix_indent.py",
+        "type": "file",
+        "size": 589
+      },
+      {
+        "name": "fix_usage.py",
+        "type": "file",
+        "size": 970
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "goal.md",
+        "type": "file",
+        "size": 5290
+      },
+      {
+        "name": "granite_vision.ipynb",
+        "type": "file",
+        "size": 294831
+      },
+      {
+        "name": "memories",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "nim_client.py",
+        "type": "file",
+        "size": 4436
+      },
+      {
+        "name": "notebooks",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "orchestrator.md",
+        "type": "file",
+        "size": 4648
+      },
+      {
+        "name": "patch_protocol.py",
+        "type": "file",
+        "size": 2086
+      },
+      {
+        "name": "pipeline.py",
+        "type": "file",
+        "size": 5153
+      },
+      {
+        "name": "pipeline_ibm.md",
+        "type": "file",
+        "size": 35898
+      },
+      {
+        "name": "plans",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "ports.md",
+        "type": "file",
+        "size": 278
+      },
+      {
+        "name": "pytest.ini",
+        "type": "file",
+        "size": 799
+      },
+      {
+        "name": "reference.md",
+        "type": "file",
+        "size": 41378
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 944
+      },
+      {
+        "name": "result.json",
+        "type": "file",
+        "size": 1374
+      },
+      {
+        "name": "reviewer.md",
+        "type": "file",
+        "size": 3979
+      },
+      {
+        "name": "run_sdlc.py",
+        "type": "file",
+        "size": 9742
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "sdlc_sim",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "sdlc_tools.py",
+        "type": "file",
+        "size": 7444
+      },
+      {
+        "name": "setup_env.ps1",
+        "type": "file",
+        "size": 3927
+      },
+      {
+        "name": "start.ps1",
+        "type": "file",
+        "size": 2224
+      },
+      {
+        "name": "start.sh",
+        "type": "file",
+        "size": 2575
+      },
+      {
+        "name": "test_smoke.py",
+        "type": "file",
+        "size": 4807
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests",
+      "pytest.ini"
+    ],
+    "hasCi": false,
+    "hasDocker": true,
+    "readmeSnippet": "# SDLC loop simulator (NVIDIA NIM edition)\n\nRuns the same orchestrator → coder → reviewer loop as the Claude Code\nsubagent setup, but on top of the NVIDIA NIM OpenAI-compatible API instead\nof Claude Code itself. Reuses your existing `.claude/agents/orchestrator.md`,\n`coder.md`, and `reviewer.md` files unmodified — it parses their frontmatter\nand system prompts directly.\n\n## What's different from real Claude Code subagents\n\n- **No `Agent` tool.** The orchestrator can't spawn coder/reviewer itself —\n  this script does that in Python instead. The orchestrator's job each turn\n  is just to decide *what* the next coder task is, using a small text\n  protocol (see below), and this script does the actual dispatch.\n- **No automatic skill preloading.** `reviewer.md`'s `skills:` frontmatter\n  (`code-reviewer`, `playwright-expert`) is ignored by this harness — Claude\n  Code's skill-loading mechanism doesn't exist here. If you want the\n  reviewer to follow those skills' checklists, paste their content into\n  `reviewer.md`'s system prompt body directly, or into the goal text.\n- **No persistent memory directory** — `memory: project` in the frontmatter\n  is likewise ignored. State only persists via whatever files the agents\n  write (e.g. `PLAN/sdlc_state.md`), same as any other file in your repo.\n- **Tool calling quality depends on the NIM model you pick.** Not every\n  model in NVIDIA's catalog supports function calling reliably. Models\n  documented to support it well as of writing: `meta/lla",
+    "error": null,
+    "fullReadmeLength": 7111
+  },
+  {
+    "name": "CosmosSteller",
+    "url": "https://github.com/aditya0si/CosmosSteller",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-15T15:48:35Z",
+    "updatedAt": "2026-08-25T16:27:09Z",
+    "pushedAt": "2026-07-15T16:11:25Z",
+    "description": "",
+    "homepageUrl": "https://cosmos-steller.vercel.app",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 231351,
+      "HTML": 45617,
+      "CSS": 6770,
+      "JavaScript": 258
+    },
+    "rootFiles": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 28
+      },
+      {
+        "name": "App.tsx",
+        "type": "file",
+        "size": 20727
+      },
+      {
+        "name": "components",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "hooks",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "index.css",
+        "type": "file",
+        "size": 6770
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "size": 294
+      },
+      {
+        "name": "lib",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "main.tsx",
+        "type": "file",
+        "size": 236
+      },
+      {
+        "name": "memory.md",
+        "type": "file",
+        "size": 4364
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "size": 97573
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 792
+      },
+      {
+        "name": "postcss.config.js",
+        "type": "file",
+        "size": 80
+      },
+      {
+        "name": "shaders",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tailwind.config.js",
+        "type": "file",
+        "size": 178
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "size": 587
+      },
+      {
+        "name": "vanilla.html",
+        "type": "file",
+        "size": 45323
+      },
+      {
+        "name": "vite.config.ts",
+        "type": "file",
+        "size": 269
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "pipeline_ocr",
+    "url": "https://github.com/aditya0si/pipeline_ocr",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-12T21:27:35Z",
+    "updatedAt": "2026-08-25T16:27:08Z",
+    "pushedAt": "2026-07-12T21:51:20Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 1,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 466632,
+      "TypeScript": 424929,
+      "CSS": 48206,
+      "Shell": 1533,
+      "PowerShell": 1140,
+      "Dockerfile": 618,
+      "HTML": 455
+    },
+    "rootFiles": [
+      {
+        "name": ".coveragerc",
+        "type": "file",
+        "size": 566
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 790
+      },
+      {
+        "name": "AGENTS",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "Dockerfile",
+        "type": "file",
+        "size": 618
+      },
+      {
+        "name": "LICENSE",
+        "type": "file",
+        "size": 1078
+      },
+      {
+        "name": "PLAN",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 5676
+      },
+      {
+        "name": "SETUP.md",
+        "type": "file",
+        "size": 7056
+      },
+      {
+        "name": "backend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "frontend",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "pipeline_ibm.md",
+        "type": "file",
+        "size": 35898
+      },
+      {
+        "name": "pytest.ini",
+        "type": "file",
+        "size": 799
+      },
+      {
+        "name": "reference.md",
+        "type": "file",
+        "size": 41378
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "start.ps1",
+        "type": "file",
+        "size": 1140
+      },
+      {
+        "name": "start.sh",
+        "type": "file",
+        "size": 1533
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests",
+      "pytest.ini"
+    ],
+    "hasCi": false,
+    "hasDocker": true,
+    "readmeSnippet": "# MedVault — Medical OCR Pipeline\n\nA modular medical document OCR pipeline that classifies documents (TABLE / HANDWRITTEN / PRINTED_TEXT) and routes them to the appropriate OCR engine, with LLM-powered structured extraction and a Hepatology knowledge base.\n\nBuilt with FastAPI + React + TypeScript + SQLite.\n\n![License](https://img.shields.io/badge/license-MIT-blue.svg)\n![Python](https://img.shields.io/badge/python-3.12-blue.svg)\n![React](https://img.shields.io/badge/react-19-61dafb.svg)\n\n## Prerequisites\n\n- **Python 3.12**\n- **Node.js 20+**\n- **NVIDIA GPU** (optional — for GPU acceleration; runs on CPU without it)\n- **Windows** (PowerShell) or **macOS/Linux** (bash)\n\n## Quick Start\n\n### 1. Clone the repo\n\n```bash\ngit clone https://github.com/aditya0si/pipeline_ocr.git\ncd pipeline_ocr\n```\n\n### 2. Run the setup script\n\n```powershell\n# Windows\n.\\start.ps1\n```\n\n```bash\n# macOS / Linux\nchmod +x start.sh\n./start.sh\n```\n\nThis will:\n- Create a Python virtual environment (`.venv/`)\n- Install backend dependencies (`backend/requirements.txt`)\n- Install frontend dependencies (`frontend/package.json`)\n- Start the backend on **http://localhost:8000**\n- Start the frontend on **http://localhost:5173**\n\nOpen **http://localhost:5173** in your browser.\n\n---\n\n## Manual Setup\n\n### Backend\n\n```bash\npython -m venv .venv\n.venv\\Scripts\\pip install -r backend\\requirements.txt\n\n# Optional: install GPU support for PaddleOCR (RTX 5060 / sm_120)\n# Download from: https://paddle-whl.bj.bcebos.com/stable/cu12",
+    "error": null,
+    "fullReadmeLength": 5496
+  },
+  {
+    "name": "revenue-ops-orchestration",
+    "url": "https://github.com/aditya0si/revenue-ops-orchestration",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-09T10:10:19Z",
+    "updatedAt": "2026-08-25T16:27:16Z",
+    "pushedAt": "2026-07-09T11:35:58Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 7755
+    },
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 4313
+      },
+      {
+        "name": "app.py",
+        "type": "file",
+        "size": 2388
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 68
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Revenue Ops Orchestrator\n\n## Overview & Scope\nThis project serves as the operational \"nervous system\" for the full-funnel automation loop. Its primary goal is to **Streamline GTM Operations** by identifying bottlenecks in the Go-To-Market framework and building **clever automations to eliminate repetitive administrative tasks**. Furthermore, it takes absolute ownership of **CRM & Data Governance**, ensuring **CRM data hygiene and seamless integration between your data pipelines and core sales databases**.\n\n## Tech Stack & Tooling Exposure\n- **Orchestration Platforms:** Utilizing modern tooling like **Make**, **Zapier**, and **n8n** (self-hosted) to build resilient visual and code-based workflows.\n- **Triggers:** Webhooks, scheduled polls, or database CDC.\n- **APIs Chained:** Intent Signal Engine → Autonomous SDR → Salesforce/HubSpot API → Slack/Teams API.\n- **Data Transform:** JSON payload mapping and standardization across platforms.\n\n## Workflow Architecture\n1. **Signal Reception:** A webhook receives a newly detected, highly scored intent signal.\n2. **Data Governance Pre-Check:** The orchestrator queries Salesforce/HubSpot to ensure the account isn't already being worked by a human rep, enforcing strict **CRM data hygiene**.\n3. **SDR Dispatch:** If the account is clear, the orchestrator triggers the Autonomous SDR via API.\n4. **CRM Write & Seamless Integration:** The orchestrator writes the enriched account data, the detected signal, and the generated email draft back in",
+    "error": null,
+    "fullReadmeLength": 4307
+  },
+  {
+    "name": "autonomus-sdr",
+    "url": "https://github.com/aditya0si/autonomus-sdr",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-09T10:09:37Z",
+    "updatedAt": "2026-08-25T16:27:14Z",
+    "pushedAt": "2026-07-09T11:35:54Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 4959
+    },
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 4021
+      },
+      {
+        "name": "app.py",
+        "type": "file",
+        "size": 1498
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 68
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Autonomous SDR (Sales Development Representative)\n\n## Overview & Scope\nThis project tackles **AI-Driven Personalization** by transforming the high-value intent signals generated by the Intent Signal Engine into hyper-contextual, strategic outreach. It solves the problem of low conversion rates by engineering **robust prompts and automated data pipelines to safely generate highly personalized outbound copy at scale using LLMs**. This framework relies on a deep understanding of **how Large Language Models (LLMs) behave**, moving beyond basic wrappers into sophisticated multi-agent reasoning.\n\n## Tech Stack & Data Proficiency\n- **Language:** Python \n- **LLM APIs:** OpenAI API (GPT-4o), Anthropic API (Claude 3.5 Sonnet).\n- **Agent Frameworks:** LangChain, CrewAI, or AutoGen (for orchestrating multi-agent interactions).\n- **Core Libraries:** `pydantic` (enforcing strict JSON boundaries on LLM outputs), `pandas`.\n\n## Workflow Architecture\n1. **Signal Ingestion:** Receives an enriched, scored lead along with its specific \"Intent Event\".\n2. **Multi-Agent Deliberation:** \n   - **Researcher Agent:** Scours the web for additional contextual nuance related to the signal.\n   - **Strategist Agent:** Determines the best angle of approach using **robust prompts**.\n   - **Writer Agent:** Drafts the email using the chosen strategy.\n3. **Guardrails:** A Reviewer Agent critiques the draft against tone guidelines to **safely generate** the copy (filtering hallucinations or spam flags).\n4. **Out",
+    "error": null,
+    "fullReadmeLength": 4021
+  },
+  {
+    "name": "intent-signal-engine",
+    "url": "https://github.com/aditya0si/intent-signal-engine",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-09T10:10:00Z",
+    "updatedAt": "2026-08-25T16:27:15Z",
+    "pushedAt": "2026-07-09T11:35:51Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 5162
+    },
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 3880
+      },
+      {
+        "name": "app.py",
+        "type": "file",
+        "size": 1315
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 118
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Intent Signal Engine\n\n## Overview & Scope\nA robust data engineering pipeline designed to **build automated workflows** for extracting and interpreting buying intent signals. In modern GTM strategies, relying on static data leads to bottlenecks and missed opportunities. This engine actively scans the market via **data scraping and lead enrichment pipelines**, manipulating complex **JSON data payloads**, and scoring entities based on their \"Propensity to Buy\" (PTB). By automating the very top of the funnel, we lay the foundation for a scalable **growth loop**.\n\n## Tech Stack & Data Proficiency\n- **Language:** Python (showcasing **programmatic thinking** and data structures)\n- **Tooling Exposure:** Integration with modern outbound intelligence tools like **Clay**, as well as **custom REST APIs** (e.g., SerpAPI, Apollo) and web scraping libraries (BeautifulSoup/Playwright).\n- **Core Libraries:** `requests`, `pandas`, `pydantic` (for rigorous JSON schema validation), `pytest`.\n- **Scheduling & Logic:** GitHub Actions or Airflow, heavily relying on **algorithmic logic pipelines**.\n\n## Workflow Architecture\n1. **Signal Ingestion:** Scrapers and APIs pull daily updates from target domains, job boards, and news aggregators.\n2. **Noise Filtering & Schema Validation:** `pydantic` models and heuristic filters discard irrelevant data, structuring the remainder into a standardized JSON Signal Schema.\n3. **Deep Enrichment:** For high-value signals, concurrent API calls fetch deeper organi",
+    "error": null,
+    "fullReadmeLength": 3880
+  },
+  {
+    "name": "PaddleOcr",
+    "url": "https://github.com/aditya0si/PaddleOcr",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-07-07T16:01:13Z",
+    "updatedAt": "2026-08-25T16:27:11Z",
+    "pushedAt": "2026-07-07T16:02:24Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 25784,
+      "JavaScript": 25215,
+      "CSS": 15496,
+      "HTML": 11038,
+      "Batchfile": 78
+    },
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 1351
+      },
+      {
+        "name": "experiments",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "medical_rules.json",
+        "type": "file",
+        "size": 11525
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 9374
+      },
+      {
+        "name": "run_paddleocr.py",
+        "type": "file",
+        "size": 5957
+      },
+      {
+        "name": "server.py",
+        "type": "file",
+        "size": 4593
+      },
+      {
+        "name": "start_server.bat",
+        "type": "file",
+        "size": 78
+      },
+      {
+        "name": "ui",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# PaddleOCR Medical Extraction Pipeline\n\nThis repository contains an optimized PaddleOCR pipeline specifically tuned for Medical Reports and Handwritten Prescriptions.\n\n## Requirements\nEnsure you have Python 3.12+ installed.\n1. Create a virtual environment:\n   ```bash\n   python -m venv venv\n   ```\n2. Activate the environment:\n   - Windows: `venv\\Scripts\\activate`\n   - Linux/Mac: `source venv/bin/activate`\n3. Install dependencies:\n   ```bash\n   pip install -r requirements.txt\n   ```\n\n## Running the Web UI Server\nTo start the Flask server and use the web interface:\n1. Double click `start_server.bat` (if on Windows)\n2. Or manually run:\n   ```bash\n   python server.py\n   ```\n3. Open http://127.0.0.1:5000 in your browser.\n\n## Running Locally on a folder of images\nYou can also run the pipeline via CLI to bulk-process a folder of images:\n```bash\npython run_paddleocr.py\n```\n\n## Note on GPU Execution\nIf you have an NVIDIA GPU, PaddleOCR will use it automatically. If you encounter silent failures or 0 bounding boxes being returned, ensure your installed `paddlepaddle-gpu` version matches your system's CUDNN version, or run it through the virtual environment.\n\nThe pipeline applies an optimized tuning config (`best_config.json`) which overrides the default image scaling (`det_limit_side_len = 2000`) for maximum accuracy on faint handwriting.\n",
+    "error": null,
+    "fullReadmeLength": 1351
+  },
+  {
+    "name": "HealthCareOCR",
+    "url": "https://github.com/aditya0si/HealthCareOCR",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-06-28T09:36:06Z",
+    "updatedAt": "2026-08-25T16:27:12Z",
+    "pushedAt": "2026-06-28T09:40:41Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Python": 272273,
+      "PowerShell": 4237
+    },
+    "rootFiles": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 340
+      },
+      {
+        "name": "OCR_TRACKS_COMPARISON.md",
+        "type": "file",
+        "size": 4930
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 591
+      },
+      {
+        "name": "REINTEGRATION_GUIDE.md",
+        "type": "file",
+        "size": 10296
+      },
+      {
+        "name": "app.py",
+        "type": "file",
+        "size": 87540
+      },
+      {
+        "name": "bin",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "configs",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "download.svg",
+        "type": "file",
+        "size": 19295
+      },
+      {
+        "name": "models",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "push_to_github.ps1",
+        "type": "file",
+        "size": 1446
+      },
+      {
+        "name": "pyproject.toml",
+        "type": "file",
+        "size": 843
+      },
+      {
+        "name": "requirements.txt",
+        "type": "file",
+        "size": 524
+      },
+      {
+        "name": "resources",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "scripts",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Medical Report OCR + Summarization Pipeline\n\nA high-speed medical document OCR + summarization pipeline that processes patient-uploaded medical reports (lab reports, handwritten prescriptions, discharge summaries, ultrasound reports, case booklets) and produces structured, doctor-readable summaries.\n\n## Setup\n\n1. Create a Python 3.12 virtual environment:\n   ```bash\n   py -3.12 -m venv venv\n   ```\n2. Activate and install dependencies:\n   ```bash\n   .\\venv\\Scripts\\activate\n   pip install -r requirements.txt\n   ```\n3. Run verification:\n   ```bash\n   python scripts/verify_env.py\n   ```\n",
+    "error": null,
+    "fullReadmeLength": 591
+  },
+  {
+    "name": "prompt_war",
+    "url": "https://github.com/aditya0si/prompt_war",
+    "isPrivate": true,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-06-13T12:46:47Z",
+    "updatedAt": "2026-06-13T15:37:37Z",
+    "pushedAt": "2026-06-13T12:47:55Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "TypeScript": 151467,
+      "CSS": 7518,
+      "JavaScript": 489
+    },
+    "rootFiles": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 503
+      },
+      {
+        "name": "AGENTS.md",
+        "type": "file",
+        "size": 327
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file",
+        "size": 11
+      },
+      {
+        "name": "DEVELOPMENT_PLAN.md",
+        "type": "file",
+        "size": 49199
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 1450
+      },
+      {
+        "name": "REVIEW_PLAN.md",
+        "type": "file",
+        "size": 14485
+      },
+      {
+        "name": "app",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "components",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "eslint.config.mjs",
+        "type": "file",
+        "size": 489
+      },
+      {
+        "name": "lib",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "next.config.ts",
+        "type": "file",
+        "size": 133
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "size": 261750
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "size": 681
+      },
+      {
+        "name": "prisma.config.ts",
+        "type": "file",
+        "size": 374
+      },
+      {
+        "name": "prisma",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "public",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "submission.md",
+        "type": "file",
+        "size": 4566
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "size": 666
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).\n\n## Getting Started\n\nFirst, run the development server:\n\n```bash\nnpm run dev\n# or\nyarn dev\n# or\npnpm dev\n# or\nbun dev\n```\n\nOpen [http://localhost:3000](http://localhost:3000) with your browser to see the result.\n\nYou can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.\n\nThis project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.\n\n## Learn More\n\nTo learn more about Next.js, take a look at the following resources:\n\n- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.\n- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.\n\nYou can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!\n\n## Deploy on Vercel\n\nThe easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.\n\nCheck out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.\n",
+    "error": null,
+    "fullReadmeLength": 1450
+  },
+  {
+    "name": "e-commerce-quality-platform",
+    "url": "https://github.com/aditya0si/e-commerce-quality-platform",
+    "isPrivate": true,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-04-21T20:27:32Z",
+    "updatedAt": "2026-04-21T20:28:24Z",
+    "pushedAt": "2026-04-21T20:27:47Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 9024
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# e-commerce-quality-platform\n\nPROJECT BRIEF: AI-Powered E-Commerce Quality & Anomaly Platform\n\nGOAL:\nBuild a production-grade full-stack system that detects product quality issues \nvia image analysis, identifies supply chain anomalies, and provides real-time \nbusiness intelligence—combining ML engineering, data pipelines, and MLOps \nmonitoring into a deployable SaaS platform.\n\nTARGET OUTCOMES:\n✅ Internship-ready: Demonstrates full-stack + MLOps expertise\n✅ Placement-ready: Shows you can ship production systems\n✅ Portfolio centerpiece: Spans 5+ valuable domains (ML, data, backend, frontend, DevOps)\n\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\nTECHNICAL ARCHITECTURE:\n\n1. DATA PIPELINE\n   - Source: Olist e-commerce dataset (existing familiarity)\n   - Processing: ETL with Python (pandas) → PostgreSQL\n   - Key tables: Products, Orders, Images, Sellers, Ratings\n   - Optimization: Indexes on high-query columns, window functions for rolling stats\n   \n2. ML COMPONENTS\n   a) Product Quality Detection\n      - Model: Dual-Branch CNN (leveraging your recent work)\n      - Input: Product images\n      - Output: Quality score (0-100), defect labels\n      - Training: Synthetic + Olist product image data\n      - Monitoring: Prediction drift, confidence distribution\n   \n   b) Anomaly Detection\n      - Method: Isolation Forest or Autoencoder for multivariate patterns\n      - Anomalies: Seller fraud (price spikes, rating manipulation), \n                   supply chain dela",
+    "error": null,
+    "fullReadmeLength": 8216
+  },
+  {
+    "name": "FoodKart",
+    "url": "https://github.com/aditya0si/FoodKart",
+    "isPrivate": false,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2026-04-16T16:29:24Z",
+    "updatedAt": "2026-08-25T16:31:50Z",
+    "pushedAt": "2026-04-16T16:29:25Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "Secure-File-Share",
+    "url": "https://github.com/aditya0si/Secure-File-Share",
+    "isPrivate": true,
+    "isFork": false,
+    "isArchived": false,
+    "createdAt": "2026-04-02T15:09:45Z",
+    "updatedAt": "2026-04-02T15:25:00Z",
+    "pushedAt": "2026-04-02T15:11:07Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "JavaScript": 63185,
+      "CSS": 6619,
+      "HTML": 358
+    },
+    "rootFiles": [
+      {
+        "name": "client",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "database",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "dummy.txt",
+        "type": "file",
+        "size": 56
+      },
+      {
+        "name": "guideline.md",
+        "type": "file",
+        "size": 4217
+      },
+      {
+        "name": "server",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "uploads",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "",
+    "error": null
+  },
+  {
+    "name": "claw-code",
+    "url": "https://github.com/aditya0si/claw-code",
+    "isPrivate": false,
+    "isFork": true,
+    "isArchived": true,
+    "createdAt": "2026-04-01T06:26:05Z",
+    "updatedAt": "2026-08-25T16:27:06Z",
+    "pushedAt": "2026-04-01T06:25:28Z",
+    "description": "The fastest repo in history to surpass 50K stars Γ¡É, reaching the milestone in just 2 hours after publication. Better Harness Tools that make real things done. Now writing in Rust using oh-my-codex.",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {
+      "Rust": 765609,
+      "Python": 88705
+    },
+    "rootFiles": [
+      {
+        "name": ".claude.json",
+        "type": "file",
+        "size": 56
+      },
+      {
+        "name": ".claude",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".github",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "size": 119
+      },
+      {
+        "name": "CLAUDE.md",
+        "type": "file",
+        "size": 1093
+      },
+      {
+        "name": "PARITY.md",
+        "type": "file",
+        "size": 9681
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 9219
+      },
+      {
+        "name": "assets",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "rust",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "src",
+        "type": "dir",
+        "size": 0
+      },
+      {
+        "name": "tests",
+        "type": "dir",
+        "size": 0
+      }
+    ],
+    "workflows": [],
+    "hasTests": true,
+    "testPaths": [
+      "tests"
+    ],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# Rewriting Project Claw Code\n\n<p align=\"center\">\n  <strong>⭐ The fastest repo in history to surpass 50K stars, reaching the milestone in just 2 hours after publication ⭐</strong>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://star-history.com/#instructkr/claw-code&Date\">\n    <picture>\n      <source media=\"(prefers-color-scheme: dark)\" srcset=\"https://api.star-history.com/svg?repos=instructkr/claw-code&type=Date&theme=dark\" />\n      <source media=\"(prefers-color-scheme: light)\" srcset=\"https://api.star-history.com/svg?repos=instructkr/claw-code&type=Date\" />\n      <img alt=\"Star History Chart\" src=\"https://api.star-history.com/svg?repos=instructkr/claw-code&type=Date\" width=\"600\" />\n    </picture>\n  </a>\n</p>\n\n<p align=\"center\">\n  <img src=\"assets/clawd-hero.jpeg\" alt=\"Claw\" width=\"300\" />\n</p>\n\n<p align=\"center\">\n  <strong>Better Harness Tools, not merely storing the archive of leaked Claude Code</strong>\n</p>\n\n<p align=\"center\">\n  <a href=\"https://github.com/sponsors/instructkr\"><img src=\"https://img.shields.io/badge/Sponsor-%E2%9D%A4-pink?logo=github&style=for-the-badge\" alt=\"Sponsor on GitHub\" /></a>\n</p>\n\n> [!IMPORTANT]\n> **Rust port is now in progress** on the [`dev/rust`](https://github.com/instructkr/claw-code/tree/dev/rust) branch and is expected to be merged into main today. The Rust implementation aims to deliver a faster, memory-safe harness runtime. Stay tuned — this will be the definitive version of the project.\n\n> If you find this work useful, consider [sponsoring",
+    "error": null,
+    "fullReadmeLength": 9083
+  },
+  {
+    "name": "testrepo",
+    "url": "https://github.com/aditya0si/testrepo",
+    "isPrivate": true,
+    "isFork": false,
+    "isArchived": true,
+    "createdAt": "2023-10-20T13:45:26Z",
+    "updatedAt": "2026-08-25T16:27:04Z",
+    "pushedAt": "2023-10-20T13:45:27Z",
+    "description": "",
+    "homepageUrl": "",
+    "stargazerCount": 0,
+    "forkCount": 0,
+    "defaultBranch": "main",
+    "languages": {},
+    "rootFiles": [
+      {
+        "name": "README.md",
+        "type": "file",
+        "size": 10
+      }
+    ],
+    "workflows": [],
+    "hasTests": false,
+    "testPaths": [],
+    "hasCi": false,
+    "hasDocker": false,
+    "readmeSnippet": "# testrepo",
+    "error": null,
+    "fullReadmeLength": 10
+  }
+]

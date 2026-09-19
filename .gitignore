@@ -16,6 +16,10 @@ next-env.d.ts
 .agents/
 ORIGINAL_REQUEST.md
 
+# Playwright generated artifacts
+playwright-report/
+test-results/
+
 # Screenshots & scratch files
 shots/
 variants/

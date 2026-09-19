@@ -91,7 +91,7 @@ export default function GitHubLive() {
                 {repo.name}
               </span>
               <span className="col-span-2 text-sm text-muted md:col-span-1 md:truncate">
-                {repo.description}
+                Repository metadata only — open source for details
               </span>
               <span className="hidden font-mono text-[11px] text-muted md:block">
                 {repo.language ?? "—"}

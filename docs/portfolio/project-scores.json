@@ -1,0 +1,2732 @@
+{
+  "metadata": {
+    "authoritative_ledger": "research/evidence-ledger.json",
+    "authoritative_evidence_source": "research/real_repo_evidence.json",
+    "generated_at": "2026-09-18T21:06:20.425Z",
+    "scoring_version": "3.0-deterministic-anchors-unit-a3",
+    "weights": {
+      "engineering_depth": 0.18,
+      "ai_relevance": 0.14,
+      "production_readiness": 0.14,
+      "systems_backend": 0.12,
+      "product_completeness": 0.1,
+      "originality": 0.08,
+      "measurable_evidence": 0.07,
+      "code_quality": 0.06,
+      "docs_explainability": 0.05,
+      "interview_depth": 0.04,
+      "demonstrability": 0.02
+    },
+    "deterministic_caps": {
+      "README_CLAIM_ONLY_CAP_4": "Categories supported exclusively by unverified README claims are strictly capped at 4.0.",
+      "MANIFEST_TREE_OBSERVED_ONLY_CAP_6": "Categories supported only by package manifests or directory tree presence are capped at 6.0.",
+      "UNEXECUTED_TESTS_CAP_6": "Test source files present in git tree but unexecuted in audit cap measurable evidence and code quality at 6.0.",
+      "CI_CONFIG_UNEXECUTED_CAP_6": "CI workflow configuration files observed without executed run logs cap production readiness at 6.0.",
+      "HISTORICAL_BENCHMARK_UNEXECUTED_CAP_7": "Historical benchmark JSON committed in repo but unexecuted in current audit caps measurable evidence at 7.0.",
+      "NO_TESTS_CODE_QUALITY_CAP_4": "Repositories with zero verified test files have code quality strictly capped at 4.0.",
+      "NO_TESTS_PROD_READINESS_CAP_5": "Repositories with zero verified test files have production readiness capped at 5.0.",
+      "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7": "Repositories with no independently verified live deployment URL have demonstrability capped at 7.0.",
+      "UNEXECUTED_AUDIT_CONFIDENCE_CAP_0_75": "Repositories with zero TEST_EXECUTED or EXTERNAL_VERIFIED audit records have overall confidence capped at 0.75."
+    },
+    "total_repositories_audited": 47,
+    "total_meaningful_repositories": 27,
+    "total_viable_projects_scored": 15,
+    "total_meaningful_repositories_excluded": 12,
+    "eligibility_gate_status": "PROVISIONAL_PENDING_EXECUTION",
+    "flagships_designated": [
+      {
+        "slug": "schemegpt",
+        "name": "schemeGPT",
+        "role": "AI Engineering & Hybrid RAG Flagship (Provisional)",
+        "total_score": 77.05,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      },
+      {
+        "slug": "sentinel",
+        "name": "Sentinel",
+        "role": "AI Reliability & Guardrails Flagship (Provisional)",
+        "total_score": 75.49,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      },
+      {
+        "slug": "mcp-from-scratch",
+        "name": "mcp-from-scratch",
+        "role": "Agent Internals & Protocol Flagship (Provisional)",
+        "total_score": 75.27,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      },
+      {
+        "slug": "devatlas",
+        "name": "DevAtlas",
+        "role": "Full-Stack & Developer Ecosystem Flagship (Provisional)",
+        "total_score": 73.78,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      },
+      {
+        "slug": "tenant-api-platform",
+        "name": "tenant-api-platform",
+        "role": "Backend & Multi-Tenant Systems Flagship (Provisional)",
+        "total_score": 70.86,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      },
+      {
+        "slug": "event-stream-platform",
+        "name": "event-stream-platform",
+        "role": "Streaming Infrastructure Flagship (Provisional)",
+        "total_score": 68.44,
+        "status": "PROVISIONAL_PENDING_EXECUTION"
+      }
+    ]
+  },
+  "rankings": [
+    {
+      "slug": "schemegpt",
+      "name": "schemeGPT",
+      "repo": "aditya0si/schemeGPT",
+      "commit_sha": "f030ad35b4a574dc0e3b463fa68435926c123202",
+      "url": "https://github.com/aditya0si/schemeGPT",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "AI Engineering & Hybrid RAG Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-SG-RETRIEVAL",
+        "EV-SCHEMEGPT-CI",
+        "EV-SCHEMEGPT-MANIFEST",
+        "EV-SG-NEXT16",
+        "EV-SG-WORKFLOWS",
+        "EV-SCHEMEGPT-TESTS",
+        "EV-SG-RAGAS-CLAIM",
+        "EV-SCHEMEGPT-LANG",
+        "EV-SCHEMEGPT-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.4,
+          "category_evidence_ids": [
+            "EV-SG-RETRIEVAL"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Hybrid PostgreSQL pgvector dense HNSW search + PostgreSQL tsvector sparse lexical search fused via Reciprocal Rank Fusion, with exact substring quote attribution engine. [Evidence: EV-SG-RETRIEVAL]"
+        },
+        "ai_relevance": {
+          "score": 9.6,
+          "category_evidence_ids": [
+            "EV-SG-RETRIEVAL"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Direct 2026 core: tool-calling Groq LLM agent, deterministic retrieval gates, bilingual NLP (English + Hindi), citation validation. [Evidence: EV-SG-RETRIEVAL]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-SCHEMEGPT-CI",
+            "EV-SCHEMEGPT-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Multi-stage Dockerfile, docker-compose orchestration, VPS production runbook, environment validation. [Evidence: EV-SCHEMEGPT-CI, EV-SCHEMEGPT-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-SG-RETRIEVAL"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "PostgreSQL 16 HNSW vector indexing, FastAPI async endpoints, SSE streaming with backpressure handling. [Evidence: EV-SG-RETRIEVAL]"
+        },
+        "product_completeness": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-SCHEMEGPT-MANIFEST",
+            "EV-SG-NEXT16"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Full citizen welfare decision engine with Next.js 16 UI (Next 16.3.5 in web/package.json), search filters, and cited answer cards. [Evidence: EV-SCHEMEGPT-MANIFEST, EV-SG-NEXT16]"
+        },
+        "originality": {
+          "score": 8.8,
+          "category_evidence_ids": [
+            "EV-SG-RETRIEVAL"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Addresses public sector welfare access fragmentation in India rather than copying generic documentation RAG. [Evidence: EV-SG-RETRIEVAL]"
+        },
+        "measurable_evidence": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-SG-WORKFLOWS",
+            "EV-SCHEMEGPT-TESTS",
+            "EV-SG-RAGAS-CLAIM"
+          ],
+          "evidence_strength": "EVAL_HARNESS_UNEXECUTED",
+          "anchor_used": "EVAL_HARNESS_UNEXECUTED_CAP_7",
+          "missing_evidence": "Execution of evaluation scripts and recording of live score metrics",
+          "rationale": "Automated retrieval gate eval suite in eval/ running in GitHub Actions workflow definitions; RAGAS remains an unverified README claim. [Evidence: EV-SG-WORKFLOWS, EV-SCHEMEGPT-TESTS, EV-SG-RAGAS-CLAIM]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-SCHEMEGPT-TESTS",
+            "EV-SCHEMEGPT-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean modular structure (services, models, router, eval), strong typing with Pydantic schemas; unexecuted in audit. [Evidence: EV-SCHEMEGPT-TESTS, EV-SCHEMEGPT-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-SCHEMEGPT-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Detailed README with architecture flowcharts, Docker runbooks, and eval formulas; capped at 4.0 as unverified claims. [Evidence: EV-SCHEMEGPT-README]"
+        },
+        "interview_depth": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-SG-RETRIEVAL",
+            "EV-SG-RETRIEVAL"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Extensive depth on vector indexing tradeoffs, RRF math, bilingual latency, and evaluation gating. [Evidence: EV-SG-RETRIEVAL, EV-SG-RETRIEVAL]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-SCHEMEGPT-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Next.js 16 frontend and FastAPI backend configurable via Docker Compose for local execution. [Evidence: EV-SCHEMEGPT-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.4,
+        "ai_relevance": 9.6,
+        "production_readiness": 6,
+        "systems_backend": 8,
+        "product_completeness": 8.5,
+        "originality": 8.8,
+        "measurable_evidence": 6.5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 8.5,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "Hybrid PostgreSQL pgvector dense HNSW search + PostgreSQL tsvector sparse lexical search fused via Reciprocal Rank Fusion, with exact substring quote attribution engine. [Evidence: EV-SG-RETRIEVAL]",
+        "ai_relevance": "Direct 2026 core: tool-calling Groq LLM agent, deterministic retrieval gates, bilingual NLP (English + Hindi), citation validation. [Evidence: EV-SG-RETRIEVAL]",
+        "production_readiness": "Multi-stage Dockerfile, docker-compose orchestration, VPS production runbook, environment validation. [Evidence: EV-SCHEMEGPT-CI, EV-SCHEMEGPT-MANIFEST]",
+        "systems_backend": "PostgreSQL 16 HNSW vector indexing, FastAPI async endpoints, SSE streaming with backpressure handling. [Evidence: EV-SG-RETRIEVAL]",
+        "product_completeness": "Full citizen welfare decision engine with Next.js 16 UI (Next 16.3.5 in web/package.json), search filters, and cited answer cards. [Evidence: EV-SCHEMEGPT-MANIFEST, EV-SG-NEXT16]",
+        "originality": "Addresses public sector welfare access fragmentation in India rather than copying generic documentation RAG. [Evidence: EV-SG-RETRIEVAL]",
+        "measurable_evidence": "Automated retrieval gate eval suite in eval/ running in GitHub Actions workflow definitions; RAGAS remains an unverified README claim. [Evidence: EV-SG-WORKFLOWS, EV-SCHEMEGPT-TESTS, EV-SG-RAGAS-CLAIM]",
+        "code_quality": "Clean modular structure (services, models, router, eval), strong typing with Pydantic schemas; unexecuted in audit. [Evidence: EV-SCHEMEGPT-TESTS, EV-SCHEMEGPT-LANG]",
+        "docs_explainability": "Detailed README with architecture flowcharts, Docker runbooks, and eval formulas; capped at 4.0 as unverified claims. [Evidence: EV-SCHEMEGPT-README]",
+        "interview_depth": "Extensive depth on vector indexing tradeoffs, RRF math, bilingual latency, and evaluation gating. [Evidence: EV-SG-RETRIEVAL, EV-SG-RETRIEVAL]",
+        "demonstrability": "Next.js 16 frontend and FastAPI backend configurable via Docker Compose for local execution. [Evidence: EV-SCHEMEGPT-MANIFEST]"
+      },
+      "total_score": 77.05
+    },
+    {
+      "slug": "sentinel",
+      "name": "Sentinel",
+      "repo": "aditya0si/Sentinel",
+      "commit_sha": "ab0f2cee433ebc1d8d7c47f936fc236d75a5a027",
+      "url": "https://github.com/aditya0si/Sentinel",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "AI Reliability & Guardrails Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-SEN-PROXY",
+        "EV-SENTINEL-CI",
+        "EV-SENTINEL-MANIFEST",
+        "EV-SENTINEL-TESTS",
+        "EV-SENTINEL-LANG",
+        "EV-SEN-TESTS",
+        "EV-SENTINEL-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.4,
+          "category_evidence_ids": [
+            "EV-SEN-PROXY"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Decoupled proxy architecture intercepting inbound and outbound LLM traffic with OpenTelemetry Jaeger export and 5 pluggable guardrails. [Evidence: EV-SEN-PROXY]"
+        },
+        "ai_relevance": {
+          "score": 9.5,
+          "category_evidence_ids": [
+            "EV-SEN-PROXY"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Directly addresses 2026 enterprise AI requirements: non-deterministic output guardrails, PII redaction, prompt injection filtering. [Evidence: EV-SEN-PROXY]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-SENTINEL-CI",
+            "EV-SENTINEL-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "CI quality gate workflow configuration (.github/workflows/quality-gate.yml), Docker Compose setup, and Prometheus metrics endpoint. [Evidence: EV-SENTINEL-CI, EV-SENTINEL-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 8.2,
+          "category_evidence_ids": [
+            "EV-SEN-PROXY"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "FastAPI async proxy hooks, Prometheus metrics export, SQLite rolling telemetry store. [Evidence: EV-SEN-PROXY]"
+        },
+        "product_completeness": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-SENTINEL-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Dual-mode library + standalone proxy container with live health, metrics, and validation endpoints. [Evidence: EV-SENTINEL-MANIFEST]"
+        },
+        "originality": {
+          "score": 8.8,
+          "category_evidence_ids": [
+            "EV-SEN-PROXY"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Quality-gate framework turning golden-set evaluation into a merge blocker. [Evidence: EV-SEN-PROXY]"
+        },
+        "measurable_evidence": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-SENTINEL-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-SENTINEL-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-SENTINEL-TESTS",
+            "EV-SENTINEL-LANG",
+            "EV-SEN-TESTS"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Pydantic v2 strict models, clean pluggable validator interfaces, strict schema validation; unexecuted in audit. [Evidence: EV-SENTINEL-TESTS, EV-SENTINEL-LANG, EV-SEN-TESTS]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-SENTINEL-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Detailed README with ASCII sequence diagrams, Jaeger trace documentation, and policy definitions; capped at 4.0 as unverified claims. [Evidence: EV-SENTINEL-README]"
+        },
+        "interview_depth": {
+          "score": 8.6,
+          "category_evidence_ids": [
+            "EV-SEN-PROXY",
+            "EV-SEN-PROXY"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Deep talking points on proxy middleware latency, regex vs model-judge tradeoffs, and drift alerting. [Evidence: EV-SEN-PROXY, EV-SEN-PROXY]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-SENTINEL-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Runnable via docker-compose with Prometheus and Jaeger UI demonstrating local trace spans. [Evidence: EV-SENTINEL-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.4,
+        "ai_relevance": 9.5,
+        "production_readiness": 6,
+        "systems_backend": 8.2,
+        "product_completeness": 7.5,
+        "originality": 8.8,
+        "measurable_evidence": 5.5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 8.6,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "Decoupled proxy architecture intercepting inbound and outbound LLM traffic with OpenTelemetry Jaeger export and 5 pluggable guardrails. [Evidence: EV-SEN-PROXY]",
+        "ai_relevance": "Directly addresses 2026 enterprise AI requirements: non-deterministic output guardrails, PII redaction, prompt injection filtering. [Evidence: EV-SEN-PROXY]",
+        "production_readiness": "CI quality gate workflow configuration (.github/workflows/quality-gate.yml), Docker Compose setup, and Prometheus metrics endpoint. [Evidence: EV-SENTINEL-CI, EV-SENTINEL-MANIFEST]",
+        "systems_backend": "FastAPI async proxy hooks, Prometheus metrics export, SQLite rolling telemetry store. [Evidence: EV-SEN-PROXY]",
+        "product_completeness": "Dual-mode library + standalone proxy container with live health, metrics, and validation endpoints. [Evidence: EV-SENTINEL-MANIFEST]",
+        "originality": "Quality-gate framework turning golden-set evaluation into a merge blocker. [Evidence: EV-SEN-PROXY]",
+        "measurable_evidence": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-SENTINEL-TESTS]",
+        "code_quality": "Pydantic v2 strict models, clean pluggable validator interfaces, strict schema validation; unexecuted in audit. [Evidence: EV-SENTINEL-TESTS, EV-SENTINEL-LANG, EV-SEN-TESTS]",
+        "docs_explainability": "Detailed README with ASCII sequence diagrams, Jaeger trace documentation, and policy definitions; capped at 4.0 as unverified claims. [Evidence: EV-SENTINEL-README]",
+        "interview_depth": "Deep talking points on proxy middleware latency, regex vs model-judge tradeoffs, and drift alerting. [Evidence: EV-SEN-PROXY, EV-SEN-PROXY]",
+        "demonstrability": "Runnable via docker-compose with Prometheus and Jaeger UI demonstrating local trace spans. [Evidence: EV-SENTINEL-MANIFEST]"
+      },
+      "total_score": 75.49
+    },
+    {
+      "slug": "mcp-from-scratch",
+      "name": "mcp-from-scratch",
+      "repo": "aditya0si/mcp-from-scratch",
+      "commit_sha": "59fbaa0ed89d67ffb3632337d7552e5b7de49ca6",
+      "url": "https://github.com/aditya0si/mcp-from-scratch",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "Agent Internals & Protocol Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-MCP-CODEC",
+        "EV-MCP_FROM_SCRATCH-MANIFEST",
+        "EV-MCP-EVAL",
+        "EV-MCP_FROM_SCRATCH-TESTS",
+        "EV-MCP_FROM_SCRATCH-LANG",
+        "EV-MCP_FROM_SCRATCH-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-MCP-CODEC"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Bespoke implementation of Model Context Protocol (MCP) server from scratch using Python standard library (asyncio, json) without official SDKs or LangChain dependencies. [Evidence: EV-MCP-CODEC]"
+        },
+        "ai_relevance": {
+          "score": 9.8,
+          "category_evidence_ids": [
+            "EV-MCP-CODEC"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Direct alignment with industry standard Model Context Protocol for agent tooling, resources, and execution. [Evidence: EV-MCP-CODEC]"
+        },
+        "production_readiness": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-MCP_FROM_SCRATCH-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_CONFIG_ONLY",
+          "anchor_used": "LOCAL_CONFIG_ONLY_CAP_5_5",
+          "missing_evidence": "CI/CD pipeline configuration and automated build execution",
+          "rationale": "Clean stdio and HTTP/SSE transport implementations with spec error code compliance (-32700 to -32603); local configuration. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 8.4,
+          "category_evidence_ids": [
+            "EV-MCP-CODEC"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Low-level protocol wire serialization, asynchronous request dispatching, and streaming transport handlers. [Evidence: EV-MCP-CODEC]"
+        },
+        "product_completeness": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-MCP_FROM_SCRATCH-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Includes both the protocol server and a minimal ReAct agent loop with evaluation harness. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]"
+        },
+        "originality": {
+          "score": 9,
+          "category_evidence_ids": [
+            "EV-MCP-CODEC"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Educational and protocol-first deep dive into MCP internals rather than third-party wrapper usage. [Evidence: EV-MCP-CODEC]"
+        },
+        "measurable_evidence": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-MCP-EVAL",
+            "EV-MCP_FROM_SCRATCH-TESTS"
+          ],
+          "evidence_strength": "EVAL_HARNESS_UNEXECUTED",
+          "anchor_used": "EVAL_HARNESS_UNEXECUTED_CAP_7",
+          "missing_evidence": "Execution of evaluation scripts and recording of live score metrics",
+          "rationale": "Evaluation harness with 5 verified pytest test files in tests/ and grader modules in eval/ testing spec compliance and tool execution. [Evidence: EV-MCP-EVAL, EV-MCP_FROM_SCRATCH-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-MCP_FROM_SCRATCH-TESTS",
+            "EV-MCP_FROM_SCRATCH-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean object-oriented codec hierarchy, typed dataclasses, and standard Python library adherence. [Evidence: EV-MCP_FROM_SCRATCH-TESTS, EV-MCP_FROM_SCRATCH-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-MCP_FROM_SCRATCH-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Protocol wire sequence documentation, JSON-RPC schema breakdown, and quickstart client code; capped at 4.0 as unverified claims. [Evidence: EV-MCP_FROM_SCRATCH-README]"
+        },
+        "interview_depth": {
+          "score": 8.8,
+          "category_evidence_ids": [
+            "EV-MCP-CODEC",
+            "EV-MCP-CODEC"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Deep protocol surface: SSE framing, JSON-RPC 2.0 error handling, stdio pipe concurrency, and context injection mechanics. [Evidence: EV-MCP-CODEC, EV-MCP-CODEC]"
+        },
+        "demonstrability": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-MCP_FROM_SCRATCH-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Runnable locally via standard python CLI with mock client tool calling demonstration. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.5,
+        "ai_relevance": 9.8,
+        "production_readiness": 5,
+        "systems_backend": 8.4,
+        "product_completeness": 7,
+        "originality": 9,
+        "measurable_evidence": 6.5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 8.8,
+        "demonstrability": 6.5
+      },
+      "rationales": {
+        "engineering_depth": "Bespoke implementation of Model Context Protocol (MCP) server from scratch using Python standard library (asyncio, json) without official SDKs or LangChain dependencies. [Evidence: EV-MCP-CODEC]",
+        "ai_relevance": "Direct alignment with industry standard Model Context Protocol for agent tooling, resources, and execution. [Evidence: EV-MCP-CODEC]",
+        "production_readiness": "Clean stdio and HTTP/SSE transport implementations with spec error code compliance (-32700 to -32603); local configuration. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]",
+        "systems_backend": "Low-level protocol wire serialization, asynchronous request dispatching, and streaming transport handlers. [Evidence: EV-MCP-CODEC]",
+        "product_completeness": "Includes both the protocol server and a minimal ReAct agent loop with evaluation harness. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]",
+        "originality": "Educational and protocol-first deep dive into MCP internals rather than third-party wrapper usage. [Evidence: EV-MCP-CODEC]",
+        "measurable_evidence": "Evaluation harness with 5 verified pytest test files in tests/ and grader modules in eval/ testing spec compliance and tool execution. [Evidence: EV-MCP-EVAL, EV-MCP_FROM_SCRATCH-TESTS]",
+        "code_quality": "Clean object-oriented codec hierarchy, typed dataclasses, and standard Python library adherence. [Evidence: EV-MCP_FROM_SCRATCH-TESTS, EV-MCP_FROM_SCRATCH-LANG]",
+        "docs_explainability": "Protocol wire sequence documentation, JSON-RPC schema breakdown, and quickstart client code; capped at 4.0 as unverified claims. [Evidence: EV-MCP_FROM_SCRATCH-README]",
+        "interview_depth": "Deep protocol surface: SSE framing, JSON-RPC 2.0 error handling, stdio pipe concurrency, and context injection mechanics. [Evidence: EV-MCP-CODEC, EV-MCP-CODEC]",
+        "demonstrability": "Runnable locally via standard python CLI with mock client tool calling demonstration. [Evidence: EV-MCP_FROM_SCRATCH-MANIFEST]"
+      },
+      "total_score": 75.27
+    },
+    {
+      "slug": "devatlas",
+      "name": "DevAtlas",
+      "repo": "aditya0si/DevAtlas",
+      "commit_sha": "2b8d37bca2443464fce97e3c88820dd783d50011",
+      "url": "https://github.com/aditya0si/DevAtlas",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "Full-Stack & Developer Ecosystem Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-DEVATLAS-ARCH",
+        "EV-DEVATLAS-AI",
+        "EV-DEVATLAS-CI",
+        "EV-DEVATLAS-MANIFEST",
+        "EV-DEVATLAS-DB",
+        "EV-DEVATLAS-TESTS",
+        "EV-DEVATLAS-LANG",
+        "EV-DEVATLAS-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Polyglot developer intelligence platform with Next.js frontend, FastAPI backend, Celery async ingestion workers, and Redis broker. [Evidence: EV-DEVATLAS-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 8.8,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "LLM classification and summarization of GitHub repositories, topic clustering, and developer ranking. [Evidence: EV-DEVATLAS-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-CI",
+            "EV-DEVATLAS-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Multi-service architecture with Docker Compose orchestration, background queue workers, and CI workflow configuration. [Evidence: EV-DEVATLAS-CI, EV-DEVATLAS-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "FastAPI async endpoints, Celery distributed tasks, PostgreSQL database schema with migration history. [Evidence: EV-DEVATLAS-DB]"
+        },
+        "product_completeness": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Complete developer exploration web application with search, interactive charts, and repository analytics. [Evidence: EV-DEVATLAS-MANIFEST]"
+        },
+        "originality": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Holistic developer intelligence indexing open-source contributors and technical repositories. [Evidence: EV-DEVATLAS-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "40 verified test source files in backend/tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-DEVATLAS-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-TESTS",
+            "EV-DEVATLAS-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Strict separation of UI, API, and worker services with 40 automated test source files; unexecuted in audit. [Evidence: EV-DEVATLAS-TESTS, EV-DEVATLAS-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Clear repository setup instructions, architecture breakdown, and database migration documentation; capped at 4.0 as unverified claims. [Evidence: EV-DEVATLAS-README]"
+        },
+        "interview_depth": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-ARCH",
+            "EV-DEVATLAS-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Talking points on asynchronous job queuing, rate-limited external API scraping, and frontend caching. [Evidence: EV-DEVATLAS-ARCH, EV-DEVATLAS-DB]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-DEVATLAS-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local docker-compose setup spinning up web interface, API server, Redis, and Postgres. [Evidence: EV-DEVATLAS-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8,
+        "ai_relevance": 8.8,
+        "production_readiness": 6,
+        "systems_backend": 7.8,
+        "product_completeness": 8.5,
+        "originality": 8,
+        "measurable_evidence": 6,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 8,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "Polyglot developer intelligence platform with Next.js frontend, FastAPI backend, Celery async ingestion workers, and Redis broker. [Evidence: EV-DEVATLAS-ARCH]",
+        "ai_relevance": "LLM classification and summarization of GitHub repositories, topic clustering, and developer ranking. [Evidence: EV-DEVATLAS-AI]",
+        "production_readiness": "Multi-service architecture with Docker Compose orchestration, background queue workers, and CI workflow configuration. [Evidence: EV-DEVATLAS-CI, EV-DEVATLAS-MANIFEST]",
+        "systems_backend": "FastAPI async endpoints, Celery distributed tasks, PostgreSQL database schema with migration history. [Evidence: EV-DEVATLAS-DB]",
+        "product_completeness": "Complete developer exploration web application with search, interactive charts, and repository analytics. [Evidence: EV-DEVATLAS-MANIFEST]",
+        "originality": "Holistic developer intelligence indexing open-source contributors and technical repositories. [Evidence: EV-DEVATLAS-ARCH]",
+        "measurable_evidence": "40 verified test source files in backend/tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-DEVATLAS-TESTS]",
+        "code_quality": "Strict separation of UI, API, and worker services with 40 automated test source files; unexecuted in audit. [Evidence: EV-DEVATLAS-TESTS, EV-DEVATLAS-LANG]",
+        "docs_explainability": "Clear repository setup instructions, architecture breakdown, and database migration documentation; capped at 4.0 as unverified claims. [Evidence: EV-DEVATLAS-README]",
+        "interview_depth": "Talking points on asynchronous job queuing, rate-limited external API scraping, and frontend caching. [Evidence: EV-DEVATLAS-ARCH, EV-DEVATLAS-DB]",
+        "demonstrability": "Local docker-compose setup spinning up web interface, API server, Redis, and Postgres. [Evidence: EV-DEVATLAS-MANIFEST]"
+      },
+      "total_score": 73.78
+    },
+    {
+      "slug": "coverai",
+      "name": "CoverAI",
+      "repo": "aditya0si/CoverAI",
+      "commit_sha": "d1e73678b093e4e6693f08fa1564e14b11ec2168",
+      "url": "https://github.com/aditya0si/CoverAI",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-COVERAI-ARCH",
+        "EV-COVERAI-AI",
+        "EV-COVERAI-CI",
+        "EV-COVERAI-MANIFEST",
+        "EV-COVERAI-DB",
+        "EV-COVERAI-TESTS",
+        "EV-COVERAI-LANG",
+        "EV-COVERAI-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-COVERAI-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Automated insurance claim compliance engine combining OCR parsing, claim validation rules, and policy check evaluation. [Evidence: EV-COVERAI-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-COVERAI-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Multi-modal document analysis, OCR extraction, and policy compliance verification. [Evidence: EV-COVERAI-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-COVERAI-CI",
+            "EV-COVERAI-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Docker containerization, environment configuration, and GitHub Actions CI workflow configuration. [Evidence: EV-COVERAI-CI, EV-COVERAI-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-COVERAI-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "FastAPI REST backend with database models, asynchronous document processing, and validation handlers. [Evidence: EV-COVERAI-DB]"
+        },
+        "product_completeness": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-COVERAI-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Interactive claim dashboard displaying parsed policies, validation flags, and compliance scores. [Evidence: EV-COVERAI-MANIFEST]"
+        },
+        "originality": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-COVERAI-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Domain-specific enterprise workflow automating document verification and claim compliance. [Evidence: EV-COVERAI-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-COVERAI-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "13 verified test source files in apps/api/tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-COVERAI-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-COVERAI-TESTS",
+            "EV-COVERAI-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean modular layout with domain models and 13 automated test source files; unexecuted in audit. [Evidence: EV-COVERAI-TESTS, EV-COVERAI-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-COVERAI-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Documentation covering setup runbooks, claim submission schemas, and policy validation rules; capped at 4.0 as unverified claims. [Evidence: EV-COVERAI-README]"
+        },
+        "interview_depth": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-COVERAI-ARCH",
+            "EV-COVERAI-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Discussion on document layout extraction, confidence scoring, and human-in-the-loop validation. [Evidence: EV-COVERAI-ARCH, EV-COVERAI-DB]"
+        },
+        "demonstrability": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-COVERAI-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local execution of web UI and API container via docker-compose. [Evidence: EV-COVERAI-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 7.8,
+        "ai_relevance": 8.5,
+        "production_readiness": 6,
+        "systems_backend": 7.5,
+        "product_completeness": 8,
+        "originality": 7.8,
+        "measurable_evidence": 5.8,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 7.8,
+        "demonstrability": 6.8
+      },
+      "rationales": {
+        "engineering_depth": "Automated insurance claim compliance engine combining OCR parsing, claim validation rules, and policy check evaluation. [Evidence: EV-COVERAI-ARCH]",
+        "ai_relevance": "Multi-modal document analysis, OCR extraction, and policy compliance verification. [Evidence: EV-COVERAI-AI]",
+        "production_readiness": "Docker containerization, environment configuration, and GitHub Actions CI workflow configuration. [Evidence: EV-COVERAI-CI, EV-COVERAI-MANIFEST]",
+        "systems_backend": "FastAPI REST backend with database models, asynchronous document processing, and validation handlers. [Evidence: EV-COVERAI-DB]",
+        "product_completeness": "Interactive claim dashboard displaying parsed policies, validation flags, and compliance scores. [Evidence: EV-COVERAI-MANIFEST]",
+        "originality": "Domain-specific enterprise workflow automating document verification and claim compliance. [Evidence: EV-COVERAI-ARCH]",
+        "measurable_evidence": "13 verified test source files in apps/api/tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-COVERAI-TESTS]",
+        "code_quality": "Clean modular layout with domain models and 13 automated test source files; unexecuted in audit. [Evidence: EV-COVERAI-TESTS, EV-COVERAI-LANG]",
+        "docs_explainability": "Documentation covering setup runbooks, claim submission schemas, and policy validation rules; capped at 4.0 as unverified claims. [Evidence: EV-COVERAI-README]",
+        "interview_depth": "Discussion on document layout extraction, confidence scoring, and human-in-the-loop validation. [Evidence: EV-COVERAI-ARCH, EV-COVERAI-DB]",
+        "demonstrability": "Local execution of web UI and API container via docker-compose. [Evidence: EV-COVERAI-MANIFEST]"
+      },
+      "total_score": 71.72
+    },
+    {
+      "slug": "grounded-knowledge-platform",
+      "name": "grounded-knowledge-platform",
+      "repo": "aditya0si/grounded-knowledge-platform",
+      "commit_sha": "55849ba6101a94b0bbf5392bdeaa7169a536af69",
+      "url": "https://github.com/aditya0si/grounded-knowledge-platform",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-GKP-ARCH",
+        "EV-GKP-AI",
+        "EV-GROUNDED_KNOWLEDGE_PLATFORM-CI",
+        "EV-GKP-MANIFEST",
+        "EV-GKP-DB",
+        "EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS",
+        "EV-GROUNDED_KNOWLEDGE_PLATFORM-LANG",
+        "EV-GROUNDED_KNOWLEDGE_PLATFORM-README",
+        "EV-GKP-ADR"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-GKP-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Knowledge graph RAG platform combining entity extraction, relation mapping, and grounded contextual retrieval. [Evidence: EV-GKP-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 9,
+          "category_evidence_ids": [
+            "EV-GKP-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Entity resolution, knowledge graph traversal, and factual grounding for generative AI queries. [Evidence: EV-GKP-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-GROUNDED_KNOWLEDGE_PLATFORM-CI",
+            "EV-GKP-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Container definitions, database persistence configurations, and CI workflow configuration. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-CI, EV-GKP-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-GKP-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Graph and relational database coordination, FastAPI async endpoints, and structured query routing. [Evidence: EV-GKP-DB]"
+        },
+        "product_completeness": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-GKP-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Graph-augmented search interface with entity visualization and citation cards. [Evidence: EV-GKP-MANIFEST]"
+        },
+        "originality": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-GKP-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Grounded factual citations constructed directly from knowledge graph relations. [Evidence: EV-GKP-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS",
+            "EV-GROUNDED_KNOWLEDGE_PLATFORM-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean entity typing, graph schema definitions, and 7 automated test source files; unexecuted in audit. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS, EV-GROUNDED_KNOWLEDGE_PLATFORM-LANG]"
+        },
+        "docs_explainability": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-GROUNDED_KNOWLEDGE_PLATFORM-README",
+            "EV-GKP-ADR"
+          ],
+          "evidence_strength": "DOCS_OBSERVED",
+          "anchor_used": "MANIFEST_TREE_OBSERVED_ONLY_CAP_6",
+          "missing_evidence": "Interactive hosted API documentation (e.g. Swagger UI)",
+          "rationale": "Architecture diagrams, schema entity documentation, and ADR docs in corpus/docs/; supported by observed tree records. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-README, EV-GKP-ADR]"
+        },
+        "interview_depth": {
+          "score": 7.8,
+          "category_evidence_ids": [
+            "EV-GKP-ARCH",
+            "EV-GKP-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Technical tradeoffs between vector indexing and structured graph traversal in retrieval pipelines. [Evidence: EV-GKP-ARCH, EV-GKP-DB]"
+        },
+        "demonstrability": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-GKP-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local service runnable via Docker Compose with FastAPI and database containers. [Evidence: EV-GKP-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 7.5,
+        "ai_relevance": 9,
+        "production_readiness": 6,
+        "systems_backend": 7.5,
+        "product_completeness": 7,
+        "originality": 7.8,
+        "measurable_evidence": 5.5,
+        "code_quality": 6,
+        "docs_explainability": 6,
+        "interview_depth": 7.8,
+        "demonstrability": 6.5
+      },
+      "rationales": {
+        "engineering_depth": "Knowledge graph RAG platform combining entity extraction, relation mapping, and grounded contextual retrieval. [Evidence: EV-GKP-ARCH]",
+        "ai_relevance": "Entity resolution, knowledge graph traversal, and factual grounding for generative AI queries. [Evidence: EV-GKP-AI]",
+        "production_readiness": "Container definitions, database persistence configurations, and CI workflow configuration. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-CI, EV-GKP-MANIFEST]",
+        "systems_backend": "Graph and relational database coordination, FastAPI async endpoints, and structured query routing. [Evidence: EV-GKP-DB]",
+        "product_completeness": "Graph-augmented search interface with entity visualization and citation cards. [Evidence: EV-GKP-MANIFEST]",
+        "originality": "Grounded factual citations constructed directly from knowledge graph relations. [Evidence: EV-GKP-ARCH]",
+        "measurable_evidence": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS]",
+        "code_quality": "Clean entity typing, graph schema definitions, and 7 automated test source files; unexecuted in audit. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-TESTS, EV-GROUNDED_KNOWLEDGE_PLATFORM-LANG]",
+        "docs_explainability": "Architecture diagrams, schema entity documentation, and ADR docs in corpus/docs/; supported by observed tree records. [Evidence: EV-GROUNDED_KNOWLEDGE_PLATFORM-README, EV-GKP-ADR]",
+        "interview_depth": "Technical tradeoffs between vector indexing and structured graph traversal in retrieval pipelines. [Evidence: EV-GKP-ARCH, EV-GKP-DB]",
+        "demonstrability": "Local service runnable via Docker Compose with FastAPI and database containers. [Evidence: EV-GKP-MANIFEST]"
+      },
+      "total_score": 71.61
+    },
+    {
+      "slug": "tenant-api-platform",
+      "name": "tenant-api-platform",
+      "repo": "aditya0si/tenant-api-platform",
+      "commit_sha": "a6f715aac1d4e46b2ef30e12fb42d4719672f7f5",
+      "url": "https://github.com/aditya0si/tenant-api-platform",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "Backend & Multi-Tenant Systems Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-TAP-RLS",
+        "EV-TAP-ADR",
+        "EV-TAP-NO-STRIPE-AI",
+        "EV-TENANT_API_PLATFORM-CI",
+        "EV-TENANT_API_PLATFORM-MANIFEST",
+        "EV-TAP-FLAGSHIP-ELIGIBILITY",
+        "EV-TAP-LOAD-BENCHMARK",
+        "EV-TENANT_API_PLATFORM-TESTS",
+        "EV-TENANT_API_PLATFORM-LANG",
+        "EV-TENANT_API_PLATFORM-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.8,
+          "category_evidence_ids": [
+            "EV-TAP-RLS",
+            "EV-TAP-ADR"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Go 1.27 multi-tenant billing engine with PostgreSQL Row-Level Security (RLS) enforcement, distributed Redis token-bucket rate limiting, idempotent write state machines, outbox pattern for crash-resilient webhook delivery, supported by 14 ADRs. [Evidence: EV-TAP-RLS, EV-TAP-ADR]"
+        },
+        "ai_relevance": {
+          "score": 3,
+          "category_evidence_ids": [
+            "EV-TAP-NO-STRIPE-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "N/A (Non-AI project by design)",
+          "rationale": "Pure backend and distributed systems engineering; verified zero external payment gateway or machine learning dependencies. [Evidence: EV-TAP-NO-STRIPE-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-TENANT_API_PLATFORM-CI",
+            "EV-TENANT_API_PLATFORM-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Dockerfile, docker-compose orchestration, and GitHub Actions CI workflow configuration. [Evidence: EV-TENANT_API_PLATFORM-CI, EV-TENANT_API_PLATFORM-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 9.2,
+          "category_evidence_ids": [
+            "EV-TAP-RLS"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Go chi router, pgx v5 connection pooling, PostgreSQL session variables for RLS (app.current_tenant_id), Redis locks and sliding window counters. [Evidence: EV-TAP-RLS]"
+        },
+        "product_completeness": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-TENANT_API_PLATFORM-MANIFEST",
+            "EV-TAP-FLAGSHIP-ELIGIBILITY"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Complete multi-tenant API: tenant lifecycle, memberships, project resources, invoice ledger, idempotent mutations, outbox webhooks. [Evidence: EV-TENANT_API_PLATFORM-MANIFEST, EV-TAP-FLAGSHIP-ELIGIBILITY]"
+        },
+        "originality": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-TAP-RLS"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Bespoke billing ledger and isolation architecture implementing complex primitives from first principles without SaaS lock-in. [Evidence: EV-TAP-RLS]"
+        },
+        "measurable_evidence": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-TAP-LOAD-BENCHMARK"
+          ],
+          "evidence_strength": "HISTORICAL_BENCHMARK_UNEXECUTED",
+          "anchor_used": "HISTORICAL_BENCHMARK_UNEXECUTED_CAP_7",
+          "missing_evidence": "Live benchmark execution in current audit environment",
+          "rationale": "Committed k6 load test results: 6,250 HTTP requests at 120 req/s with 0% failure; p95 read 28.8ms, write 49.0ms (historical committed benchmark artifact; local synthetic Docker environment). [Evidence: EV-TAP-LOAD-BENCHMARK]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-TENANT_API_PLATFORM-TESTS",
+            "EV-TENANT_API_PLATFORM-LANG",
+            "EV-TAP-ADR"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean Go project structure with domain separation, database migrations, and 14 formal Architecture Decision Records. [Evidence: EV-TENANT_API_PLATFORM-TESTS, EV-TENANT_API_PLATFORM-LANG, EV-TAP-ADR]"
+        },
+        "docs_explainability": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-TENANT_API_PLATFORM-README",
+            "EV-TAP-ADR"
+          ],
+          "evidence_strength": "DOCS_OBSERVED",
+          "anchor_used": "MANIFEST_TREE_OBSERVED_ONLY_CAP_6",
+          "missing_evidence": "Interactive hosted API documentation (e.g. Swagger UI)",
+          "rationale": "Comprehensive docs/DESIGN.md detailing failure modes, 14 ADR files, and k6 benchmark logs; supported by observed ADR documents. [Evidence: EV-TENANT_API_PLATFORM-README, EV-TAP-ADR]"
+        },
+        "interview_depth": {
+          "score": 9.2,
+          "category_evidence_ids": [
+            "EV-TAP-RLS",
+            "EV-TAP-RLS"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Unmatched talking points on RLS vs application isolation, Redis rate limiting, outbox transactional dispatch, and idempotent state transitions. [Evidence: EV-TAP-RLS, EV-TAP-RLS]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-TENANT_API_PLATFORM-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Docker Compose environment boots PostgreSQL, Redis, and API server for local testing. [Evidence: EV-TENANT_API_PLATFORM-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.8,
+        "ai_relevance": 3,
+        "production_readiness": 6,
+        "systems_backend": 9.2,
+        "product_completeness": 8,
+        "originality": 8.5,
+        "measurable_evidence": 7,
+        "code_quality": 6,
+        "docs_explainability": 6,
+        "interview_depth": 9.2,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "Go 1.27 multi-tenant billing engine with PostgreSQL Row-Level Security (RLS) enforcement, distributed Redis token-bucket rate limiting, idempotent write state machines, outbox pattern for crash-resilient webhook delivery, supported by 14 ADRs. [Evidence: EV-TAP-RLS, EV-TAP-ADR]",
+        "ai_relevance": "Pure backend and distributed systems engineering; verified zero external payment gateway or machine learning dependencies. [Evidence: EV-TAP-NO-STRIPE-AI]",
+        "production_readiness": "Dockerfile, docker-compose orchestration, and GitHub Actions CI workflow configuration. [Evidence: EV-TENANT_API_PLATFORM-CI, EV-TENANT_API_PLATFORM-MANIFEST]",
+        "systems_backend": "Go chi router, pgx v5 connection pooling, PostgreSQL session variables for RLS (app.current_tenant_id), Redis locks and sliding window counters. [Evidence: EV-TAP-RLS]",
+        "product_completeness": "Complete multi-tenant API: tenant lifecycle, memberships, project resources, invoice ledger, idempotent mutations, outbox webhooks. [Evidence: EV-TENANT_API_PLATFORM-MANIFEST, EV-TAP-FLAGSHIP-ELIGIBILITY]",
+        "originality": "Bespoke billing ledger and isolation architecture implementing complex primitives from first principles without SaaS lock-in. [Evidence: EV-TAP-RLS]",
+        "measurable_evidence": "Committed k6 load test results: 6,250 HTTP requests at 120 req/s with 0% failure; p95 read 28.8ms, write 49.0ms (historical committed benchmark artifact; local synthetic Docker environment). [Evidence: EV-TAP-LOAD-BENCHMARK]",
+        "code_quality": "Clean Go project structure with domain separation, database migrations, and 14 formal Architecture Decision Records. [Evidence: EV-TENANT_API_PLATFORM-TESTS, EV-TENANT_API_PLATFORM-LANG, EV-TAP-ADR]",
+        "docs_explainability": "Comprehensive docs/DESIGN.md detailing failure modes, 14 ADR files, and k6 benchmark logs; supported by observed ADR documents. [Evidence: EV-TENANT_API_PLATFORM-README, EV-TAP-ADR]",
+        "interview_depth": "Unmatched talking points on RLS vs application isolation, Redis rate limiting, outbox transactional dispatch, and idempotent state transitions. [Evidence: EV-TAP-RLS, EV-TAP-RLS]",
+        "demonstrability": "Docker Compose environment boots PostgreSQL, Redis, and API server for local testing. [Evidence: EV-TENANT_API_PLATFORM-MANIFEST]"
+      },
+      "total_score": 70.86
+    },
+    {
+      "slug": "event-stream-platform",
+      "name": "event-stream-platform",
+      "repo": "aditya0si/event-stream-platform",
+      "commit_sha": "4ecb068d032a155c74dc2911c2d8cf0a713ce857",
+      "url": "https://github.com/aditya0si/event-stream-platform",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_status": "PROVISIONAL_PENDING_EXECUTION",
+      "flagship_role": "Streaming Infrastructure Flagship (Provisional)",
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-ESP-GO-MOD",
+        "EV-ESP-NO-SARAMA-TIMESCALE",
+        "EV-EVENT_STREAM_PLATFORM-CI",
+        "EV-EVENT_STREAM_PLATFORM-MANIFEST",
+        "EV-ESP-LOAD-BENCHMARK",
+        "EV-EVENT_STREAM_PLATFORM-TESTS",
+        "EV-EVENT_STREAM_PLATFORM-LANG",
+        "EV-EVENT_STREAM_PLATFORM-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.6,
+          "category_evidence_ids": [
+            "EV-ESP-GO-MOD"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Go streaming pipeline utilizing twmb/franz-go for high-performance Redpanda consumption, with dead-letter queue routing, idempotent commit batches, and fuzz testing. [Evidence: EV-ESP-GO-MOD]"
+        },
+        "ai_relevance": {
+          "score": 3,
+          "category_evidence_ids": [
+            "EV-ESP-NO-SARAMA-TIMESCALE"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "N/A (Non-AI project by design)",
+          "rationale": "Specialized streaming systems infrastructure supporting event data pipelines; zero direct AI model dependencies. [Evidence: EV-ESP-NO-SARAMA-TIMESCALE]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-EVENT_STREAM_PLATFORM-CI",
+            "EV-EVENT_STREAM_PLATFORM-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Multi-container Docker Compose definition (Redpanda, PostgreSQL, Redis), Prometheus metrics export, and CI workflow configuration. [Evidence: EV-EVENT_STREAM_PLATFORM-CI, EV-EVENT_STREAM_PLATFORM-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 9,
+          "category_evidence_ids": [
+            "EV-ESP-GO-MOD"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "franz-go Kafka protocol implementation, Redis distributed lock manager, PostgreSQL transaction batching, and graceful signal cancellation. [Evidence: EV-ESP-GO-MOD]"
+        },
+        "product_completeness": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-EVENT_STREAM_PLATFORM-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "End-to-end event stream processing pipeline from ingress to durable persistence and metrics reporting. [Evidence: EV-EVENT_STREAM_PLATFORM-MANIFEST]"
+        },
+        "originality": {
+          "score": 8.2,
+          "category_evidence_ids": [
+            "EV-ESP-GO-MOD"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "High-throughput event streaming architecture avoiding heavyweight frameworks in favor of lean Go concurrency. [Evidence: EV-ESP-GO-MOD]"
+        },
+        "measurable_evidence": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-ESP-LOAD-BENCHMARK"
+          ],
+          "evidence_strength": "HISTORICAL_BENCHMARK_UNEXECUTED",
+          "anchor_used": "HISTORICAL_BENCHMARK_UNEXECUTED_CAP_7",
+          "missing_evidence": "Live benchmark execution in current audit environment",
+          "rationale": "Committed ingest benchmark results: 40s duration at 2500 offered events/s meeting 2000 events/s NFR1 target (historical committed benchmark artifact; local synthetic Docker environment). [Evidence: EV-ESP-LOAD-BENCHMARK]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-EVENT_STREAM_PLATFORM-TESTS",
+            "EV-EVENT_STREAM_PLATFORM-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Idiomatic Go with clean package boundaries, strict error wrapping, and fuzz tests for event envelopes. [Evidence: EV-EVENT_STREAM_PLATFORM-TESTS, EV-EVENT_STREAM_PLATFORM-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-EVENT_STREAM_PLATFORM-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Detailed README with architecture flowcharts, consumer group failure runbooks, and throughput metrics; capped at 4.0 as unverified claims. [Evidence: EV-EVENT_STREAM_PLATFORM-README]"
+        },
+        "interview_depth": {
+          "score": 9,
+          "category_evidence_ids": [
+            "EV-ESP-GO-MOD",
+            "EV-ESP-GO-MOD"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Extensive interview depth: consumer rebalances, offset commit semantics, at-least-once delivery tradeoffs, and backpressure handling. [Evidence: EV-ESP-GO-MOD, EV-ESP-GO-MOD]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-EVENT_STREAM_PLATFORM-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Full streaming infrastructure bootable via docker-compose with Redpanda console and Prometheus. [Evidence: EV-EVENT_STREAM_PLATFORM-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.6,
+        "ai_relevance": 3,
+        "production_readiness": 6,
+        "systems_backend": 9,
+        "product_completeness": 7.5,
+        "originality": 8.2,
+        "measurable_evidence": 7,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 9,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "Go streaming pipeline utilizing twmb/franz-go for high-performance Redpanda consumption, with dead-letter queue routing, idempotent commit batches, and fuzz testing. [Evidence: EV-ESP-GO-MOD]",
+        "ai_relevance": "Specialized streaming systems infrastructure supporting event data pipelines; zero direct AI model dependencies. [Evidence: EV-ESP-NO-SARAMA-TIMESCALE]",
+        "production_readiness": "Multi-container Docker Compose definition (Redpanda, PostgreSQL, Redis), Prometheus metrics export, and CI workflow configuration. [Evidence: EV-EVENT_STREAM_PLATFORM-CI, EV-EVENT_STREAM_PLATFORM-MANIFEST]",
+        "systems_backend": "franz-go Kafka protocol implementation, Redis distributed lock manager, PostgreSQL transaction batching, and graceful signal cancellation. [Evidence: EV-ESP-GO-MOD]",
+        "product_completeness": "End-to-end event stream processing pipeline from ingress to durable persistence and metrics reporting. [Evidence: EV-EVENT_STREAM_PLATFORM-MANIFEST]",
+        "originality": "High-throughput event streaming architecture avoiding heavyweight frameworks in favor of lean Go concurrency. [Evidence: EV-ESP-GO-MOD]",
+        "measurable_evidence": "Committed ingest benchmark results: 40s duration at 2500 offered events/s meeting 2000 events/s NFR1 target (historical committed benchmark artifact; local synthetic Docker environment). [Evidence: EV-ESP-LOAD-BENCHMARK]",
+        "code_quality": "Idiomatic Go with clean package boundaries, strict error wrapping, and fuzz tests for event envelopes. [Evidence: EV-EVENT_STREAM_PLATFORM-TESTS, EV-EVENT_STREAM_PLATFORM-LANG]",
+        "docs_explainability": "Detailed README with architecture flowcharts, consumer group failure runbooks, and throughput metrics; capped at 4.0 as unverified claims. [Evidence: EV-EVENT_STREAM_PLATFORM-README]",
+        "interview_depth": "Extensive interview depth: consumer rebalances, offset commit semantics, at-least-once delivery tradeoffs, and backpressure handling. [Evidence: EV-ESP-GO-MOD, EV-ESP-GO-MOD]",
+        "demonstrability": "Full streaming infrastructure bootable via docker-compose with Redpanda console and Prometheus. [Evidence: EV-EVENT_STREAM_PLATFORM-MANIFEST]"
+      },
+      "total_score": 68.44
+    },
+    {
+      "slug": "bustwatch",
+      "name": "bustwatch",
+      "repo": "aditya0si/bustwatch",
+      "commit_sha": "2ed53f052df3ca248505cca919620dcbad09245b",
+      "url": "https://github.com/aditya0si/bustwatch",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-BUSTWATCH-ARCH",
+        "EV-BUSTWATCH-AI",
+        "EV-BUSTWATCH-CI",
+        "EV-BUSTWATCH-MANIFEST",
+        "EV-BUSTWATCH-DB",
+        "EV-BUSTWATCH-TESTS",
+        "EV-BUSTWATCH-LANG",
+        "EV-BUSTWATCH-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Public transit delay prediction API with spatial bus clustering and real-time route schedule telemetry. [Evidence: EV-BUSTWATCH-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Predictive machine learning models forecasting transit delay probabilities from spatial features. [Evidence: EV-BUSTWATCH-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-CI",
+            "EV-BUSTWATCH-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Containerized deployment scripts, Redis cache integration, and CI workflow configuration. [Evidence: EV-BUSTWATCH-CI, EV-BUSTWATCH-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "FastAPI async route handlers, geospatial indexing, and Redis query caching. [Evidence: EV-BUSTWATCH-DB]"
+        },
+        "product_completeness": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Functional transit tracking API and client dashboard with route delay metrics. [Evidence: EV-BUSTWATCH-MANIFEST]"
+        },
+        "originality": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Civic tech telemetry application targeting municipal transit reliability. [Evidence: EV-BUSTWATCH-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "6 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-BUSTWATCH-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-TESTS",
+            "EV-BUSTWATCH-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Modular Python layout with typed request schemas and 6 automated test source files; unexecuted in audit. [Evidence: EV-BUSTWATCH-TESTS, EV-BUSTWATCH-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Clear README with installation steps, API route tables, and curl examples; capped at 4.0 as unverified claims. [Evidence: EV-BUSTWATCH-README]"
+        },
+        "interview_depth": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-ARCH",
+            "EV-BUSTWATCH-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Discussions on feature engineering for transit delay, spatial clustering, and cache invalidation. [Evidence: EV-BUSTWATCH-ARCH, EV-BUSTWATCH-DB]"
+        },
+        "demonstrability": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-BUSTWATCH-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Runnable locally with Docker Compose spinning up FastAPI and Redis. [Evidence: EV-BUSTWATCH-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 6.8,
+        "ai_relevance": 6,
+        "production_readiness": 6,
+        "systems_backend": 7,
+        "product_completeness": 6.8,
+        "originality": 7,
+        "measurable_evidence": 5.5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 7,
+        "demonstrability": 6.5
+      },
+      "rationales": {
+        "engineering_depth": "Public transit delay prediction API with spatial bus clustering and real-time route schedule telemetry. [Evidence: EV-BUSTWATCH-ARCH]",
+        "ai_relevance": "Predictive machine learning models forecasting transit delay probabilities from spatial features. [Evidence: EV-BUSTWATCH-AI]",
+        "production_readiness": "Containerized deployment scripts, Redis cache integration, and CI workflow configuration. [Evidence: EV-BUSTWATCH-CI, EV-BUSTWATCH-MANIFEST]",
+        "systems_backend": "FastAPI async route handlers, geospatial indexing, and Redis query caching. [Evidence: EV-BUSTWATCH-DB]",
+        "product_completeness": "Functional transit tracking API and client dashboard with route delay metrics. [Evidence: EV-BUSTWATCH-MANIFEST]",
+        "originality": "Civic tech telemetry application targeting municipal transit reliability. [Evidence: EV-BUSTWATCH-ARCH]",
+        "measurable_evidence": "6 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-BUSTWATCH-TESTS]",
+        "code_quality": "Modular Python layout with typed request schemas and 6 automated test source files; unexecuted in audit. [Evidence: EV-BUSTWATCH-TESTS, EV-BUSTWATCH-LANG]",
+        "docs_explainability": "Clear README with installation steps, API route tables, and curl examples; capped at 4.0 as unverified claims. [Evidence: EV-BUSTWATCH-README]",
+        "interview_depth": "Discussions on feature engineering for transit delay, spatial clustering, and cache invalidation. [Evidence: EV-BUSTWATCH-ARCH, EV-BUSTWATCH-DB]",
+        "demonstrability": "Runnable locally with Docker Compose spinning up FastAPI and Redis. [Evidence: EV-BUSTWATCH-MANIFEST]"
+      },
+      "total_score": 63.39
+    },
+    {
+      "slug": "floodlens",
+      "name": "floodlens",
+      "repo": "aditya0si/floodlens",
+      "commit_sha": "fc6ac4c18f4e68edbd079625bdca1106d193836c",
+      "url": "https://github.com/aditya0si/floodlens",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-FLOODLENS-ARCH",
+        "EV-FLOODLENS-AI",
+        "EV-FLOODLENS-CI",
+        "EV-FLOODLENS-MANIFEST",
+        "EV-FLOODLENS-DB",
+        "EV-FLOODLENS-TESTS",
+        "EV-FLOODLENS-LANG",
+        "EV-FLOODLENS-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Hydrological physics elevation grid processing and flood risk modeling pipeline. [Evidence: EV-FLOODLENS-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Geospatial ML models predicting localized flood inundation probability from digital elevation models. [Evidence: EV-FLOODLENS-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-CI",
+            "EV-FLOODLENS-MANIFEST"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Containerized spatial processing service with Docker Compose and CI workflow configuration. [Evidence: EV-FLOODLENS-CI, EV-FLOODLENS-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "FastAPI geospatial processing endpoints, raster grid matrix manipulation, and caching. [Evidence: EV-FLOODLENS-DB]"
+        },
+        "product_completeness": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Interactive risk assessment dashboard with terrain elevation map visualization. [Evidence: EV-FLOODLENS-MANIFEST]"
+        },
+        "originality": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Physics-informed hydrological modeling applied to regional climate resilience. [Evidence: EV-FLOODLENS-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-FLOODLENS-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-TESTS",
+            "EV-FLOODLENS-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Modular Python codebase with typed models and 7 automated test source files; unexecuted in audit. [Evidence: EV-FLOODLENS-TESTS, EV-FLOODLENS-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Documentation detailing elevation model data inputs, setup instructions, and risk formulas; capped at 4.0 as unverified claims. [Evidence: EV-FLOODLENS-README]"
+        },
+        "interview_depth": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-ARCH",
+            "EV-FLOODLENS-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Talking points on digital elevation model processing, spatial grid resolution, and hydrological runoff algorithms. [Evidence: EV-FLOODLENS-ARCH, EV-FLOODLENS-DB]"
+        },
+        "demonstrability": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-FLOODLENS-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local execution via Docker Compose with web dashboard. [Evidence: EV-FLOODLENS-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 6.8,
+        "ai_relevance": 6,
+        "production_readiness": 6,
+        "systems_backend": 7,
+        "product_completeness": 6.8,
+        "originality": 7,
+        "measurable_evidence": 5.5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 7,
+        "demonstrability": 6.5
+      },
+      "rationales": {
+        "engineering_depth": "Hydrological physics elevation grid processing and flood risk modeling pipeline. [Evidence: EV-FLOODLENS-ARCH]",
+        "ai_relevance": "Geospatial ML models predicting localized flood inundation probability from digital elevation models. [Evidence: EV-FLOODLENS-AI]",
+        "production_readiness": "Containerized spatial processing service with Docker Compose and CI workflow configuration. [Evidence: EV-FLOODLENS-CI, EV-FLOODLENS-MANIFEST]",
+        "systems_backend": "FastAPI geospatial processing endpoints, raster grid matrix manipulation, and caching. [Evidence: EV-FLOODLENS-DB]",
+        "product_completeness": "Interactive risk assessment dashboard with terrain elevation map visualization. [Evidence: EV-FLOODLENS-MANIFEST]",
+        "originality": "Physics-informed hydrological modeling applied to regional climate resilience. [Evidence: EV-FLOODLENS-ARCH]",
+        "measurable_evidence": "7 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-FLOODLENS-TESTS]",
+        "code_quality": "Modular Python codebase with typed models and 7 automated test source files; unexecuted in audit. [Evidence: EV-FLOODLENS-TESTS, EV-FLOODLENS-LANG]",
+        "docs_explainability": "Documentation detailing elevation model data inputs, setup instructions, and risk formulas; capped at 4.0 as unverified claims. [Evidence: EV-FLOODLENS-README]",
+        "interview_depth": "Talking points on digital elevation model processing, spatial grid resolution, and hydrological runoff algorithms. [Evidence: EV-FLOODLENS-ARCH, EV-FLOODLENS-DB]",
+        "demonstrability": "Local execution via Docker Compose with web dashboard. [Evidence: EV-FLOODLENS-MANIFEST]"
+      },
+      "total_score": 63.39
+    },
+    {
+      "slug": "opencode-team",
+      "name": "OpenCode-Team",
+      "repo": "aditya0si/OpenCode-Team",
+      "commit_sha": "70c1dbaa07819f0b9612f032d27ca5ffd626fe04",
+      "url": "https://github.com/aditya0si/OpenCode-Team",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-OCT-ARCH",
+        "EV-OCT-AI",
+        "EV-OPENCODE_TEAM-CI",
+        "EV-OPENCODE_TEAM-MANIFEST",
+        "EV-OCT-DB",
+        "EV-OCT-NPM-PACKAGE",
+        "EV-OPENCODE_TEAM-NO-TESTS",
+        "EV-OPENCODE_TEAM-LANG",
+        "EV-OPENCODE_TEAM-README",
+        "EV-OCT-CONFLICT-LABELED"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-OCT-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "TypeScript multi-agent collaboration framework coordinating code reviews, plan generation, and task breakdown. [Evidence: EV-OCT-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 8,
+          "category_evidence_ids": [
+            "EV-OCT-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Multi-agent teamwork patterns, role-specialized prompt loops, and tool orchestration. [Evidence: EV-OCT-AI]"
+        },
+        "production_readiness": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-CI",
+            "EV-OPENCODE_TEAM-MANIFEST"
+          ],
+          "evidence_strength": "NO_TESTS_CONTAINER_ONLY",
+          "anchor_used": "NO_TESTS_PROD_READINESS_CAP_5",
+          "missing_evidence": "Automated test suite to validate builds and containers",
+          "rationale": "Published npm package (opencode-teamwork) and GitHub Actions CI workflow configuration. [Evidence: EV-OPENCODE_TEAM-CI, EV-OPENCODE_TEAM-MANIFEST]"
+        },
+        "systems_backend": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-OCT-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Node.js CLI process execution, tool dispatcher, and local filesystem state. [Evidence: EV-OCT-DB]"
+        },
+        "product_completeness": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-MANIFEST",
+            "EV-OCT-NPM-PACKAGE"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Published npm package with executable CLI commands and interactive multi-agent prompts. [Evidence: EV-OPENCODE_TEAM-MANIFEST, EV-OCT-NPM-PACKAGE]"
+        },
+        "originality": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-OCT-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Modular agent collaboration framework focused on terminal-based pair programming workflows. [Evidence: EV-OCT-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 3.5,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-NO-TESTS"
+          ],
+          "evidence_strength": "NO_TESTS_OR_BENCHMARKS",
+          "anchor_used": "NO_TESTS_CAP_4",
+          "missing_evidence": "Automated test suite or benchmark scripts in repository tree",
+          "rationale": "0 automated test source files detected in repository tree; no empirical benchmark artifact detected in captured paths. [Evidence: EV-OPENCODE_TEAM-NO-TESTS]"
+        },
+        "code_quality": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-NO-TESTS",
+            "EV-OPENCODE_TEAM-LANG"
+          ],
+          "evidence_strength": "NO_TESTS",
+          "anchor_used": "NO_TESTS_CODE_QUALITY_CAP_4",
+          "missing_evidence": "Automated test suite and lint/typechecking execution in CI",
+          "rationale": "TypeScript source code; capped strictly at 4.0 due to complete absence of automated test suite. [Evidence: EV-OPENCODE_TEAM-NO-TESTS, EV-OPENCODE_TEAM-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-README",
+            "EV-OCT-CONFLICT-LABELED"
+          ],
+          "evidence_strength": "DOCS_OBSERVED",
+          "anchor_used": "MANIFEST_TREE_OBSERVED_ONLY_CAP_6",
+          "missing_evidence": "Interactive hosted API documentation (e.g. Swagger UI)",
+          "rationale": "Comprehensive README detailing slash commands, agent roles, and installation instructions; capped at 4.0 as unverified claims. [Evidence: EV-OPENCODE_TEAM-README, EV-OCT-CONFLICT-LABELED]"
+        },
+        "interview_depth": {
+          "score": 7.2,
+          "category_evidence_ids": [
+            "EV-OCT-ARCH",
+            "EV-OCT-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Discussion on agent delegation patterns, prompt engineering, and CLI tool interfaces. [Evidence: EV-OCT-ARCH, EV-OCT-DB]"
+        },
+        "demonstrability": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-OPENCODE_TEAM-MANIFEST",
+            "EV-OCT-NPM-PACKAGE"
+          ],
+          "evidence_strength": "EXTERNAL_VERIFIED",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Directly runnable via published npm package: npm i opencode-teamwork. [Evidence: EV-OPENCODE_TEAM-MANIFEST, EV-OCT-NPM-PACKAGE]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 6.5,
+        "ai_relevance": 8,
+        "production_readiness": 5,
+        "systems_backend": 6,
+        "product_completeness": 7.5,
+        "originality": 7.5,
+        "measurable_evidence": 3.5,
+        "code_quality": 4,
+        "docs_explainability": 4,
+        "interview_depth": 7.2,
+        "demonstrability": 7
+      },
+      "rationales": {
+        "engineering_depth": "TypeScript multi-agent collaboration framework coordinating code reviews, plan generation, and task breakdown. [Evidence: EV-OCT-ARCH]",
+        "ai_relevance": "Multi-agent teamwork patterns, role-specialized prompt loops, and tool orchestration. [Evidence: EV-OCT-AI]",
+        "production_readiness": "Published npm package (opencode-teamwork) and GitHub Actions CI workflow configuration. [Evidence: EV-OPENCODE_TEAM-CI, EV-OPENCODE_TEAM-MANIFEST]",
+        "systems_backend": "Node.js CLI process execution, tool dispatcher, and local filesystem state. [Evidence: EV-OCT-DB]",
+        "product_completeness": "Published npm package with executable CLI commands and interactive multi-agent prompts. [Evidence: EV-OPENCODE_TEAM-MANIFEST, EV-OCT-NPM-PACKAGE]",
+        "originality": "Modular agent collaboration framework focused on terminal-based pair programming workflows. [Evidence: EV-OCT-ARCH]",
+        "measurable_evidence": "0 automated test source files detected in repository tree; no empirical benchmark artifact detected in captured paths. [Evidence: EV-OPENCODE_TEAM-NO-TESTS]",
+        "code_quality": "TypeScript source code; capped strictly at 4.0 due to complete absence of automated test suite. [Evidence: EV-OPENCODE_TEAM-NO-TESTS, EV-OPENCODE_TEAM-LANG]",
+        "docs_explainability": "Comprehensive README detailing slash commands, agent roles, and installation instructions; capped at 4.0 as unverified claims. [Evidence: EV-OPENCODE_TEAM-README, EV-OCT-CONFLICT-LABELED]",
+        "interview_depth": "Discussion on agent delegation patterns, prompt engineering, and CLI tool interfaces. [Evidence: EV-OCT-ARCH, EV-OCT-DB]",
+        "demonstrability": "Directly runnable via published npm package: npm i opencode-teamwork. [Evidence: EV-OPENCODE_TEAM-MANIFEST, EV-OCT-NPM-PACKAGE]"
+      },
+      "total_score": 61.73
+    },
+    {
+      "slug": "vibe-odds",
+      "name": "vibe-odds",
+      "repo": "aditya0si/vibe-odds",
+      "commit_sha": "d642b70addbf76a2bc75ad7d9965aa73429562dd",
+      "url": "https://github.com/aditya0si/vibe-odds",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-VIBE-ARCH",
+        "EV-VIBE-AI",
+        "EV-VIBE_ODDS-NO-CI",
+        "EV-VIBE-DB",
+        "EV-VIBE-MANIFEST",
+        "EV-VIBE_ODDS-TESTS",
+        "EV-VIBE_ODDS-LANG",
+        "EV-VIBE_ODDS-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 7,
+          "category_evidence_ids": [
+            "EV-VIBE-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Multi-model sports betting market statistical forecasting and probability calibration pipeline. [Evidence: EV-VIBE-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-VIBE-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Gradient boosting and logistic calibration models for probability forecasting and Kelly criterion bankroll management. [Evidence: EV-VIBE-AI]"
+        },
+        "production_readiness": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-VIBE_ODDS-NO-CI"
+          ],
+          "evidence_strength": "LOCAL_CONFIG_ONLY",
+          "anchor_used": "LOCAL_CONFIG_ONLY_CAP_5_5",
+          "missing_evidence": "CI/CD pipeline configuration and automated build execution",
+          "rationale": "Local environment configuration, data extraction scripts, and dependency manifests. [Evidence: EV-VIBE_ODDS-NO-CI]"
+        },
+        "systems_backend": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-VIBE-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Statistical processing pipeline using SQLite and Parquet file persistence. [Evidence: EV-VIBE-DB]"
+        },
+        "product_completeness": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-VIBE-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "CLI and analytical reporting interface for model backtesting and probability tracking. [Evidence: EV-VIBE-MANIFEST]"
+        },
+        "originality": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-VIBE-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Market efficiency analysis comparing predicted odds with sportsbook market lines. [Evidence: EV-VIBE-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-VIBE_ODDS-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "10 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-VIBE_ODDS-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-VIBE_ODDS-TESTS",
+            "EV-VIBE_ODDS-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean Python statistical packages with 10 automated test source files; unexecuted in audit. [Evidence: EV-VIBE_ODDS-TESTS, EV-VIBE_ODDS-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-VIBE_ODDS-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "README explaining calibration metrics, Brier score calculations, and bankroll policies; capped at 4.0 as unverified claims. [Evidence: EV-VIBE_ODDS-README]"
+        },
+        "interview_depth": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-VIBE-ARCH",
+            "EV-VIBE-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Discussion on market microstructure, model calibration curves, and variance management. [Evidence: EV-VIBE-ARCH, EV-VIBE-DB]"
+        },
+        "demonstrability": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-VIBE-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local Python execution via CLI backtesting commands. [Evidence: EV-VIBE-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 7,
+        "ai_relevance": 5.8,
+        "production_readiness": 5,
+        "systems_backend": 6.8,
+        "product_completeness": 6.5,
+        "originality": 6.8,
+        "measurable_evidence": 5.8,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 6.8,
+        "demonstrability": 5.8
+      },
+      "rationales": {
+        "engineering_depth": "Multi-model sports betting market statistical forecasting and probability calibration pipeline. [Evidence: EV-VIBE-ARCH]",
+        "ai_relevance": "Gradient boosting and logistic calibration models for probability forecasting and Kelly criterion bankroll management. [Evidence: EV-VIBE-AI]",
+        "production_readiness": "Local environment configuration, data extraction scripts, and dependency manifests. [Evidence: EV-VIBE_ODDS-NO-CI]",
+        "systems_backend": "Statistical processing pipeline using SQLite and Parquet file persistence. [Evidence: EV-VIBE-DB]",
+        "product_completeness": "CLI and analytical reporting interface for model backtesting and probability tracking. [Evidence: EV-VIBE-MANIFEST]",
+        "originality": "Market efficiency analysis comparing predicted odds with sportsbook market lines. [Evidence: EV-VIBE-ARCH]",
+        "measurable_evidence": "10 verified test source files in tests/; no empirical benchmark artifact detected in captured paths. [Evidence: EV-VIBE_ODDS-TESTS]",
+        "code_quality": "Clean Python statistical packages with 10 automated test source files; unexecuted in audit. [Evidence: EV-VIBE_ODDS-TESTS, EV-VIBE_ODDS-LANG]",
+        "docs_explainability": "README explaining calibration metrics, Brier score calculations, and bankroll policies; capped at 4.0 as unverified claims. [Evidence: EV-VIBE_ODDS-README]",
+        "interview_depth": "Discussion on market microstructure, model calibration curves, and variance management. [Evidence: EV-VIBE-ARCH, EV-VIBE-DB]",
+        "demonstrability": "Local Python execution via CLI backtesting commands. [Evidence: EV-VIBE-MANIFEST]"
+      },
+      "total_score": 61.36
+    },
+    {
+      "slug": "thebutterflyeffect",
+      "name": "TheButterFlyEffect",
+      "repo": "aditya0si/TheButterFlyEffect",
+      "commit_sha": "a62f3a0b22afef9b8c1a4d92893901a8d87a16d5",
+      "url": "https://github.com/aditya0si/TheButterFlyEffect",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-TBE-ARCH",
+        "EV-TBE-AI",
+        "EV-THEBUTTERFLYEFFECT-NO-CI",
+        "EV-TBE-DB",
+        "EV-TBE-MANIFEST",
+        "EV-THEBUTTERFLYEFFECT-NO-TESTS",
+        "EV-THEBUTTERFLYEFFECT-LANG",
+        "EV-THEBUTTERFLYEFFECT-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 6.2,
+          "category_evidence_ids": [
+            "EV-TBE-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Autonomous agent simulation framework exploring emergent behaviors and cascading decision loops. [Evidence: EV-TBE-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-TBE-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "Phase 1 model inference evaluation or benchmark",
+          "rationale": "Agent swarm simulation modeling cascading state transitions and multi-agent interactions. [Evidence: EV-TBE-AI]"
+        },
+        "production_readiness": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-THEBUTTERFLYEFFECT-NO-CI"
+          ],
+          "evidence_strength": "NO_TESTS_CONTAINER_ONLY",
+          "anchor_used": "NO_TESTS_PROD_READINESS_CAP_5",
+          "missing_evidence": "Automated test suite to validate builds and containers",
+          "rationale": "Local execution scripts and dependency requirements; no automated CI workflow. [Evidence: EV-THEBUTTERFLYEFFECT-NO-CI]"
+        },
+        "systems_backend": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-TBE-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Python in-memory agent state tracking and procedural execution. [Evidence: EV-TBE-DB]"
+        },
+        "product_completeness": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-TBE-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Prototype CLI simulation tool for experimenting with agent decision trees. [Evidence: EV-TBE-MANIFEST]"
+        },
+        "originality": {
+          "score": 7.5,
+          "category_evidence_ids": [
+            "EV-TBE-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Exploration of non-deterministic cascading outcomes in simulated multi-agent environments. [Evidence: EV-TBE-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 3.5,
+          "category_evidence_ids": [
+            "EV-THEBUTTERFLYEFFECT-NO-TESTS"
+          ],
+          "evidence_strength": "NO_TESTS_OR_BENCHMARKS",
+          "anchor_used": "NO_TESTS_CAP_4",
+          "missing_evidence": "Automated test suite or benchmark scripts in repository tree",
+          "rationale": "0 automated test source files detected in repository tree; no empirical benchmark artifact detected in captured paths. [Evidence: EV-THEBUTTERFLYEFFECT-NO-TESTS]"
+        },
+        "code_quality": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-THEBUTTERFLYEFFECT-NO-TESTS",
+            "EV-THEBUTTERFLYEFFECT-LANG"
+          ],
+          "evidence_strength": "NO_TESTS",
+          "anchor_used": "NO_TESTS_CODE_QUALITY_CAP_4",
+          "missing_evidence": "Automated test suite and lint/typechecking execution in CI",
+          "rationale": "Python simulation scripts; capped strictly at 4.0 due to absence of automated test suite. [Evidence: EV-THEBUTTERFLYEFFECT-NO-TESTS, EV-THEBUTTERFLYEFFECT-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-THEBUTTERFLYEFFECT-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "README explaining simulation theory, agent states, and execution instructions; capped at 4.0 as unverified claims. [Evidence: EV-THEBUTTERFLYEFFECT-README]"
+        },
+        "interview_depth": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-TBE-ARCH",
+            "EV-TBE-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Talking points on emergent agent behaviors, loop termination, and state propagation. [Evidence: EV-TBE-ARCH, EV-TBE-DB]"
+        },
+        "demonstrability": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-TBE-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Local Python execution running simulation rounds in terminal. [Evidence: EV-TBE-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 6.2,
+        "ai_relevance": 7.5,
+        "production_readiness": 5,
+        "systems_backend": 5.5,
+        "product_completeness": 5.5,
+        "originality": 7.5,
+        "measurable_evidence": 3.5,
+        "code_quality": 4,
+        "docs_explainability": 4,
+        "interview_depth": 6.5,
+        "demonstrability": 5.5
+      },
+      "rationales": {
+        "engineering_depth": "Autonomous agent simulation framework exploring emergent behaviors and cascading decision loops. [Evidence: EV-TBE-ARCH]",
+        "ai_relevance": "Agent swarm simulation modeling cascading state transitions and multi-agent interactions. [Evidence: EV-TBE-AI]",
+        "production_readiness": "Local execution scripts and dependency requirements; no automated CI workflow. [Evidence: EV-THEBUTTERFLYEFFECT-NO-CI]",
+        "systems_backend": "Python in-memory agent state tracking and procedural execution. [Evidence: EV-TBE-DB]",
+        "product_completeness": "Prototype CLI simulation tool for experimenting with agent decision trees. [Evidence: EV-TBE-MANIFEST]",
+        "originality": "Exploration of non-deterministic cascading outcomes in simulated multi-agent environments. [Evidence: EV-TBE-ARCH]",
+        "measurable_evidence": "0 automated test source files detected in repository tree; no empirical benchmark artifact detected in captured paths. [Evidence: EV-THEBUTTERFLYEFFECT-NO-TESTS]",
+        "code_quality": "Python simulation scripts; capped strictly at 4.0 due to absence of automated test suite. [Evidence: EV-THEBUTTERFLYEFFECT-NO-TESTS, EV-THEBUTTERFLYEFFECT-LANG]",
+        "docs_explainability": "README explaining simulation theory, agent states, and execution instructions; capped at 4.0 as unverified claims. [Evidence: EV-THEBUTTERFLYEFFECT-README]",
+        "interview_depth": "Talking points on emergent agent behaviors, loop termination, and state propagation. [Evidence: EV-TBE-ARCH, EV-TBE-DB]",
+        "demonstrability": "Local Python execution running simulation rounds in terminal. [Evidence: EV-TBE-MANIFEST]"
+      },
+      "total_score": 57.31
+    },
+    {
+      "slug": "asic-crc-engine",
+      "name": "asic-crc-engine",
+      "repo": "aditya0si/asic-crc-engine",
+      "commit_sha": "519e2a4f05ff726d2a7573c9fc7d704812e758ca",
+      "url": "https://github.com/aditya0si/asic-crc-engine",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-ASIC-ARCH",
+        "EV-ASIC-AI",
+        "EV-ASIC_CRC_ENGINE-CI",
+        "EV-ASIC_CRC_ENGINE-GIT",
+        "EV-ASIC-DB",
+        "EV-ASIC_CRC_ENGINE-NON-WEB-API",
+        "EV-ASIC_CRC_ENGINE-TESTS",
+        "EV-ASIC_CRC_ENGINE-LANG",
+        "EV-ASIC_CRC_ENGINE-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 8.2,
+          "category_evidence_ids": [
+            "EV-ASIC-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Synthesizable Verilog RTL implementation of Ethernet CRC32 checksum engine with parallel LFSR polynomial calculation. [Evidence: EV-ASIC-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 1.5,
+          "category_evidence_ids": [
+            "EV-ASIC-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "N/A (Non-AI project by design)",
+          "rationale": "Pure digital hardware RTL engineering; zero machine learning or AI integration by design. [Evidence: EV-ASIC-AI]"
+        },
+        "production_readiness": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-CI",
+            "EV-ASIC_CRC_ENGINE-GIT"
+          ],
+          "evidence_strength": "CI_CONFIG_UNEXECUTED",
+          "anchor_used": "CI_CONFIG_UNEXECUTED_CAP_6",
+          "missing_evidence": "CI workflow run execution logs and verification of passing build jobs",
+          "rationale": "Hardware RTL synthesis scripts and GitHub Actions CI workflow configuration. [Evidence: EV-ASIC_CRC_ENGINE-CI, EV-ASIC_CRC_ENGINE-GIT]"
+        },
+        "systems_backend": {
+          "score": 3,
+          "category_evidence_ids": [
+            "EV-ASIC-DB",
+            "EV-ASIC_CRC_ENGINE-NON-WEB-API"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Digital register-transfer level hardware design; non-web API architecture. [Evidence: EV-ASIC-DB, EV-ASIC_CRC_ENGINE-NON-WEB-API]"
+        },
+        "product_completeness": {
+          "score": 6.5,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-GIT"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Complete synthesizable Verilog core with dual testbenches validating hardware correctness. [Evidence: EV-ASIC_CRC_ENGINE-GIT]"
+        },
+        "originality": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-ASIC-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Demonstrates low-level hardware design literacy and HDL verification within an engineering portfolio. [Evidence: EV-ASIC-ARCH]"
+        },
+        "measurable_evidence": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "2 verified Verilog testbenches in tb/ (tb_crc32.sv, tb_crc32_simple.v); no software benchmark artifact detected in captured paths. [Evidence: EV-ASIC_CRC_ENGINE-TESTS]"
+        },
+        "code_quality": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-TESTS",
+            "EV-ASIC_CRC_ENGINE-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Clean, synthesizable SystemVerilog/Verilog code with timing assertions and dual testbenches. [Evidence: EV-ASIC_CRC_ENGINE-TESTS, EV-ASIC_CRC_ENGINE-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "Documentation of CRC32 polynomial matrix math, clock timing constraints, and synthesis targets; capped at 4.0 as unverified claims. [Evidence: EV-ASIC_CRC_ENGINE-README]"
+        },
+        "interview_depth": {
+          "score": 8.5,
+          "category_evidence_ids": [
+            "EV-ASIC-ARCH",
+            "EV-ASIC-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Talking points on parallel LFSR vs serial CRC, setup/hold timing margins, and hardware synthesis. [Evidence: EV-ASIC-ARCH, EV-ASIC-DB]"
+        },
+        "demonstrability": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-ASIC_CRC_ENGINE-GIT"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Simulatable locally with Icarus Verilog and GTKWave waveform viewer. [Evidence: EV-ASIC_CRC_ENGINE-GIT]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 8.2,
+        "ai_relevance": 1.5,
+        "production_readiness": 6,
+        "systems_backend": 3,
+        "product_completeness": 6.5,
+        "originality": 8.5,
+        "measurable_evidence": 5,
+        "code_quality": 6,
+        "docs_explainability": 4,
+        "interview_depth": 8.5,
+        "demonstrability": 5.8
+      },
+      "rationales": {
+        "engineering_depth": "Synthesizable Verilog RTL implementation of Ethernet CRC32 checksum engine with parallel LFSR polynomial calculation. [Evidence: EV-ASIC-ARCH]",
+        "ai_relevance": "Pure digital hardware RTL engineering; zero machine learning or AI integration by design. [Evidence: EV-ASIC-AI]",
+        "production_readiness": "Hardware RTL synthesis scripts and GitHub Actions CI workflow configuration. [Evidence: EV-ASIC_CRC_ENGINE-CI, EV-ASIC_CRC_ENGINE-GIT]",
+        "systems_backend": "Digital register-transfer level hardware design; non-web API architecture. [Evidence: EV-ASIC-DB, EV-ASIC_CRC_ENGINE-NON-WEB-API]",
+        "product_completeness": "Complete synthesizable Verilog core with dual testbenches validating hardware correctness. [Evidence: EV-ASIC_CRC_ENGINE-GIT]",
+        "originality": "Demonstrates low-level hardware design literacy and HDL verification within an engineering portfolio. [Evidence: EV-ASIC-ARCH]",
+        "measurable_evidence": "2 verified Verilog testbenches in tb/ (tb_crc32.sv, tb_crc32_simple.v); no software benchmark artifact detected in captured paths. [Evidence: EV-ASIC_CRC_ENGINE-TESTS]",
+        "code_quality": "Clean, synthesizable SystemVerilog/Verilog code with timing assertions and dual testbenches. [Evidence: EV-ASIC_CRC_ENGINE-TESTS, EV-ASIC_CRC_ENGINE-LANG]",
+        "docs_explainability": "Documentation of CRC32 polynomial matrix math, clock timing constraints, and synthesis targets; capped at 4.0 as unverified claims. [Evidence: EV-ASIC_CRC_ENGINE-README]",
+        "interview_depth": "Talking points on parallel LFSR vs serial CRC, setup/hold timing margins, and hardware synthesis. [Evidence: EV-ASIC-ARCH, EV-ASIC-DB]",
+        "demonstrability": "Simulatable locally with Icarus Verilog and GTKWave waveform viewer. [Evidence: EV-ASIC_CRC_ENGINE-GIT]"
+      },
+      "total_score": 55.82
+    },
+    {
+      "slug": "e-commerce-dashboard",
+      "name": "E-commerce-Dashboard",
+      "repo": "aditya0si/E-commerce-Dashboard",
+      "commit_sha": "efc53ac6cc242a1c1390af606f3a578b92cc1f99",
+      "url": "https://github.com/aditya0si/E-commerce-Dashboard",
+      "eligibility_gate": "PROVISIONAL_PENDING_EXECUTION",
+      "eligible_flagship": "INELIGIBLE",
+      "flagship_status": null,
+      "flagship_role": null,
+      "confidence": 0.75,
+      "missing_evidence": "Phase 1 live execution: automated build execution, test suite run verification, and live load benchmarking.",
+      "evidence_ids": [
+        "EV-ECOM-ARCH",
+        "EV-ECOM-AI",
+        "EV-E_COMMERCE_DASHBOARD-NO-CI",
+        "EV-ECOM-DB",
+        "EV-E_COMMERCE_DASHBOARD-MANIFEST",
+        "EV-ECOM-ORDERS-CLAIM",
+        "EV-E_COMMERCE_DASHBOARD-TESTS",
+        "EV-E_COMMERCE_DASHBOARD-LANG",
+        "EV-E_COMMERCE_DASHBOARD-README"
+      ],
+      "categories": {
+        "engineering_depth": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-ECOM-ARCH"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ARCHITECTURE_AND_CODE_COMPLEXITY_TIER",
+          "missing_evidence": "Dynamic tracing or profiling in live execution environment",
+          "rationale": "Streamlit exploratory e-commerce analytics dashboard operating over Brazilian customer order datasets. [Evidence: EV-ECOM-ARCH]"
+        },
+        "ai_relevance": {
+          "score": 2,
+          "category_evidence_ids": [
+            "EV-ECOM-AI"
+          ],
+          "evidence_strength": "DOMAIN_CLASSIFICATION",
+          "anchor_used": "AI_DOMAIN_ALIGNMENT_RUBRIC",
+          "missing_evidence": "N/A (Non-AI project by design)",
+          "rationale": "Classical data analytics and statistical reporting; zero AI or ML models. [Evidence: EV-ECOM-AI]"
+        },
+        "production_readiness": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-NO-CI"
+          ],
+          "evidence_strength": "LOCAL_CONFIG_ONLY",
+          "anchor_used": "LOCAL_CONFIG_ONLY_CAP_5_5",
+          "missing_evidence": "CI/CD pipeline configuration and automated build execution",
+          "rationale": "Local Streamlit execution environment and requirements.txt manifest; no automated CI workflow. [Evidence: EV-E_COMMERCE_DASHBOARD-NO-CI]"
+        },
+        "systems_backend": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-ECOM-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "SYSTEMS_BACKEND_COMPLEXITY_RUBRIC",
+          "missing_evidence": "Production database query telemetry and concurrency benchmarks under load",
+          "rationale": "Pandas data frame manipulation and local CSV dataset queries. [Evidence: EV-ECOM-DB]"
+        },
+        "product_completeness": {
+          "score": 6.8,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-MANIFEST"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "PRODUCT_SURFACE_OBSERVATION",
+          "missing_evidence": "End-to-end user workflow execution in browser/CLI",
+          "rationale": "Multi-tab interactive dashboard with revenue breakdown, delivery maps, and customer metrics. [Evidence: EV-E_COMMERCE_DASHBOARD-MANIFEST]"
+        },
+        "originality": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-ECOM-ARCH",
+            "EV-ECOM-ORDERS-CLAIM"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "ORIGINALITY_DOMAIN_RUBRIC",
+          "missing_evidence": "Independent patent or novel research paper publication",
+          "rationale": "Standard retail order analytics implementation over public Olist dataset. [Evidence: EV-ECOM-ARCH, EV-ECOM-ORDERS-CLAIM]"
+        },
+        "measurable_evidence": {
+          "score": 5,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-TESTS"
+          ],
+          "evidence_strength": "UNEXECUTED_TEST_FILES",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Automated test suite execution and coverage reports in audit environment",
+          "rationale": "1 verified test source file in tests/ (test_views.py); order volume of 99,441 orders cited as unverified README claim. [Evidence: EV-E_COMMERCE_DASHBOARD-TESTS]"
+        },
+        "code_quality": {
+          "score": 5.5,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-TESTS",
+            "EV-E_COMMERCE_DASHBOARD-LANG"
+          ],
+          "evidence_strength": "CODE_OBSERVED_UNEXECUTED_TESTS",
+          "anchor_used": "UNEXECUTED_TESTS_CAP_6",
+          "missing_evidence": "Passing test suite execution logs and linter/typecheck verification",
+          "rationale": "Functional Streamlit script with basic view test; unexecuted in audit. [Evidence: EV-E_COMMERCE_DASHBOARD-TESTS, EV-E_COMMERCE_DASHBOARD-LANG]"
+        },
+        "docs_explainability": {
+          "score": 4,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-README"
+          ],
+          "evidence_strength": "README_CLAIM_ONLY",
+          "anchor_used": "README_CLAIM_ONLY_CAP_4",
+          "missing_evidence": "Committed Architecture Decision Records (ADRs) or technical specification documents in tree",
+          "rationale": "README explaining dashboard metrics, setup commands, and dataset origin; capped at 4.0 as unverified claims. [Evidence: EV-E_COMMERCE_DASHBOARD-README]"
+        },
+        "interview_depth": {
+          "score": 5.8,
+          "category_evidence_ids": [
+            "EV-ECOM-ARCH",
+            "EV-ECOM-DB"
+          ],
+          "evidence_strength": "CODE_OBSERVED_STATIC",
+          "anchor_used": "TECHNICAL_INTERVIEW_SURFACE_RUBRIC",
+          "missing_evidence": "Live whiteboard recording or interview transcript",
+          "rationale": "Discussions on exploratory data analysis, aggregation performance, and chart selection. [Evidence: EV-ECOM-ARCH, EV-ECOM-DB]"
+        },
+        "demonstrability": {
+          "score": 6,
+          "category_evidence_ids": [
+            "EV-E_COMMERCE_DASHBOARD-MANIFEST"
+          ],
+          "evidence_strength": "LOCAL_DEMO_OR_PACKAGE",
+          "anchor_used": "NO_EXTERNAL_LIVE_DEPLOYMENT_CAP_7",
+          "missing_evidence": "Independently verified live production deployment URL with active health endpoint",
+          "rationale": "Locally executable via streamlit run app.py command. [Evidence: EV-E_COMMERCE_DASHBOARD-MANIFEST]"
+        }
+      },
+      "scores": {
+        "engineering_depth": 5.5,
+        "ai_relevance": 2,
+        "production_readiness": 5,
+        "systems_backend": 5.5,
+        "product_completeness": 6.8,
+        "originality": 5.5,
+        "measurable_evidence": 5,
+        "code_quality": 5.5,
+        "docs_explainability": 4,
+        "interview_depth": 5.8,
+        "demonstrability": 6
+      },
+      "rationales": {
+        "engineering_depth": "Streamlit exploratory e-commerce analytics dashboard operating over Brazilian customer order datasets. [Evidence: EV-ECOM-ARCH]",
+        "ai_relevance": "Classical data analytics and statistical reporting; zero AI or ML models. [Evidence: EV-ECOM-AI]",
+        "production_readiness": "Local Streamlit execution environment and requirements.txt manifest; no automated CI workflow. [Evidence: EV-E_COMMERCE_DASHBOARD-NO-CI]",
+        "systems_backend": "Pandas data frame manipulation and local CSV dataset queries. [Evidence: EV-ECOM-DB]",
+        "product_completeness": "Multi-tab interactive dashboard with revenue breakdown, delivery maps, and customer metrics. [Evidence: EV-E_COMMERCE_DASHBOARD-MANIFEST]",
+        "originality": "Standard retail order analytics implementation over public Olist dataset. [Evidence: EV-ECOM-ARCH, EV-ECOM-ORDERS-CLAIM]",
+        "measurable_evidence": "1 verified test source file in tests/ (test_views.py); order volume of 99,441 orders cited as unverified README claim. [Evidence: EV-E_COMMERCE_DASHBOARD-TESTS]",
+        "code_quality": "Functional Streamlit script with basic view test; unexecuted in audit. [Evidence: EV-E_COMMERCE_DASHBOARD-TESTS, EV-E_COMMERCE_DASHBOARD-LANG]",
+        "docs_explainability": "README explaining dashboard metrics, setup commands, and dataset origin; capped at 4.0 as unverified claims. [Evidence: EV-E_COMMERCE_DASHBOARD-README]",
+        "interview_depth": "Discussions on exploratory data analysis, aggregation performance, and chart selection. [Evidence: EV-ECOM-ARCH, EV-ECOM-DB]",
+        "demonstrability": "Locally executable via streamlit run app.py command. [Evidence: EV-E_COMMERCE_DASHBOARD-MANIFEST]"
+      },
+      "total_score": 49.82
+    }
+  ],
+  "exclusions": [
+    {
+      "repo": "aegis",
+      "full_name": "aditya0si/aegis",
+      "commit_sha": "1b99d93491c227dfffa68f5cc90a7b25d1da098c",
+      "reason": "Security analysis prototype with single commit; unverified test suite and insufficient production artifacts.",
+      "disposition": "Excluded from viable software ranking; historical security prototype.",
+      "evidence_ids": [
+        "EV-AEGIS-GIT",
+        "EV-AEGIS-LANG",
+        "EV-AEGIS-MANIFEST"
+      ],
+      "missing_evidence": "Automated test suite execution and continuous development history."
+    },
+    {
+      "repo": "pharmforge",
+      "full_name": "aditya0si/pharmforge",
+      "commit_sha": "6ddc42287f6ad21fb7d92ec568c8a6bd90aec274",
+      "reason": "Pharmaceutical manufacturing pipeline with single commit; lacking active test runner integration and multi-environment deployment.",
+      "disposition": "Excluded from viable software ranking; early domain prototype.",
+      "evidence_ids": [
+        "EV-PHARMFORGE-GIT",
+        "EV-PHARMFORGE-LANG",
+        "EV-PHARMFORGE-MANIFEST"
+      ],
+      "missing_evidence": "Empirical validation metrics and automated test execution."
+    },
+    {
+      "repo": "skyguard",
+      "full_name": "aditya0si/skyguard",
+      "commit_sha": "66f0b9d861957d1e6c7a20e9f1b0e4d6d3e053e1",
+      "reason": "Aerospace telemetry monitoring concept; single commit history and unverified sensor simulation.",
+      "disposition": "Excluded from viable software ranking; conceptual exploration.",
+      "evidence_ids": [
+        "EV-SKYGUARD-GIT",
+        "EV-SKYGUARD-LANG",
+        "EV-SKYGUARD-MANIFEST"
+      ],
+      "missing_evidence": "End-to-end integration tests and real-time telemetry stream benchmarks."
+    },
+    {
+      "repo": "stormcast",
+      "full_name": "aditya0si/stormcast",
+      "commit_sha": "0e145a61f05906996c9e30050c4e974ff5c5b2a3",
+      "reason": "Severe weather forecasting model pipeline; early prototype superseded by floodlens and bustwatch.",
+      "disposition": "Excluded from viable software ranking; superseded prototype.",
+      "evidence_ids": [
+        "EV-STORMCAST-GIT",
+        "EV-STORMCAST-LANG",
+        "EV-STORMCAST-MANIFEST"
+      ],
+      "missing_evidence": "Continuous integration and model validation benchmarks."
+    },
+    {
+      "repo": "weathergpt",
+      "full_name": "aditya0si/weathergpt",
+      "commit_sha": "bf4bd4737e7a4fcd1ea7807220b44a43ffa832f2",
+      "reason": "Weather forecast generative assistant; tutorial-scale wrapper around weather API with minimal systems engineering depth.",
+      "disposition": "Excluded from viable software ranking; basic tutorial project.",
+      "evidence_ids": [
+        "EV-WEATHERGPT-GIT",
+        "EV-WEATHERGPT-LANG",
+        "EV-WEATHERGPT-MANIFEST"
+      ],
+      "missing_evidence": "Non-trivial backend architecture or empirical benchmark."
+    },
+    {
+      "repo": "agentic_rag_system",
+      "full_name": "aditya0si/agentic_rag_system",
+      "commit_sha": "48a3b5a6d579b26bc067f2380a26fb37d82ace6b",
+      "reason": "Early RAG experiment; superseded by schemeGPT and grounded-knowledge-platform production architectures.",
+      "disposition": "Excluded from viable software ranking; superseded RAG prototype.",
+      "evidence_ids": [
+        "EV-AGENTIC_RAG_SYSTEM-GIT",
+        "EV-AGENTIC_RAG_SYSTEM-LANG",
+        "EV-AGENTIC_RAG_SYSTEM-MANIFEST"
+      ],
+      "missing_evidence": "Comprehensive evaluation harness and production deployment."
+    },
+    {
+      "repo": "Cyber",
+      "full_name": "aditya0si/Cyber",
+      "commit_sha": "4ec33c00f8685151e4b7417f204bf5b6566e4ad2",
+      "reason": "Network security tooling scripts; lacking automated test files and structured service architecture.",
+      "disposition": "Excluded from viable software ranking; script collection.",
+      "evidence_ids": [
+        "EV-CYBER-GIT",
+        "EV-CYBER-LANG",
+        "EV-CYBER-MANIFEST"
+      ],
+      "missing_evidence": "Automated test suite and service API contracts."
+    },
+    {
+      "repo": "bom-intelligence",
+      "full_name": "aditya0si/bom-intelligence",
+      "commit_sha": "1c332508f7a54611f43d57e3a45ca7b03df6a791",
+      "reason": "Bill of Materials parsing scripts; offline utility lacking service packaging and automated tests.",
+      "disposition": "Excluded from viable software ranking; hardware utility script.",
+      "evidence_ids": [
+        "EV-BOM_INTELLIGENCE-GIT",
+        "EV-BOM_INTELLIGENCE-LANG",
+        "EV-BOM_INTELLIGENCE-NON-WEB-API"
+      ],
+      "missing_evidence": "Automated API test suite."
+    },
+    {
+      "repo": "HealthCareOCR",
+      "full_name": "aditya0si/HealthCareOCR",
+      "commit_sha": "648d2a49cb3617841c0553e7a287fa1797ad5851",
+      "reason": "Early OCR pipeline for medical records; superseded by CoverAI's mature document analysis and test suite.",
+      "disposition": "Excluded from viable software ranking; historical prototype.",
+      "evidence_ids": [
+        "EV-HEALTHCAREOCR-GIT",
+        "EV-HEALTHCAREOCR-LANG",
+        "EV-HEALTHCAREOCR-MANIFEST"
+      ],
+      "missing_evidence": "End-to-end evaluation benchmark."
+    },
+    {
+      "repo": "pipeline_ocr",
+      "full_name": "aditya0si/pipeline_ocr",
+      "commit_sha": "c0a7ac02c52d6baea588fb42decfb2bf62b5134e",
+      "reason": "Archived OCR pipeline scripts; archived repository status and superseded by active projects.",
+      "disposition": "Excluded from viable software ranking; archived status.",
+      "evidence_ids": [
+        "EV-PIPELINE_OCR-GIT",
+        "EV-PIPELINE_OCR-LANG",
+        "EV-PIPELINE_OCR-MANIFEST"
+      ],
+      "missing_evidence": "Active development and CI pipeline."
+    },
+    {
+      "repo": "pipeline_pr-tb",
+      "full_name": "aditya0si/pipeline_pr-tb",
+      "commit_sha": "ec6c2a4bd183b81ad93f862dd51c7738d9e461fe",
+      "reason": "Pull request test bench automation prototype; archived repository status.",
+      "disposition": "Excluded from viable software ranking; archived status.",
+      "evidence_ids": [
+        "EV-PIPELINE_PR_TB-GIT",
+        "EV-PIPELINE_PR_TB-LANG",
+        "EV-PIPELINE_PR_TB-MANIFEST"
+      ],
+      "missing_evidence": "Active production deployment."
+    },
+    {
+      "repo": "ate-fixture-lab",
+      "full_name": "aditya0si/ate-fixture-lab",
+      "commit_sha": "70398cb2d55501d3a3decd69b924c1ef33b1d79d",
+      "reason": "Hardware automated test equipment fixture sequencer scripts; laboratory instrumentation tooling rather than a distributed software service.",
+      "disposition": "Excluded from software ranking; cataloged as hardware engineering artifact.",
+      "evidence_ids": [
+        "EV-ATE_FIXTURE_LAB-GIT",
+        "EV-ATE_FIXTURE_LAB-LANG",
+        "EV-ATE_FIXTURE_LAB-NON-WEB-API"
+      ],
+      "missing_evidence": "Software service API contract."
+    }
+  ]
+}

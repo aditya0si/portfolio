@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 
 const NAV: [string, string][] = [
-  ["WORK", "/#work"],
-  ["EXPERIENCE", "/#experience"],
+  ["PRODUCTS", "/#products"],
+  ["SYSTEMS (R&D)", "/#systems"],
   ["STACK", "/#stack"],
   ["CONCEPTS", "/#concepts"],
   ["GITHUB", "/#github"],
@@ -19,9 +19,12 @@ function useIstClock() {
         timeZone: "Asia/Kolkata",
         hour12: false,
       });
-    setTime(fmt());
-    const id = setInterval(() => setTime(fmt()), 1000);
-    return () => clearInterval(id);
+    const initial = window.setTimeout(() => setTime(fmt()), 0);
+    const id = window.setInterval(() => setTime(fmt()), 1000);
+    return () => {
+      window.clearTimeout(initial);
+      window.clearInterval(id);
+    };
   }, []);
   return time;
 }
@@ -32,9 +35,12 @@ export default function Hud() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    setTheme(
-      document.documentElement.getAttribute("data-theme") === "b" ? "b" : "a"
-    );
+    const frame = window.requestAnimationFrame(() => {
+      setTheme(
+        document.documentElement.getAttribute("data-theme") === "b" ? "b" : "a"
+      );
+    });
+    return () => window.cancelAnimationFrame(frame);
   }, []);
 
   useEffect(() => {
