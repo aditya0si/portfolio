@@ -7,7 +7,8 @@
 ## Result
 
 - ZAP failure alerts: **0**
-- Warning categories: **2**
+- ZAP process exit: **2**, because baseline warnings remained
+- Warning categories in the retained JSON: **4** (2 medium CSP categories and 2 informational cache categories)
 - Passing passive rules: **65**
 
 | Risk | Finding | Observed instances | Disposition |

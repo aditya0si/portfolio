@@ -218,6 +218,30 @@
       "exit_code": 0,
       "summary": "202 passed, 18 warnings in 28.80s against Docker-backed PostgreSQL 16 with PostGIS/pgvector and Redis.",
       "scope": "Verified on a repaired but uncommitted DevAtlas working tree based on commit 7d266b3; this is not evidence that the audited Git commit itself passes unchanged."
+    },
+    {
+      "id": "CI-PORTFOLIO-2D1AFAA",
+      "repo": "Portfolio",
+      "commit_sha": "2d1afaa0662dbe07d7d4ef4f91cb9612a655ff16",
+      "working_tree_clean": true,
+      "evidence_type": "CI_OBSERVED",
+      "command": "GitHub Actions workflow: Portfolio quality gates",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "Run 35453129836 passed Node tests, ESLint, TypeScript, production build, npm audit, three evidence validators, 12 Playwright/axe checks, and Gitleaks.",
+      "scope": "Remote GitHub-hosted CI at the exact release SHA; https://github.com/aditya0si/portfolio/actions/runs/35453129836"
+    },
+    {
+      "id": "DEPLOY-PORTFOLIO-2D1AFAA",
+      "repo": "Portfolio",
+      "commit_sha": "2d1afaa0662dbe07d7d4ef4f91cb9612a655ff16",
+      "working_tree_clean": true,
+      "evidence_type": "EXTERNAL_VERIFIED",
+      "command": "GitHub Deployments API lookup plus external HTTPS probes",
+      "result": "PASS",
+      "exit_code": 0,
+      "summary": "GitHub deployment 6542754630 completed successfully; 10 public endpoints returned HTTP 200, release markers were present, and the production HTML contained no Fontshare reference.",
+      "scope": "Portfolio production deployment only; revision URL https://portfolio-cp8t6s5dh-adityasinghprojects.vercel.app and alias https://portfolio-gray-five-72.vercel.app. Candidate repository deployments are not implied."
     }
   ]
 }

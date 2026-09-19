@@ -4,7 +4,7 @@
 
 - **Phase 1:** VERIFIED-PARTIAL (DRAFT); evidence inventory and strategy documents pass local validators.
 - **Phase 2 M0–M3:** VERIFIED LOCALLY on 2026-09-19.
-- **Portfolio revision:** committed and pushed to `main`; production deployment for commit `3eb54943957142f2f1e4f6385f021ac17b3dac54` completed successfully on Vercel.
+- **Portfolio application release:** `2d1afaa0662dbe07d7d4ef4f91cb9612a655ff16` is on `origin/main`; CI run `35453129836` passed and Vercel deployment `6542754630` succeeded for that exact release SHA.
 - **Integrity mode:** evidence-first; unexecuted and externally unverified claims remain qualified.
 
 ## Ecosystem snapshot
