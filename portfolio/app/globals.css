@@ -2,10 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Clash Display";
+  src: url("/fonts/clash-display-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* ==========================================================================
    ENGINEER'S BLUEPRINT — Next.js port
-   Cream/ink base · one electric violet accent · Clash Display + Satoshi +
-   JetBrains Mono · sharp corners · hairlines · no gradients, no glass.
+   Cream/ink base · one electric violet accent · self-hosted Clash Display +
+   Segoe UI fallback · JetBrains Mono · sharp corners · hairlines · no gradients, no glass.
    ========================================================================== */
 
 @layer base {

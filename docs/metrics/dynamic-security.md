@@ -24,6 +24,6 @@ Hardening completed during the scan cycle:
 - added `base-uri`, `object-src`, `form-action`, `worker-src`, and `manifest-src` directives;
 - added COEP, COOP, and CORP headers;
 - removed the Next.js `X-Powered-By` header;
-- added Subresource Integrity and CORS metadata for the external Fontshare stylesheet.
+- removed the mutable third-party font stylesheet and self-hosted the two required WOFF2 assets, eliminating runtime SRI drift and external font origins from CSP.
 
 The machine-readable report is `zap-final.json` in this directory. This was a passive baseline scan, not an exploit test or proof that the application is vulnerability-free.

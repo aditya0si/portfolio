@@ -44,7 +44,7 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://api.fontshare.com; img-src 'self' blob: data:; font-src 'self' data: https://cdn.fontshare.com; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
+            value: "default-src 'self'; base-uri 'self'; object-src 'none'; form-action 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' blob: data:; font-src 'self' data:; connect-src 'self' https://api.github.com; worker-src 'self' blob:; manifest-src 'self'; frame-ancestors 'none';",
           },
         ],
       },

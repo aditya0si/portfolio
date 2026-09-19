@@ -19,8 +19,8 @@ const config: Config = {
         surface: 'var(--surface)',
       },
       fontFamily: {
-        display: ['"Clash Display"', 'Satoshi', 'sans-serif'],
-        sans: ['Satoshi', '"Segoe UI"', 'sans-serif'],
+        display: ['"Clash Display"', '"Segoe UI"', 'sans-serif'],
+        sans: ['"Segoe UI"', 'sans-serif'],
         mono: ['var(--font-jbmono)', '"JetBrains Mono"', 'Consolas', 'monospace'],
       },
       maxWidth: {

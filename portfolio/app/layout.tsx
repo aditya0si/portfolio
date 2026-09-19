@@ -66,14 +66,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="preconnect" href="https://api.fontshare.com" />
-        <link rel="preconnect" href="https://cdn.fontshare.com" crossOrigin="anonymous" />
-        <link
-          href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600&f[]=satoshi@400,500,700&display=swap"
-          rel="stylesheet"
-          integrity="sha384-3WuAYeWwFlTK6nHfipy136z9/xQECkxofRrklER1CudS1CEFlYg3FuQIGkxB3hKn"
-          crossOrigin="anonymous"
-        />
         <script dangerouslySetInnerHTML={{ __html: themeInit }} />
       </head>
       <body
