@@ -2,6 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 
 const productRoutes = [
+  "/projects/stockflow",
   "/projects/schemegpt",
   "/projects/sentinel",
   "/projects/mcp-from-scratch",
@@ -82,7 +83,7 @@ test("stale and unsupported claims are completely absent from homepage", async (
   expect(errors).toEqual([]);
 });
 
-test("role filter pills deterministically filter the 5 provisional product candidates with keyboard support", async ({ page }) => {
+test("role filter pills deterministically filter the 6 provisional product candidates with keyboard support", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await page.goto("/");
 
@@ -104,9 +105,9 @@ test("role filter pills deterministically filter the 5 provisional product candi
   await expect(pillFd).toBeVisible();
   await expect(pillBackend).toBeVisible();
 
-  // All 5 products present initially under ALL
+  // All 6 products present initially under ALL
   const productCards = productsSection.locator("[data-product-card]");
-  await expect(productCards).toHaveCount(5);
+  await expect(productCards).toHaveCount(6);
 
   // Filter: AI ENGINEER
   await pillAi.click();
@@ -137,7 +138,7 @@ test("role filter pills deterministically filter the 5 provisional product candi
 
   // Reset to ALL
   await pillAll.click();
-  await expect(productCards).toHaveCount(5);
+  await expect(productCards).toHaveCount(6);
 
   expect(errors).toEqual([]);
 });
@@ -151,7 +152,7 @@ test("provisional products display candidate/provisional status and verified exe
   // Every product card must show candidate/provisional status
   const statuses = productsSection.locator("[data-product-status]");
   const count = await statuses.count();
-  expect(count).toBe(5);
+  expect(count).toBe(6);
   for (let i = 0; i < count; i++) {
     const text = await statuses.nth(i).innerText();
     expect(text.toLowerCase()).toMatch(/candidate|provisional/);

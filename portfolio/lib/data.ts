@@ -57,9 +57,52 @@ export type Flagship = {
 
 export const flagships: Flagship[] = [
   {
+    slug: "stockflow",
+    repo: "stockflow",
+    index: "P.01",
+    name: "StockFlow",
+    status: "PROVISIONAL CANDIDATE · CI VERIFIED · 52 TESTS PASSED",
+    executionState:
+      "Public GitHub Actions run 36344770271 passed Go formatting, vet, unit and integration tests, a deterministic demo, the Linux race detector, and a backup/restore rehearsal; frontend formatting, typecheck, tests and build; Docker/Compose production-stack checks; and Playwright with axe. Repository release evidence supports 52 backend/integration tests. No production deployment, production traffic, exactly-once processing, or public live application is claimed.",
+    roles: ["BACKEND/SYSTEMS"],
+    tagline:
+      "Go/PostgreSQL modular monolith for atomic multi-SKU reservation, payload-aware idempotency, fulfilment state transitions, append-only inventory movements, reconciliation, and a React/TypeScript operator UI.",
+    problem:
+      "Concurrent consumers reserving overlapping multi-SKU carts can oversell stock or double-count inventory across retries, and fulfilment transitions need an auditable, reconcilable trail.",
+    built: [
+      "Go/PostgreSQL modular monolith implementing atomic multi-SKU reservation",
+      "Payload-aware idempotency for retry-safe reservation and fulfilment requests",
+      "Fulfilment state transitions backed by append-only inventory movements and reconciliation",
+      "React/TypeScript operator UI for the inventory and fulfilment workflow",
+    ],
+    highlights: [
+      "Repository release evidence supports 52 backend/integration tests",
+      "Public GitHub Actions run 36344770271 passed Go formatting/vet/unit/integration tests, a deterministic demo, the Linux race detector, and a backup/restore rehearsal",
+      "The same run passed frontend formatting/typecheck/tests/build, Docker/Compose production-stack checks, and Playwright with axe",
+      "Committed local hot-SKU experiment: 200 buyers competing for one unit yielded 1 accepted, 199 conflicts, and 0 errors",
+      "No production deployment, production traffic, exactly-once processing, or public live application is claimed",
+    ],
+    stack: ["Go", "PostgreSQL", "React", "TypeScript", "Docker", "Docker Compose", "Playwright"],
+    metrics: [
+      { value: "52", label: "BACKEND/INTEGRATION TESTS" },
+      { value: "200→1", label: "HOT-SKU BUYERS / UNIT" },
+      { value: "199", label: "EXPECTED CONFLICTS" },
+      { value: "0", label: "ERRORS IN HOT-SKU RUN" },
+    ],
+    flow: ["RESERVATION REQUEST", "PAYLOAD-AWARE IDEMPOTENCY", "ATOMIC MULTI-SKU RESERVATION", "APPEND-ONLY MOVEMENTS", "FULFILMENT STATE TRANSITION", "RECONCILIATION", "OPERATOR UI"],
+    links: [
+      { label: "SOURCE", href: "https://github.com/aditya0si/stockflow" },
+      { label: "CI", href: "https://github.com/aditya0si/stockflow/actions/runs/36344770271" },
+    ],
+    evidenceId: "EV-SF-RESERVATION",
+    evidenceUrl: "https://github.com/aditya0si/stockflow/tree/0504328af34a9d5680d03101e77fa5a4c0e51c63/",
+    evidenceStrength:
+      "PUBLIC CI VERIFIED (GitHub Actions run 36344770271; 52 backend/integration tests per repository release evidence; no production deployment claimed)",
+  },
+  {
     slug: "schemegpt",
     repo: "schemeGPT",
-    index: "P.01",
+    index: "P.02",
     name: "schemeGPT",
     status: "PROVISIONAL CANDIDATE · 71 TESTS PASSED",
     executionState:
@@ -99,7 +142,7 @@ export const flagships: Flagship[] = [
   {
     slug: "sentinel",
     repo: "Sentinel",
-    index: "P.02",
+    index: "P.03",
     name: "Sentinel",
     status: "PROVISIONAL CANDIDATE · 62 TESTS PASSED",
     executionState:
@@ -138,7 +181,7 @@ export const flagships: Flagship[] = [
   {
     slug: "mcp-from-scratch",
     repo: "mcp-from-scratch",
-    index: "P.03",
+    index: "P.04",
     name: "mcp-from-scratch",
     status: "PROVISIONAL CANDIDATE · 29 TESTS PASSED",
     executionState:
@@ -174,7 +217,7 @@ export const flagships: Flagship[] = [
   {
     slug: "tenant-api-platform",
     repo: "tenant-api-platform",
-    index: "P.04",
+    index: "P.05",
     name: "tenant-api-platform",
     status: "PROVISIONAL CANDIDATE · DATABASE-BACKED SUITE PASSED",
     executionState:
@@ -213,7 +256,7 @@ export const flagships: Flagship[] = [
   {
     slug: "event-stream-platform",
     repo: "event-stream-platform",
-    index: "P.05",
+    index: "P.06",
     name: "event-stream-platform",
     status: "PROVISIONAL CANDIDATE · DOCKER INTEGRATION PASSED",
     executionState:

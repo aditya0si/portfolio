@@ -49,11 +49,12 @@ console.log("------------------------------------------------------------");
   console.log("  ✓ All unsupported claims verified absent");
 }
 
-// Test 2: Provisional Products Catalog Integrity (Exactly 5 Products)
+// Test 2: Provisional Products Catalog Integrity (6 Products, StockFlow First)
 {
-  console.log("Test 2: Exactly 5 provisional product candidates with required statuses...");
+  console.log("Test 2: 6 provisional product candidates with unique slugs/indices and required statuses...");
 
   const expectedSlugs = [
+    "stockflow",
     "schemegpt",
     "sentinel",
     "mcp-from-scratch",
@@ -63,8 +64,30 @@ console.log("------------------------------------------------------------");
 
   // Extract flagship slugs
   const slugMatches = [...dataContent.matchAll(/slug:\s*["']([^"']+)["']/g)].map((m) => m[1]);
-  assert.equal(slugMatches.length, 5, `Expected exactly 5 flagship products, got ${slugMatches.length}`);
+  assert.equal(slugMatches.length, 6, `Expected exactly 6 flagship products, got ${slugMatches.length}`);
   assert.deepEqual(slugMatches, expectedSlugs, "Flagship slugs do not match expected audit candidates");
+  assert.equal(slugMatches[0], "stockflow", "StockFlow must be the first flagship");
+
+  // Extract flagship indices (P.01 … P.06)
+  const indexMatches = [...dataContent.matchAll(/index:\s*["'](P\.\d+)["']/g)].map((m) => m[1]);
+  assert.equal(indexMatches.length, 6, `Expected exactly 6 flagship indices, got ${indexMatches.length}`);
+  assert.deepEqual(
+    indexMatches,
+    ["P.01", "P.02", "P.03", "P.04", "P.05", "P.06"],
+    "Flagship indices must be sequential and in order"
+  );
+
+  // Uniqueness invariants
+  assert.equal(
+    new Set(slugMatches).size,
+    slugMatches.length,
+    "Flagship slugs must be unique"
+  );
+  assert.equal(
+    new Set(indexMatches).size,
+    indexMatches.length,
+    "Flagship indices must be unique"
+  );
 
   // Verify status mentions candidate/provisional and execution state
   for (const slug of expectedSlugs) {
@@ -77,7 +100,7 @@ console.log("------------------------------------------------------------");
     );
   }
 
-  console.log("  ✓ 5 provisional products verified with explicit candidate status");
+  console.log("  ✓ 6 provisional products verified with unique slugs/indices and explicit candidate status");
 }
 
 // Test 3: Verified Execution Facts Surfaced
@@ -170,10 +193,16 @@ console.log("------------------------------------------------------------");
   console.log("Test 7: Immutable evidence links and execution qualifiers...");
 
   const evidenceUrls = [...dataContent.matchAll(/evidenceUrl:\s*["']([^"']+)["']/g)].map((m) => m[1]);
-  assert.equal(evidenceUrls.length, 5, "Every product must expose one immutable evidence URL");
+  assert.equal(evidenceUrls.length, 6, "Every product must expose one immutable evidence URL");
   for (const url of evidenceUrls) {
     assert.match(url, /^https:\/\/github\.com\/aditya0si\/[^/]+\/(?:blob|tree)\/[0-9a-f]{40}\//, `Evidence URL is not commit-pinned: ${url}`);
   }
+  assert.ok(
+    dataContent.includes(
+      "https://github.com/aditya0si/stockflow/tree/0504328af34a9d5680d03101e77fa5a4c0e51c63/"
+    ),
+    "StockFlow evidence URL must be pinned to commit 0504328af34a9d5680d03101e77fa5a4c0e51c63"
+  );
 
   assert.ok(
     !/RLS (?:tenant isolation )?verified/i.test(dataContent),

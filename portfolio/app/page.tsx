@@ -122,7 +122,7 @@ export default function Home() {
             index="01"
             label="PRODUCTS"
             title="Engineering Product Candidates."
-            note="Five provisional candidates selected for complementary role coverage. Each card separates source observations, executed checks, historical artifacts, and unresolved verification."
+            note="Six provisional candidates selected for complementary role coverage. Each card separates source observations, executed checks, historical artifacts, and unresolved verification."
           />
           <ProductsCatalog />
         </div>
