@@ -398,31 +398,50 @@ test("loading and unavailable calendar states keep 14px prose and a 44px profile
   expect(await computedFontSize(unavailable)).toBeGreaterThanOrEqual(14);
 });
 
-// Anchor regression: the existing page sections stay intact and the new
-// contributions section sits immediately after products.
-test("homepage keeps all section anchors with contributions immediately after products", async ({ page }) => {
+// Anchor regression: the simplified page keeps its current sections in order,
+// the removed sections stay gone, and contributions sits directly after the
+// hero and ahead of stack/products.
+test("homepage keeps the current section anchors with contributions directly after the hero", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, twoWeekPayload()));
   await page.goto("/");
 
-  const expected = [
-    "products",
-    "contributions",
-    "systems",
-    "stack",
-    "concepts",
-    "github",
-    "education",
-    "contact",
-  ];
+  const order = ["contributions", "stack", "products", "contact"];
+  const removed = ["systems", "concepts", "github", "education"];
 
-  for (const id of expected) {
+  for (const id of order) {
     await expect(page.locator(`section#${id}`)).toHaveCount(1);
+  }
+  for (const id of removed) {
+    await expect(page.locator(`section#${id}`)).toHaveCount(0);
   }
 
   const ids = await page.evaluate(() =>
     Array.from(document.querySelectorAll("section[id]")).map((section) => section.id),
   );
-  const anchors = ids.filter((id) => expected.includes(id));
-  expect(anchors).toEqual(expected);
+  expect(ids).toEqual(order);
+
+  const contributions = page.locator("section#contributions");
+  await expect(contributions).toBeVisible();
+
+  const placement = await page.evaluate(() => {
+    const contributions = document.querySelector("section#contributions");
+    const preceding = contributions?.previousElementSibling ?? null;
+    const sections = Array.from(document.querySelectorAll("section[id]"));
+    const indexOf = (id: string) => sections.findIndex((section) => section.id === id);
+    return {
+      precedingIsHero:
+        preceding?.tagName.toLowerCase() === "section" &&
+        !preceding.hasAttribute("id") &&
+        !!preceding.querySelector("h1"),
+      contributionsIndex: indexOf("contributions"),
+      stackIndex: indexOf("stack"),
+      productsIndex: indexOf("products"),
+    };
+  });
+
+  expect(placement.precedingIsHero).toBe(true);
+  expect(placement.contributionsIndex).toBe(0);
+  expect(placement.contributionsIndex).toBeLessThan(placement.stackIndex);
+  expect(placement.contributionsIndex).toBeLessThan(placement.productsIndex);
 });

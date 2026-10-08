@@ -9,47 +9,55 @@ import AxeBuilder from "@axe-core/playwright";
 
 test.setTimeout(90000);
 
-// Independent browser acceptance suite for the redesigned portfolio.
+// Independent browser acceptance suite for the simplified portfolio.
 //
 // Scope and fixture honesty (read before changing any fixture):
 //
-//  * The live GitHub repository call is the ONLY external upstream request that
-//    this suite mocks for the browser. It is fulfilled with HTTP 200 `[]`, which
-//    is the deterministic "cached snapshot" path (no repos, no live count).
+//  * The Home page no longer mounts a GitHub repository strip, so this suite
+//    makes NO external request to api.github.com at all. The removed feature is
+//    covered by e2e/github-repos.spec.ts.
 //  * The SAME-ORIGIN contributions / visits endpoints are fulfilled with
 //    HTTP 200 carrying a structurally INVALID payload, e.g.
 //    `{ "error": "Contributions unavailable" }`. This is a degraded-state
 //    INVALID-PAYLOAD fixture: the client validators reject the body and render
 //    the unavailable state. It is deliberately NOT a missing-config fixture and
-//    must never be described as one. HTTP 200 is used (instead of the real 503)
-//    purely so Chromium does not emit network "503" console noise.
-//  * The REAL missing-config 503 behaviour (empty GITHUB_TOKEN /
-//    UPSTASH_REDIS_REST_* ) is asserted separately against the request context,
-//    with no browser fixtures involved. Browser fixtures never leak into the
-//    request context.
+//    must never be described as one. HTTP 200 is used (instead of the real
+//    503/403) purely so Chromium does not emit network console noise.
+//  * The REAL missing-config behaviour is asserted separately against the
+//    request context, with no browser fixtures involved.
 //  * Every fixture count here is test-only and is not a product claim.
-//
-// Success calendar fixtures are deterministic two-week payloads (no production
-// data).
 
 const WIDTHS = [375, 768, 1280, 1920] as const;
 const THEMES = ["light", "dark"] as const;
 
-const FEATURED_ORDER = [
-  "schemegpt",
-  "stockflow",
-  "sentinel",
-  "tenant-api-platform",
-  "event-stream-platform",
+const FEATURED = [
+  {
+    slug: "schemegpt",
+    name: "SchemeGPT",
+    url: "https://schemegpt-web.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/schemeGPT",
+  },
+  {
+    slug: "samjho",
+    name: "samjho",
+    url: "https://samjho-adityasinghprojects.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/samjho",
+  },
+  {
+    slug: "coverai",
+    name: "CoverAI",
+    url: "https://cover-ai-web.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/CoverAI",
+  },
 ] as const;
 
-const FEATURED_SOURCE = {
-  schemegpt: "https://github.com/aditya0si/schemeGPT",
-  stockflow: "https://github.com/aditya0si/stockflow",
-  sentinel: "https://github.com/aditya0si/Sentinel",
-  "tenant-api-platform": "https://github.com/aditya0si/tenant-api-platform",
-  "event-stream-platform": "https://github.com/aditya0si/event-stream-platform",
-} as const;
+const FEATURED_ORDER = FEATURED.map((item) => item.slug);
+
+// The approved simplified Home composition: hero (no id) then these four
+// sections in this exact order. The removed systems/concepts/github/education
+// blocks must never reappear.
+const SECTION_ORDER = ["contributions", "stack", "products", "contact"] as const;
+const REMOVED_SECTIONS = ["systems", "concepts", "github", "education"] as const;
 
 const DOSSIER_SLUGS = [
   "stockflow",
@@ -60,18 +68,8 @@ const DOSSIER_SLUGS = [
   "event-stream-platform",
 ] as const;
 
-const SECTION_ORDER = [
-  "products",
-  "contributions",
-  "systems",
-  "stack",
-  "concepts",
-  "github",
-  "education",
-  "contact",
-] as const;
+const TOOL_COUNT = 23;
 
-const GITHUB_API_GLOB = "https://api.github.com/**";
 const CONTRIBUTIONS_GLOB = "**/api/contributions";
 const VISITS_GLOB = "**/api/visits";
 
@@ -97,9 +95,7 @@ type RawCalendar = {
   updatedAt: string;
 };
 
-// Deterministic two-week calendar (18 contributions). The first week omits its
-// leading days (weekdays 0-2) so the rendered grid must pad the top column.
-// This is a test fixture, never production data.
+// Deterministic two-week calendar (18 contributions). Test fixture only.
 function twoWeekCalendar(): RawCalendar {
   return {
     total: 18,
@@ -136,13 +132,6 @@ function fulfillJson(route: Route, status: number, payload: unknown) {
   });
 }
 
-// Only the external repository provider is mocked, with an empty cached array.
-async function mockUpstreamRepositories(page: Page) {
-  await page.route(GITHUB_API_GLOB, (route) =>
-    route.fulfill({ status: 200, contentType: "application/json", body: "[]" }),
-  );
-}
-
 // Degraded-state INVALID-PAYLOAD fixture (NOT missing config): HTTP 200 with a
 // body that carries no usable data, so the client renders "unavailable".
 async function mockInvalidPayloadDeployed(page: Page) {
@@ -159,7 +148,9 @@ async function mockSuccessIntegrations(page: Page) {
   await page.route(CONTRIBUTIONS_GLOB, (route) =>
     fulfillJson(route, 200, twoWeekCalendar()),
   );
-  await page.route(VISITS_GLOB, (route) => fulfillJson(route, 200, { count: 1234 }));
+  await page.route(VISITS_GLOB, (route) =>
+    fulfillJson(route, 200, { count: 1234 }),
+  );
 }
 
 function collectRuntimeErrors(page: Page) {
@@ -172,12 +163,12 @@ function collectRuntimeErrors(page: Page) {
 }
 
 function productCards(page: Page) {
-  return page.locator("#products [data-product-card]");
+  return page.locator("#products [data-frontend-card]");
 }
 
 async function cardOrder(page: Page): Promise<(string | null)[]> {
   return productCards(page).evaluateAll((elements) =>
-    elements.map((element) => element.getAttribute("data-product-card")),
+    elements.map((element) => element.getAttribute("data-frontend-card")),
   );
 }
 
@@ -191,6 +182,10 @@ async function switchToDark(page: Page) {
   ).toBeVisible();
 }
 
+async function enterTheme(page: Page, theme: "light" | "dark") {
+  if (theme === "dark") await switchToDark(page);
+}
+
 async function assertTechWrapping(card: Locator) {
   const list = card.locator("ul").first();
   await expect(list).toBeVisible();
@@ -202,11 +197,10 @@ async function assertTechWrapping(card: Locator) {
   const chips = await list.locator("li").evaluateAll((elements) =>
     elements.map((element) => {
       const rect = element.getBoundingClientRect();
-      return { left: rect.left, right: rect.right, top: Math.round(rect.top) };
+      return { left: rect.left, right: rect.right };
     }),
   );
   expect(chips.length).toBeGreaterThan(0);
-
   for (const chip of chips) {
     expect(chip.left).toBeGreaterThanOrEqual(box!.x - 1);
     expect(chip.right).toBeLessThanOrEqual(box!.x + box!.width + 1);
@@ -216,14 +210,12 @@ async function assertTechWrapping(card: Locator) {
     (el) => el.scrollWidth - el.clientWidth,
   );
   expect(internalOverflow).toBeLessThanOrEqual(1);
-
-  const rows = new Set(chips.map((chip) => chip.top)).size;
-  return { rows, count: chips.length };
 }
 
 async function assertNoPageOverflow(page: Page, label: string) {
   const overflow = await page.evaluate(
-    () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    () =>
+      document.documentElement.scrollWidth - document.documentElement.clientWidth,
   );
   expect(overflow, `page horizontal overflow (${label})`).toBeLessThanOrEqual(1);
 }
@@ -243,7 +235,9 @@ async function tabThrough(page: Page, maxTabs: number) {
       const el = document.activeElement as HTMLElement | null;
       if (!el || el === document.body) return null;
       return {
-        label: (el.getAttribute("aria-label") || el.textContent || "").trim().slice(0, 80),
+        label: (el.getAttribute("aria-label") || el.textContent || "")
+          .trim()
+          .slice(0, 80),
         href: el.getAttribute("href"),
         focusVisible: el.matches(":focus-visible"),
       };
@@ -253,6 +247,18 @@ async function tabThrough(page: Page, maxTabs: number) {
   return seen;
 }
 
+// Trigger every scroll-reveal so a full-page screenshot is not blank below the
+// fold. IntersectionObserver only adds `.revealed` once an element is visible.
+async function revealAll(page: Page) {
+  const reveals = page.locator(".reveal");
+  const count = await reveals.count();
+  for (let i = 0; i < count; i += 1) {
+    await reveals.nth(i).scrollIntoViewIfNeeded();
+    await expect(reveals.nth(i)).toHaveClass(/revealed/);
+  }
+  await page.evaluate(() => window.scrollTo(0, 0));
+}
+
 // ---------------------------------------------------------------------------
 // Theme via the real HUD control (no invented selector).
 // ---------------------------------------------------------------------------
@@ -260,7 +266,6 @@ async function tabThrough(page: Page, maxTabs: number) {
 test("HUD theme button switches to theme B (dark), updates data-theme and saves as-theme", async ({
   page,
 }) => {
-  await mockUpstreamRepositories(page);
   await mockSuccessIntegrations(page);
   await page.goto("/");
 
@@ -270,7 +275,9 @@ test("HUD theme button switches to theme B (dark), updates data-theme and saves 
   await switchToDark(page);
 
   expect(await page.evaluate(() => localStorage.getItem("as-theme"))).toBe("b");
-  await expect(page.locator("header").getByText("THEME[B]", { exact: false })).toBeVisible();
+  await expect(
+    page.locator("header").getByText("THEME[B]", { exact: false }),
+  ).toBeVisible();
 
   // Persistence across a reload comes from the pre-paint storage restore.
   await page.reload();
@@ -286,120 +293,88 @@ test("HUD theme button switches to theme B (dark), updates data-theme and saves 
 });
 
 // ---------------------------------------------------------------------------
+// Section composition: hero + the four approved sections, in order, and none of
+// the removed blocks.
+// ---------------------------------------------------------------------------
+
+test("the simplified Home composes the approved sections in order and drops the removed blocks", async ({
+  page,
+}) => {
+  await mockSuccessIntegrations(page);
+  await page.goto("/");
+
+  for (const id of SECTION_ORDER) {
+    await expect(page.locator(`section#${id}`)).toHaveCount(1);
+  }
+
+  const ids = await page.evaluate(() =>
+    Array.from(document.querySelectorAll("section[id]")).map(
+      (section) => section.id,
+    ),
+  );
+  expect(ids).toEqual([...SECTION_ORDER]);
+
+  for (const id of REMOVED_SECTIONS) {
+    await expect(page.locator(`section#${id}`)).toHaveCount(0);
+  }
+  await expect(page.locator("#capabilities")).toHaveCount(0);
+  await expect(page.locator("#evidence")).toHaveCount(0);
+});
+
+// ---------------------------------------------------------------------------
 // Desktop + mobile acceptance across the required widths and both themes.
 // ---------------------------------------------------------------------------
 
 for (const width of WIDTHS) {
   for (const theme of THEMES) {
-    test(`${theme} @ ${width}px: five products in order, source + case study, no live demo, wrapping, no overflow`, async ({
+    test(`${theme} @ ${width}px: three frontends in order, 23 tools, wrapped chips, no overflow, genuine states`, async ({
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
       const errors = collectRuntimeErrors(page);
-      await mockUpstreamRepositories(page);
       await mockSuccessIntegrations(page);
       await page.goto("/");
+      await enterTheme(page, theme);
 
-      if (theme === "dark") {
-        await switchToDark(page);
-      }
-
-      // Five cards, exact curated order.
-      await expect(productCards(page)).toHaveCount(5);
+      // Three cards, exact curated order, exact live + source links.
+      await expect(productCards(page)).toHaveCount(FEATURED.length);
       expect(await cardOrder(page)).toEqual([...FEATURED_ORDER]);
 
-      for (const slug of FEATURED_ORDER) {
-        const card = page.locator(`#products [data-product-card="${slug}"]`);
+      for (const item of FEATURED) {
+        const card = page.locator(`#products [data-frontend-card="${item.slug}"]`);
         await expect(card).toBeVisible();
-
-        const source = card.getByRole("link", { name: /source/i });
-        await expect(source).toBeVisible();
-        await expect(source).toHaveAttribute("href", FEATURED_SOURCE[slug]);
-
-        const caseStudy = card.getByRole("link", { name: /case study/i });
-        await expect(caseStudy).toBeVisible();
-        await expect(caseStudy).toHaveAttribute("href", `/projects/${slug}`);
-
-        await expect(card.getByRole("link", { name: /live demo/i })).toHaveCount(0);
         await expect(
-          card.getByText("Live demo not linked", { exact: true }),
-        ).toBeVisible();
-
-        const { rows } = await assertTechWrapping(card);
-        if (width === 375 && slug === "stockflow") {
-          // The 7-chip StockFlow stack cannot fit one row on the narrowest sheet.
-          expect(rows, "StockFlow chips wrap onto multiple rows at 375px").toBeGreaterThanOrEqual(2);
-        }
+          card.getByRole("link", { name: "Source code", exact: true }),
+        ).toHaveAttribute("href", item.sourceUrl);
+        await expect(
+          card.getByRole("link", { name: /live site/i }),
+        ).toHaveAttribute("href", item.url);
+        await expect(card).not.toContainText("DevAtlas");
+        await assertTechWrapping(card);
       }
+
+      // The compact stack strip renders all 23 local marks as 44px targets.
+      const tools = page.locator("#stack ul > li");
+      await expect(tools).toHaveCount(TOOL_COUNT);
+      const firstToolBox = await page.locator("#stack ul > li a").first().boundingBox();
+      expect(firstToolBox?.height ?? 0).toBeGreaterThanOrEqual(44);
+      expect(firstToolBox?.width ?? 0).toBeGreaterThanOrEqual(44);
 
       await assertNoPageOverflow(page, `${theme} @ ${width}`);
       await assertFooterContained(page, `${theme} @ ${width}`);
 
-      // Targeted screenshot after scroll-into-view (not a blank full-page shot).
-      //
-      // The IntersectionObserver only adds `.revealed` once an element is
-      // actually visible, and the products section is taller than the viewport,
-      // so scrolling the section as a whole can leave its header offscreen.
-      // Scroll EACH reveal element into view and assert the real visible class.
-      const productReveals = page.locator("#products .reveal");
-      const productRevealCount = await productReveals.count();
-      expect(productRevealCount).toBeGreaterThan(0);
-      for (let i = 0; i < productRevealCount; i += 1) {
-        const preDiag = await productReveals
-          .nth(i)
-          .evaluate((el) => ({
-            cls: el.className,
-            connected: el.isConnected,
-            top: Math.round(el.getBoundingClientRect().top),
-            bottom: Math.round(el.getBoundingClientRect().bottom),
-            winH: window.innerHeight,
-            scrollY: Math.round(window.scrollY),
-          }));
-        console.log("PRE-DIAG", i, JSON.stringify(preDiag));
-        await productReveals.nth(i).scrollIntoViewIfNeeded();
-        const postDiag = await productReveals
-          .nth(i)
-          .evaluate((el) => ({
-            cls: el.className,
-            connected: el.isConnected,
-            top: Math.round(el.getBoundingClientRect().top),
-            bottom: Math.round(el.getBoundingClientRect().bottom),
-            winH: window.innerHeight,
-            scrollY: Math.round(window.scrollY),
-          }));
-        console.log("POST-DIAG", i, JSON.stringify(postDiag));
-        await page.waitForTimeout(500);
-        const waitDiag = await productReveals.nth(i).evaluate((el) => ({
-          cls: el.className,
-          connected: el.isConnected,
-        }));
-        console.log("WAIT-DIAG", i, JSON.stringify(waitDiag));
-        await expect(productReveals.nth(i)).toHaveClass(/revealed/);
-      }
-      await page
-        .locator("#products")
-        .screenshot({ path: `.hermes/briefs/screenshots/acceptance-${theme}-${width}-products.png` });
-
-      await expect(page.getByText("18 contributions in the last year", { exact: true })).toBeVisible();
-      // Same targeted handling for any reveal elements inside contributions.
-      const contributionReveals = page.locator("#contributions .reveal");
-      const contributionRevealCount = await contributionReveals.count();
-      for (let i = 0; i < contributionRevealCount; i += 1) {
-        await contributionReveals.nth(i).scrollIntoViewIfNeeded();
-        await expect(contributionReveals.nth(i)).toHaveClass(/revealed/);
-      }
-      await page.locator("#contributions").scrollIntoViewIfNeeded();
-      await page
-        .locator("#contributions")
-        .screenshot({ path: `.hermes/briefs/screenshots/acceptance-${theme}-${width}-contributions.png` });
-
+      // Genuine integration states render with the success fixtures.
+      await expect(
+        page.getByText("18 contributions in the last year", { exact: true }),
+      ).toBeVisible();
       await expect(page.getByText("1,234 visits", { exact: true })).toBeVisible();
-      await page.locator("footer").scrollIntoViewIfNeeded();
-      await page
-        .locator("footer")
-        .screenshot({ path: `.hermes/briefs/screenshots/acceptance-${theme}-${width}-footer.png` });
 
-      // Fixtures are all 200 here, so the page must be console-clean.
+      await revealAll(page);
+      await page.screenshot({
+        path: `.hermes/briefs/screenshots/final-simple-${theme}-${width}-home.png`,
+        fullPage: true,
+      });
+
       expect(errors).toEqual([]);
     });
   }
@@ -410,15 +385,14 @@ for (const width of WIDTHS) {
 // ---------------------------------------------------------------------------
 
 for (const width of [375, 1280] as const) {
-  test(`keyboard @ ${width}px: real Tab traversal moves focus-visible and reaches HUD + product links`, async ({
+  test(`keyboard @ ${width}px: real Tab traversal moves focus-visible and reaches HUD, source and live links`, async ({
     page,
   }) => {
     await page.setViewportSize({ width, height: 900 });
-    await mockUpstreamRepositories(page);
     await mockSuccessIntegrations(page);
     await page.goto("/");
 
-    const sequence = await tabThrough(page, 80);
+    const sequence = await tabThrough(page, 120);
 
     expect(sequence.length).toBeGreaterThan(5);
     for (const step of sequence) {
@@ -428,8 +402,11 @@ for (const width of [375, 1280] as const) {
     const reachedTheme = sequence.some((step) => /Switch to theme [AB]/i.test(step.label));
     expect(reachedTheme, "HUD theme button reached via Tab").toBe(true);
 
-    const reachedProduct = sequence.some((step) => (step.href ?? "").startsWith("/projects/"));
-    expect(reachedProduct, "a product case-study link reached via Tab").toBe(true);
+    const reachedSource = sequence.some((step) => step.label === "Source code");
+    expect(reachedSource, "a Source code link reached via Tab").toBe(true);
+
+    const reachedLive = sequence.some((step) => /live site/i.test(step.label));
+    expect(reachedLive, "a live site link reached via Tab").toBe(true);
   });
 }
 
@@ -442,15 +419,13 @@ for (const theme of THEMES) {
   test(`axe ${theme} theme: no serious/critical violations with unavailable integration states`, async ({
     page,
   }) => {
-    await mockUpstreamRepositories(page);
     await mockInvalidPayloadDeployed(page);
     await page.goto("/");
+    await enterTheme(page, theme);
 
-    if (theme === "dark") {
-      await switchToDark(page);
-    }
-
-    await expect(page.getByText("Contributions unavailable", { exact: true })).toBeVisible();
+    await expect(
+      page.getByText("Contributions unavailable", { exact: true }),
+    ).toBeVisible();
     await expect(page.getByText("Visits unavailable", { exact: true })).toBeVisible();
 
     const results = await new AxeBuilder({ page })
@@ -465,33 +440,31 @@ for (const theme of THEMES) {
 }
 
 // ---------------------------------------------------------------------------
-// Section anchors preserved, contributions immediately after products.
+// Security headers on the real production server.
 // ---------------------------------------------------------------------------
 
-test("all section anchors are preserved with contributions immediately after products", async ({
-  page,
-}) => {
-  await mockUpstreamRepositories(page);
-  await mockSuccessIntegrations(page);
-  await page.goto("/");
+test("Homepage sends the hardened security headers", async ({ page }) => {
+  const response = await page.goto("/");
+  const headers = response?.headers() ?? {};
 
-  for (const id of SECTION_ORDER) {
-    await expect(page.locator(`section#${id}`)).toHaveCount(1);
-  }
-
-  const ids = await page.evaluate(() =>
-    Array.from(document.querySelectorAll("section[id]")).map((section) => section.id),
-  );
-  expect(ids.filter((id) => (SECTION_ORDER as readonly string[]).includes(id))).toEqual([
-    ...SECTION_ORDER,
-  ]);
+  expect(headers["x-content-type-options"]).toBe("nosniff");
+  expect(headers["x-frame-options"]).toBe("DENY");
+  expect(headers["referrer-policy"]).toBe("strict-origin-when-cross-origin");
+  expect(headers["permissions-policy"]).toContain("camera=()");
+  expect(headers["content-security-policy"]).toContain("frame-ancestors 'none'");
+  expect(headers["content-security-policy"]).not.toContain("unsafe-eval");
+  expect(headers["cross-origin-embedder-policy"]).toBe("credentialless");
+  expect(headers["cross-origin-opener-policy"]).toBe("same-origin");
+  expect(headers["cross-origin-resource-policy"]).toBe("same-origin");
+  expect(headers["x-powered-by"]).toBeUndefined();
 });
 
 // ---------------------------------------------------------------------------
-// Native no-JS context: server-rendered cards, six dossiers, initial state.
+// Native no-JS context: server-rendered content, 23 tools, six dossiers and
+// their audited evidence, and the initial integration text + profile link.
 // ---------------------------------------------------------------------------
 
-test("no-JS context: server-rendered homepage, six dossier routes 200, initial integration text + profile link", async ({
+test("no-JS context: server-rendered Home with three cards and 23 tools, six dossier routes 200 with evidence", async ({
   browser,
 }) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
@@ -500,8 +473,9 @@ test("no-JS context: server-rendered homepage, six dossier routes 200, initial i
   const response = await page.goto("/");
   expect(response?.status()).toBe(200);
 
-  await expect(productCards(page)).toHaveCount(5);
+  await expect(productCards(page)).toHaveCount(FEATURED.length);
   expect(await cardOrder(page)).toEqual([...FEATURED_ORDER]);
+  await expect(page.locator("#stack ul > li")).toHaveCount(TOOL_COUNT);
 
   // Initial integration states are present in the server HTML (no hydration).
   await expect(page.getByText(/Loading contributions/)).toBeVisible();
@@ -514,6 +488,11 @@ test("no-JS context: server-rendered homepage, six dossier routes 200, initial i
     const dossier = await page.goto(`/projects/${slug}`);
     expect(dossier?.status(), `dossier /projects/${slug}`).toBe(200);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByText("[EVIDENCE ID]")).toBeVisible();
+    await expect(page.getByText("NEXT DOSSIER")).toBeVisible();
+    expect(
+      await page.locator('a[href^="https://github.com/aditya0si/"]').count(),
+    ).toBeGreaterThan(0);
   }
 
   await context.close();
@@ -522,10 +501,8 @@ test("no-JS context: server-rendered homepage, six dossier routes 200, initial i
 // ---------------------------------------------------------------------------
 // REAL missing-config API tests (request context, no browser fixtures).
 //
-// The server is launched with GITHUB_TOKEN='' and UPSTASH_REDIS_REST_URL='' /
-// UPSTASH_REDIS_REST_TOKEN='' for this suite, so these hit the genuine
-// fail-closed path. This is the missing-config case; it is distinct from the
-// invalid-payload browser fixtures above.
+// The server is launched with GITHUB_TOKEN and the Upstash credentials empty for
+// this suite, so these hit the genuine fail-closed path.
 // ---------------------------------------------------------------------------
 
 test("GET /api/contributions without config fails closed 503", async ({ request }) => {
@@ -539,5 +516,7 @@ test("GET /api/contributions without config fails closed 503", async ({ request 
 test("GET /api/visits without config fails closed 503", async ({ request }) => {
   const response = await request.get("/api/visits");
   expect(response.status()).toBe(503);
-  expect(JSON.parse(await response.text())).toEqual({ error: "Visits unavailable" });
+  expect(JSON.parse(await response.text())).toEqual({
+    error: "Visits unavailable",
+  });
 });

@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "node server.js",
-    "test": "node portfolio/test/concepts.test.js && node portfolio/test/evidence_reconciliation.test.js && node portfolio/test/featured-projects.test.ts && node portfolio/test/contributions.test.ts && node portfolio/test/visits.test.ts && node portfolio/test/visit-handler.test.ts",
-    "test:unit": "node portfolio/test/featured-projects.test.ts && node portfolio/test/contributions.test.ts && node portfolio/test/visits.test.ts && node portfolio/test/visit-handler.test.ts",
+    "test": "node portfolio/test/concepts.test.js && node portfolio/test/evidence_reconciliation.test.js && node portfolio/test/featured-projects.test.ts && node portfolio/test/frontend-cards.test.ts && node portfolio/test/navigation-contact.test.ts && node portfolio/test/lean-home.test.ts && node portfolio/test/tools-logos.test.ts && node portfolio/test/runtime-review.test.ts && node portfolio/test/contributions.test.ts && node portfolio/test/visits.test.ts && node portfolio/test/visit-handler.test.ts",
+    "test:unit": "node portfolio/test/featured-projects.test.ts && node portfolio/test/frontend-cards.test.ts && node portfolio/test/navigation-contact.test.ts && node portfolio/test/lean-home.test.ts && node portfolio/test/tools-logos.test.ts && node portfolio/test/runtime-review.test.ts && node portfolio/test/contributions.test.ts && node portfolio/test/visits.test.ts && node portfolio/test/visit-handler.test.ts",
     "test:e2e": "playwright test",
     "build": "node portfolio/test/concepts.test.js && node portfolio/test/evidence_reconciliation.test.js && cd portfolio && next build",
     "start": "node server.js",

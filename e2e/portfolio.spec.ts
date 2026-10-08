@@ -10,6 +10,42 @@ const productRoutes = [
   "/projects/event-stream-platform",
 ];
 
+// Mirror of portfolio/lib/featured-frontends.ts (the Home presentation
+// manifest). The browser suite pins the rendered DOM against these exact
+// values: three genuine public frontends, in order, each backed by a real
+// locally captured screenshot and an honest backend limitation. The empty
+// DevAtlas deployment is deliberately absent rather than padded with fake data.
+const FEATURED = [
+  {
+    slug: "schemegpt",
+    name: "SchemeGPT",
+    url: "https://schemegpt-web.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/schemeGPT",
+    screenshotFile: "schemegpt-homepage.png",
+    technologies: ["Next.js", "React", "TypeScript", "Python", "PostgreSQL"],
+    limitation: "Live answering API is explicitly offline; retrieval cannot be called here.",
+  },
+  {
+    slug: "samjho",
+    name: "samjho",
+    url: "https://samjho-adityasinghprojects.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/samjho",
+    screenshotFile: "samjho-homepage.png",
+    technologies: ["Next.js", "React", "TypeScript", "Python"],
+    limitation:
+      "Questions and quizzes require the undeployed API; syllabus and animations work.",
+  },
+  {
+    slug: "coverai",
+    name: "CoverAI",
+    url: "https://cover-ai-web.vercel.app",
+    sourceUrl: "https://github.com/aditya0si/CoverAI",
+    screenshotFile: "coverai-homepage.png",
+    technologies: ["Next.js", "React", "TypeScript", "Python"],
+    limitation: "Backend not verified; this is the frontend interface only.",
+  },
+] as const;
+
 // Deterministic BROWSER-ONLY fixtures for this non-provider suite.
 //
 // The homepage mounts two same-origin integration clients (contributions and
@@ -66,7 +102,7 @@ function collectRuntimeErrors(page: Page) {
   return errors;
 }
 
-test("homepage renders, navigates via PRODUCTS HUD, and sends security headers", async ({ page }) => {
+test("homepage renders, navigates via shared HUD, and sends security headers", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   const response = await page.goto("/");
   expect(response?.status()).toBe(200);
@@ -85,22 +121,32 @@ test("homepage renders, navigates via PRODUCTS HUD, and sends security headers",
   expect(headers["cross-origin-resource-policy"]).toBe("same-origin");
   expect(headers["x-powered-by"]).toBeUndefined();
 
-  // First-class nav renamed to PRODUCTS, WORK and EXPERIENCE removed
+  // Approved shared nav is exactly Home / About / Contact with real routes.
   await expect(page.getByRole("link", { name: "WORK", exact: true })).toHaveCount(0);
   await expect(page.getByRole("link", { name: "EXPERIENCE", exact: true })).toHaveCount(0);
 
-  const productsLink = page.getByRole("link", { name: "PRODUCTS", exact: true });
-  await expect(productsLink).toBeVisible();
-  await productsLink.click();
-  await expect(page.locator("#products")).toBeInViewport();
+  const homeLink = page.getByRole("link", { name: "Home", exact: true });
+  await expect(homeLink).toBeVisible();
+  await homeLink.click();
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator("#products")).toBeVisible();
 
-  const systemsLink = page.getByRole("link", { name: /SYSTEMS/i, exact: false });
-  await expect(systemsLink).toBeVisible();
-  await systemsLink.click();
-  await expect(page.locator("#systems")).toBeInViewport();
+  const aboutLink = page.getByRole("link", { name: "About", exact: true });
+  await expect(aboutLink).toBeVisible();
+  await aboutLink.click();
+  await expect(page).toHaveURL(/\/about$/);
 
-  await page.getByRole("link", { name: "CONTACT", exact: true }).click();
-  await expect(page.locator("#contact")).toBeInViewport();
+  const contactLink = page.getByRole("link", { name: "Contact", exact: true });
+  await expect(contactLink).toBeVisible();
+  await contactLink.click();
+  await expect(page).toHaveURL(/\/contact$/);
+
+  // /contact reuses the identical contact info rendered at the bottom of Home.
+  const contactSection = page.locator("#contact");
+  await expect(contactSection).toBeVisible();
+  await expect(contactSection.getByRole("link", { name: "Email me" })).toBeVisible();
+  await expect(contactSection.getByRole("link", { name: /LinkedIn/ })).toBeVisible();
+  await expect(contactSection.getByRole("link", { name: /GitHub/ })).toBeVisible();
   expect(errors).toEqual([]);
 });
 
@@ -130,110 +176,143 @@ test("stale and unsupported claims are completely absent from homepage", async (
   expect(errors).toEqual([]);
 });
 
-test("role filter pills deterministically filter the 5 selected projects with keyboard support", async ({ page }) => {
+test("featured frontends render in approved order with real screenshots and live anchors", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await page.goto("/");
 
-  // Ensure products section is present
   const productsSection = page.locator("#products");
   await expect(productsSection).toBeVisible();
 
-  // Check filter pills exist
-  const filterPills = page.locator("[data-role-filter]");
-  await expect(filterPills).toHaveCount(4);
-
-  const pillAll = page.locator('[data-role-filter="ALL"]');
-  const pillAi = page.locator('[data-role-filter="AI ENGINEER"]');
-  const pillFd = page.locator('[data-role-filter="FORWARD DEPLOYED"]');
-  const pillBackend = page.locator('[data-role-filter="BACKEND/SYSTEMS"]');
-
-  await expect(pillAll).toBeVisible();
-  await expect(pillAi).toBeVisible();
-  await expect(pillFd).toBeVisible();
-  await expect(pillBackend).toBeVisible();
-
-  // All 5 selected projects present initially under ALL, in curated order.
-  const productCards = productsSection.locator("[data-product-card]");
-  await expect(productCards).toHaveCount(5);
-  const allOrder = await productCards.evaluateAll((elements) =>
-    elements.map((element) => element.getAttribute("data-product-card")),
+  // Exactly the three genuine public frontends, in curated order.
+  const cards = productsSection.locator("[data-frontend-card]");
+  await expect(cards).toHaveCount(FEATURED.length);
+  const order = await cards.evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("data-frontend-card")),
   );
-  expect(allOrder).toEqual([
-    "schemegpt",
-    "stockflow",
-    "sentinel",
-    "tenant-api-platform",
-    "event-stream-platform",
-  ]);
+  expect(order).toEqual(FEATURED.map((item) => item.slug));
 
-  // Filter: AI ENGINEER -> exactly schemeGPT and Sentinel
-  await pillAi.click();
-  await expect(productCards).toHaveCount(2);
-  await expect(page.locator('[data-product-card="schemegpt"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="sentinel"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="mcp-from-scratch"]')).toHaveCount(0);
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
+  for (const item of FEATURED) {
+    const card = productsSection.locator(`[data-frontend-card="${item.slug}"]`);
+    await expect(card).toBeVisible();
+    await expect(
+      card.getByRole("heading", { level: 3, name: item.name, exact: true }),
+    ).toBeVisible();
 
-  // Filter: BACKEND/SYSTEMS -> exactly StockFlow, Sentinel, tenant and event
-  await pillBackend.click();
-  await expect(productCards).toHaveCount(4);
-  await expect(page.locator('[data-product-card="stockflow"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="sentinel"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="tenant-api-platform"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toBeVisible();
+    // A real, locally captured homepage screenshot that the browser actually
+    // decoded (naturalWidth > 0), never a placeholder or synthesised frame.
+    const screenshot = card.getByRole("img", {
+      name: `${item.name} homepage`,
+      exact: true,
+    });
+    await screenshot.scrollIntoViewIfNeeded();
+    await expect(screenshot).toBeVisible();
+    const src = await screenshot.evaluate((element) =>
+      (element as HTMLImageElement).currentSrc || (element as HTMLImageElement).src,
+    );
+    expect(src).toContain(item.screenshotFile);
+    await expect
+      .poll(() =>
+        screenshot.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThan(0);
 
-  // Filter: FORWARD DEPLOYED -> exactly schemeGPT and tenant
-  await pillFd.click();
-  await expect(productCards).toHaveCount(2);
-  await expect(page.locator('[data-product-card="schemegpt"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="tenant-api-platform"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
+    // Live deployment anchor matches the manifest exactly and is safely new-tab.
+    const live = card.getByRole("link", {
+      name: `Open ${item.name} live site in a new tab`,
+      exact: true,
+    });
+    await expect(live).toHaveAttribute("href", item.url);
+    await expect(live).toHaveAttribute("target", "_blank");
+    await expect(live).toHaveAttribute("rel", "noopener noreferrer");
 
-  // Keyboard navigation on filter pills
-  await pillAll.focus();
-  await expect(pillAll).toBeFocused();
-  await page.keyboard.press("ArrowRight");
-  await expect(pillAi).toBeFocused();
-  await page.keyboard.press("Space");
-  await expect(productCards).toHaveCount(2);
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
-
-  // Reset to ALL
-  await pillAll.click();
-  await expect(productCards).toHaveCount(5);
+    // Accessible source anchor points at the verified repository and is new-tab.
+    const source = card.getByRole("link", { name: "Source code", exact: true });
+    await expect(source).toBeVisible();
+    await expect(source).toHaveAttribute("href", item.sourceUrl);
+    await expect(source).toHaveAttribute("target", "_blank");
+    await expect(source).toHaveAttribute("rel", "noopener noreferrer");
+  }
 
   expect(errors).toEqual([]);
 });
 
-test("provisional products display candidate/provisional status and verified execution facts", async ({ page }) => {
+test("featured frontends state honest backend limitations and drop the old backend cards", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await page.goto("/");
 
   const productsSection = page.locator("#products");
 
-  // Every product card must show candidate/provisional status
-  const statuses = productsSection.locator("[data-product-status]");
-  const count = await statuses.count();
-  expect(count).toBe(5);
-  for (let i = 0; i < count; i++) {
-    const text = await statuses.nth(i).innerText();
-    expect(text.toLowerCase()).toMatch(/candidate|provisional/);
+  for (const item of FEATURED) {
+    const card = productsSection.locator(`[data-frontend-card="${item.slug}"]`);
+
+    // Each card restates the exact manifest technologies via local logos.
+    const techList = card.getByRole("list", {
+      name: `${item.name} technologies`,
+    });
+    await expect(techList.locator("li")).toHaveCount(item.technologies.length);
+    for (const tech of item.technologies) {
+      await expect(techList.getByText(tech, { exact: true })).toHaveCount(1);
+    }
+
+    // The honest, explicit backend limitation is rendered on the card.
+    await expect(card).toContainText(item.limitation);
   }
 
-  // Verified facts live inside native <details> disclosures; open them all first.
-  const disclosures = productsSection.locator("details");
-  const disclosureCount = await disclosures.count();
-  for (let i = 0; i < disclosureCount; i++) {
-    await disclosures.nth(i).locator("summary").click();
-  }
+  // Empty DevAtlas (real frontend, no data) is excluded — nothing fabricated.
+  await expect(page.getByText("DevAtlas", { exact: true })).toHaveCount(0);
 
-  // Verified facts surfaced in DOM
-  const sectionText = await productsSection.innerText();
-  expect(sectionText).toMatch(/62\s*(passed|pytest)/i);
-  expect(sectionText).toMatch(/full Go suite passed[\s\S]{0,180}PostgreSQL and Redis/i);
-  expect(sectionText).toMatch(/86-test Go suite[\s\S]{0,100}Compose smoke test passed/i);
+  // Concise Home carries no role filters, product cards, status badges or the
+  // verbose verification disclosures that belonged to the old backend catalog.
+  await expect(page.locator("[data-role-filter]")).toHaveCount(0);
+  await expect(page.locator("[data-product-card]")).toHaveCount(0);
+  await expect(page.locator("[data-product-status]")).toHaveCount(0);
+  await expect(page.getByText("Verification details", { exact: false })).toHaveCount(0);
 
   expect(errors).toEqual([]);
+});
+
+test("shared Primary nav is exactly Home / About / Contact and /about is intentionally empty", async ({ page }) => {
+  await page.goto("/");
+
+  const primary = page.getByRole("navigation", { name: "Primary" });
+  await expect(primary).toBeVisible();
+
+  const labels = await primary
+    .getByRole("link")
+    .evaluateAll((elements) => elements.map((element) => element.textContent?.trim()));
+  expect(labels).toEqual(["Home", "About", "Contact"]);
+
+  const hrefs = await primary
+    .getByRole("link")
+    .evaluateAll((elements) => elements.map((element) => element.getAttribute("href")));
+  expect(hrefs).toEqual(["/", "/about", "/contact"]);
+
+  // /about is deliberately contentless: it renders no heading and no visible
+  // body copy, only the persistent HUD and skip link around <main>.
+  const response = await page.goto("/about");
+  expect(response?.status()).toBe(200);
+  await expect(page.locator("#main h1")).toHaveCount(0);
+  await expect(page.locator("#main")).toHaveText("");
+});
+
+test("Home and /contact render identical shared contact info", async ({ page }) => {
+  await page.goto("/");
+  const homeContact = page.locator("#contact");
+  await expect(homeContact).toBeVisible();
+  const homeText = (await homeContact.innerText()).trim();
+
+  await page.goto("/contact");
+  const contactPage = page.locator("#contact");
+  await expect(contactPage).toBeVisible();
+  const contactText = (await contactPage.innerText()).trim();
+
+  // Both routes render the same shared ContactInfo component, so the content
+  // must match exactly. /contact owns the single page h1; Home's is the hero h2.
+  expect(contactText).toBe(homeText);
+  await expect(page.locator("#contact h1")).toHaveCount(1);
+  await expect(contactPage.getByRole("link", { name: "Email me" })).toBeVisible();
+  await expect(contactPage.getByRole("link", { name: /LinkedIn/ })).toBeVisible();
+  await expect(contactPage.getByRole("link", { name: /GitHub/ })).toBeVisible();
 });
 
 test("mcp-from-scratch dossier preserves the 29-test evidence", async ({ page }) => {
@@ -248,32 +327,14 @@ test("mcp-from-scratch dossier preserves the 29-test evidence", async ({ page })
   expect(errors).toEqual([]);
 });
 
-test("conceptual systems section renders 5 concepts labeled FUTURE / UNBUILT with ConceptValue formula", async ({ page }) => {
+test("conceptual systems R&D block is absent from the concise homepage", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await page.goto("/");
 
-  const systemsSection = page.locator("#systems");
-  await expect(systemsSection).toBeVisible();
-
-  const conceptCards = systemsSection.locator("[data-concept-card]");
-  await expect(conceptCards).toHaveCount(5);
-
-  // Check required concepts from INITIAL-AUDIT
-  await expect(systemsSection.getByText("Aether-Gateway")).toBeVisible();
-  await expect(systemsSection.getByText("Chronos-Drift")).toBeVisible();
-  await expect(systemsSection.getByText("KVCache-Router")).toBeVisible();
-  await expect(systemsSection.getByText("Chaos-Agent")).toBeVisible();
-  await expect(systemsSection.getByText("Raft-KV-Mesh")).toBeVisible();
-
-  // All must be labeled FUTURE / UNBUILT
-  const badges = systemsSection.locator("[data-unbuilt-badge]");
-  expect(await badges.count()).toBe(5);
-  for (let i = 0; i < 5; i++) {
-    expect(await badges.nth(i).innerText()).toMatch(/FUTURE\s*\/\s*UNBUILT/);
-  }
-
-  // ConceptValue calculations surfaced
-  expect(await systemsSection.innerText()).toMatch(/ConceptValue|106\.67|128\.00/);
+  // The approved concise Home no longer surfaces the conceptual systems block.
+  // The component source is retained in the library but is not rendered here.
+  await expect(page.locator("#systems")).toHaveCount(0);
+  await expect(page.getByText("Aether-Gateway")).toHaveCount(0);
 
   expect(errors).toEqual([]);
 });
