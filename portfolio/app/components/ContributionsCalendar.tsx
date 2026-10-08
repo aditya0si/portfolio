@@ -234,9 +234,9 @@ export default function ContributionsCalendar() {
       className="contributions-calendar border border-line bg-bg p-5 sm:p-6"
     >
       <div className="mb-4 flex flex-wrap items-baseline justify-between gap-2 border-b border-line pb-3">
-        <h3 className="font-display text-2xl font-medium tracking-[-0.01em]">
+        <h2 className="font-display text-2xl font-medium tracking-[-0.01em]">
           GitHub contributions
-        </h3>
+        </h2>
         {state.status === "ready" && (
           <time
             dateTime={state.data.updatedAt}

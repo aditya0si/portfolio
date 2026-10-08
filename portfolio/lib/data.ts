@@ -5,7 +5,7 @@
 export const profile = {
   name: "Aditya Singh",
   role: "AI Systems & Backend Engineer",
-  headline: "Systems-first engineering across agent architectures, guardrails, and backend pipelines.",
+  headline: "Computer & Communication Engineering student at MIT Manipal focused on AI and backend systems.",
   sub: "Computer & Communication Engineering student at MIT Manipal, focused on agent systems, evaluation harnesses, and backend infrastructure. Status labels distinguish code inspection from checks executed in this audit.",
   email: "oliaditya05@gmail.com",
   github: "https://github.com/aditya0si",

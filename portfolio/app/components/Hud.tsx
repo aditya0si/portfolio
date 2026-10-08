@@ -3,12 +3,9 @@
 import { useEffect, useState } from "react";
 
 const NAV: [string, string][] = [
-  ["PRODUCTS", "/#products"],
-  ["SYSTEMS (R&D)", "/#systems"],
-  ["STACK", "/#stack"],
-  ["CONCEPTS", "/#concepts"],
-  ["GITHUB", "/#github"],
-  ["CONTACT", "/#contact"],
+  ["Home", "/"],
+  ["About", "/about"],
+  ["Contact", "/contact"],
 ];
 
 function useIstClock() {
