@@ -10,6 +10,53 @@ const productRoutes = [
   "/projects/event-stream-platform",
 ];
 
+// Deterministic BROWSER-ONLY fixtures for this non-provider suite.
+//
+// The homepage mounts two same-origin integration clients (contributions and
+// visits) plus the external GitHub repository strip. Against the real e2e
+// server those clients fail closed: /api/contributions returns 503 and
+// /api/visits returns 403 under Next's canonical-origin check. That is correct
+// product behaviour, but Chromium then logs network resource errors that would
+// trip the strict `collectRuntimeErrors` assertions below.
+//
+// To keep this suite deterministic WITHOUT weakening it, each client request is
+// fulfilled with HTTP 200 carrying a structurally INVALID payload, e.g.
+// `{ "error": "Contributions unavailable" }`. This is a degraded-state
+// INVALID-PAYLOAD fixture, NOT a missing-configuration fixture: the body is
+// intentionally unusable so the client validators resolve to the same
+// "unavailable" state. HTTP 200 is used only so Chromium does not emit the
+// expected 503/403 console resource errors — no console message is suppressed
+// globally, no assertion is relaxed and no success count is fabricated.
+//
+// The REAL unconfigured 503/403 contract remains covered, unmocked, in the
+// request-context API specs (e2e/contributions-api.spec.ts and
+// e2e/visits-api.spec.ts); these browser fixtures never leak into that context.
+const GITHUB_API_GLOB = "https://api.github.com/**";
+const CONTRIBUTIONS_GLOB = "**/api/contributions";
+const VISITS_GLOB = "**/api/visits";
+
+test.beforeEach(async ({ page }) => {
+  // External GitHub provider: fixed empty cached snapshot, no live network.
+  await page.route(GITHUB_API_GLOB, (route) =>
+    route.fulfill({ status: 200, contentType: "application/json", body: "[]" }),
+  );
+  // Invalid-payload fixtures (see the note above): HTTP 200 unusable bodies.
+  await page.route(CONTRIBUTIONS_GLOB, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ error: "Contributions unavailable" }),
+    }),
+  );
+  await page.route(VISITS_GLOB, (route) =>
+    route.fulfill({
+      status: 200,
+      contentType: "application/json",
+      body: JSON.stringify({ error: "Visits unavailable" }),
+    }),
+  );
+});
+
 function collectRuntimeErrors(page: Page) {
   const errors: string[] = [];
   page.on("pageerror", (error) => errors.push(`pageerror: ${error.message}`));
