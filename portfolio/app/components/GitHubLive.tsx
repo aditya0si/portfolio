@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { fallbackRepos, flagships, profile } from "@/lib/data";
+import { fallbackRepos, profile } from "@/lib/data";
+import { featuredProjects } from "@/lib/featured-projects";
 
 type Repo = {
   name: string;
@@ -11,7 +12,7 @@ type Repo = {
   url: string;
 };
 
-const FEATURED = new Set(flagships.map((f) => f.repo.toLowerCase()));
+const FEATURED = new Set(featuredProjects.map((f) => f.repo.toLowerCase()));
 const PERIODIC = new Set(["aditya0si", "portfolio", "claw-code"]);
 
 // Curate toward the site's AI-systems narrative: AI/agent repos rank first,
@@ -23,7 +24,6 @@ const isAiRepo = (r: { name: string; description: string }) =>
 
 export default function GitHubLive() {
   const [repos, setRepos] = useState<Repo[]>(fallbackRepos as unknown as Repo[]);
-  const [count, setCount] = useState<number | null>(null);
   const [live, setLive] = useState(false);
 
   useEffect(() => {
@@ -36,6 +36,7 @@ export default function GitHubLive() {
         );
         if (!res.ok) return;
         const data = await res.json();
+        if (!Array.isArray(data)) return;
         const own = data.filter(
           (r: any) => !r.fork && !PERIODIC.has(r.name.toLowerCase())
         );
@@ -56,7 +57,6 @@ export default function GitHubLive() {
           .slice(0, 8);
         if (cancelled || rest.length === 0) return;
         setRepos(rest);
-        setCount(own.length);
         setLive(true);
       } catch {
         // offline or rate-limited — cached snapshot stays
@@ -69,12 +69,11 @@ export default function GitHubLive() {
 
   return (
     <div>
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
+      <div className="mb-4">
         <p className="mono-label">
-          {live ? "LIVE FROM GITHUB API — AI SYSTEMS FIRST" : "CACHED SNAPSHOT"}
-        </p>
-        <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-muted">
-          {count ?? 38} PUBLIC REPOS · EXCLUDING FEATURED
+          {live
+            ? `Showing ${repos.length} repositories · Open GitHub for all`
+            : "Cached repository snapshot"}
         </p>
       </div>
 
