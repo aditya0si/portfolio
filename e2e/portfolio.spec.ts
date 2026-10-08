@@ -158,6 +158,13 @@ test("provisional products display candidate/provisional status and verified exe
     expect(text.toLowerCase()).toMatch(/candidate|provisional/);
   }
 
+  // Verified facts live inside native <details> disclosures; open them all first.
+  const disclosures = productsSection.locator("details");
+  const disclosureCount = await disclosures.count();
+  for (let i = 0; i < disclosureCount; i++) {
+    await disclosures.nth(i).locator("summary").click();
+  }
+
   // Verified facts surfaced in DOM
   const sectionText = await productsSection.innerText();
   expect(sectionText).toMatch(/62\s*(passed|pytest)/i);

@@ -1,10 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import Link from "next/link";
-import Reveal from "./Reveal";
-import Flow from "./Flow";
-import { flagships, type RoleCategory, type Flagship } from "@/lib/data";
+import { flagships, type RoleCategory } from "@/lib/data";
+import ProjectCard from "./ProjectCard";
 
 const ROLES: RoleCategory[] = [
   "ALL",
@@ -75,141 +73,8 @@ export default function ProductsCatalog() {
 
       {/* Product Cards */}
       <div className="space-y-12">
-        {filtered.map((project: Flagship) => (
-          <article
-            key={project.slug}
-            data-product-card={project.slug}
-            className="border-t border-line py-12 sm:py-14"
-          >
-            <div className="flex flex-wrap items-baseline justify-between gap-x-6 gap-y-3">
-              <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
-                <span className="font-mono text-[12px] text-accent">
-                  {project.index}
-                </span>
-                <h3 className="font-display text-3xl font-medium tracking-[-0.01em] sm:text-4xl">
-                  {project.name}
-                </h3>
-                <span
-                  data-product-status
-                  className="chip border-accent/40 font-mono text-[10px] text-accent"
-                >
-                  {project.status}
-                </span>
-              </div>
-
-              <div className="flex items-center gap-5 font-mono text-[11px] uppercase tracking-[0.14em]">
-                {project.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-muted transition-colors hover:text-accent"
-                  >
-                    {link.label} ↗
-                  </a>
-                ))}
-                <Link
-                  href={`/projects/${project.slug}`}
-                  className="text-ink transition-colors hover:text-accent"
-                >
-                  DOSSIER →
-                </Link>
-              </div>
-            </div>
-
-            {/* Evidence & Execution State Banner */}
-            <div className="mt-4 rounded-none border border-line bg-surface/60 p-3.5 font-mono text-[11px] text-muted">
-              <div className="flex flex-wrap items-center gap-2">
-                <span className="text-accent font-semibold">[EXECUTION STATUS]</span>
-                <span className="text-ink2">{project.executionState}</span>
-              </div>
-              <div className="mt-1 flex flex-wrap items-center gap-2">
-                <span className="text-accent font-semibold">[EVIDENCE ID]</span>
-                <a
-                  href={project.evidenceUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline decoration-line underline-offset-2 hover:text-accent"
-                >
-                  {project.evidenceId} ↗
-                </a>
-                <span className="text-line">|</span>
-                <span className="text-muted">{project.evidenceStrength}</span>
-              </div>
-            </div>
-
-            <p className="mt-4 max-w-3xl text-base leading-relaxed text-ink2 sm:text-lg">
-              {project.tagline}
-            </p>
-
-            <div className="mt-8 grid gap-10 md:grid-cols-12">
-              <div className="md:col-span-7">
-                <p className="mono-label mb-2">PROBLEM</p>
-                <p className="text-sm leading-relaxed text-muted">
-                  {project.problem}
-                </p>
-                <p className="mono-label mb-2 mt-6">WHAT WAS BUILT</p>
-                <ul className="space-y-2">
-                  {project.built.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-sm leading-relaxed text-ink2"
-                    >
-                      <span aria-hidden className="mt-0.5 text-accent">
-                        ▸
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="mono-label mb-2 mt-6">ENGINEERING HIGHLIGHTS</p>
-                <ul className="space-y-2">
-                  {project.highlights.map((item) => (
-                    <li
-                      key={item}
-                      className="flex gap-3 text-sm leading-relaxed text-ink2"
-                    >
-                      <span aria-hidden className="mt-0.5 font-mono text-[11px] text-accent">
-                        ▪
-                      </span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="md:col-span-5">
-                <p className="mono-label mb-2">STACK</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span key={tech} className="chip">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                <p className="mono-label mb-3 mt-6">BY THE NUMBERS</p>
-                <div className="grid grid-cols-2 gap-px border border-line bg-line">
-                  {project.metrics.map((metric) => (
-                    <div key={metric.label} className="bg-bg p-3.5">
-                      <p className="font-mono text-lg text-ink">
-                        {metric.value}
-                      </p>
-                      <p className="mt-0.5 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">
-                        {metric.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8">
-              <Flow steps={project.flow} />
-            </div>
-          </article>
+        {filtered.map((project) => (
+          <ProjectCard key={project.slug} project={project} />
         ))}
       </div>
     </div>
