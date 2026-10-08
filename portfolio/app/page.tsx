@@ -3,6 +3,7 @@ import Marquee from "./components/Marquee";
 import GitHubLive from "./components/GitHubLive";
 import AiConcepts from "./components/AiConcepts";
 import ProductsCatalog from "./components/ProductsCatalog";
+import ContributionsCalendar from "./components/ContributionsCalendar";
 import ConceptualSystems from "./components/ConceptualSystems";
 import {
   profile,
@@ -125,6 +126,13 @@ export default function Home() {
             note="Five projects across AI products, reliability, and backend systems. Source and verification details are linked on every card."
           />
           <ProductsCatalog />
+        </div>
+      </section>
+
+      {/* ============ GITHUB CONTRIBUTIONS ============ */}
+      <section id="contributions" className="scroll-mt-14 border-t border-line">
+        <div className="mx-auto max-w-sheet px-5 py-16 sm:px-8 sm:py-24">
+          <ContributionsCalendar />
         </div>
       </section>
 
