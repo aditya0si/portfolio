@@ -191,6 +191,84 @@
       linear-gradient(to bottom, color-mix(in srgb, var(--ink) 4%, transparent) 1px, transparent 1px);
     background-size: 56px 56px;
   }
+
+  /* ---------- GitHub contributions calendar (Task 7) ----------
+     Local design tokens: 10px squares, 3px gaps, seven weekday rows and one
+     column per week. NONE stays on the surface tone so zero days read as empty;
+     the four quartiles step the accent up to full. */
+  .contributions-calendar {
+    --contrib-cell-size: 10px;
+    --contrib-cell-gap: 3px;
+    --contrib-level-none: var(--surface);
+    --contrib-level-first: color-mix(in srgb, var(--accent) 25%, var(--surface));
+    --contrib-level-second: color-mix(in srgb, var(--accent) 45%, var(--surface));
+    --contrib-level-third: color-mix(in srgb, var(--accent) 70%, var(--surface));
+    --contrib-level-fourth: color-mix(in srgb, var(--accent) 100%, var(--surface));
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  /* The grid is intentionally wider than the column; this wrapper is the only
+     element allowed to scroll. `contain: layout` makes it the containing block
+     for the absolutely positioned sr-only labels, so the overflow clip also
+     contains them instead of leaking into the document. */
+  .contributions-calendar .contrib-scroll {
+    min-width: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    contain: inline-size layout;
+  }
+
+  .contributions-calendar .contrib-grid {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: repeat(7, var(--contrib-cell-size));
+    gap: var(--contrib-cell-gap);
+    width: max-content;
+  }
+
+  .contributions-calendar .contrib-cell {
+    width: var(--contrib-cell-size);
+    height: var(--contrib-cell-size);
+    background: var(--contrib-level-none);
+    border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  .contributions-calendar .contrib-level-none {
+    background: var(--contrib-level-none);
+  }
+  .contributions-calendar .contrib-level-first {
+    background: var(--contrib-level-first);
+  }
+  .contributions-calendar .contrib-level-second {
+    background: var(--contrib-level-second);
+  }
+  .contributions-calendar .contrib-level-third {
+    background: var(--contrib-level-third);
+  }
+  .contributions-calendar .contrib-level-fourth {
+    background: var(--contrib-level-fourth);
+  }
+
+  .contributions-calendar .contrib-legend {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 12px;
+    font-family: var(--font-jbmono), "JetBrains Mono", Consolas, monospace;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink2);
+  }
+
+  .contributions-calendar .contrib-legend-swatch {
+    display: inline-block;
+    width: var(--contrib-cell-size);
+    height: var(--contrib-cell-size);
+    border: 1px solid color-mix(in srgb, var(--ink) 10%, transparent);
+  }
 }
 
 @layer utilities {
