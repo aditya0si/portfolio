@@ -9,6 +9,7 @@ next-env.d.ts
 
 # Environment
 .env*
+!.env.example
 
 # Vercel & tools
 .vercel/
