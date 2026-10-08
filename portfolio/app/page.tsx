@@ -121,8 +121,8 @@ export default function Home() {
           <SectionHeader
             index="01"
             label="PRODUCTS"
-            title="Engineering Product Candidates."
-            note="Six provisional candidates selected for complementary role coverage. Each card separates source observations, executed checks, historical artifacts, and unresolved verification."
+            title="Selected projects"
+            note="Five projects across AI products, reliability, and backend systems. Source and verification details are linked on every card."
           />
           <ProductsCatalog />
         </div>

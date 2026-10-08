@@ -83,7 +83,7 @@ test("stale and unsupported claims are completely absent from homepage", async (
   expect(errors).toEqual([]);
 });
 
-test("role filter pills deterministically filter the 6 provisional product candidates with keyboard support", async ({ page }) => {
+test("role filter pills deterministically filter the 5 selected projects with keyboard support", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
   await page.goto("/");
 
@@ -105,28 +105,42 @@ test("role filter pills deterministically filter the 6 provisional product candi
   await expect(pillFd).toBeVisible();
   await expect(pillBackend).toBeVisible();
 
-  // All 6 products present initially under ALL
+  // All 5 selected projects present initially under ALL, in curated order.
   const productCards = productsSection.locator("[data-product-card]");
-  await expect(productCards).toHaveCount(6);
+  await expect(productCards).toHaveCount(5);
+  const allOrder = await productCards.evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("data-product-card")),
+  );
+  expect(allOrder).toEqual([
+    "schemegpt",
+    "stockflow",
+    "sentinel",
+    "tenant-api-platform",
+    "event-stream-platform",
+  ]);
 
-  // Filter: AI ENGINEER
+  // Filter: AI ENGINEER -> exactly schemeGPT and Sentinel
   await pillAi.click();
+  await expect(productCards).toHaveCount(2);
   await expect(page.locator('[data-product-card="schemegpt"]')).toBeVisible();
   await expect(page.locator('[data-product-card="sentinel"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="mcp-from-scratch"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toBeHidden();
+  await expect(page.locator('[data-product-card="mcp-from-scratch"]')).toHaveCount(0);
+  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
 
-  // Filter: BACKEND/SYSTEMS
+  // Filter: BACKEND/SYSTEMS -> exactly StockFlow, Sentinel, tenant and event
   await pillBackend.click();
+  await expect(productCards).toHaveCount(4);
+  await expect(page.locator('[data-product-card="stockflow"]')).toBeVisible();
+  await expect(page.locator('[data-product-card="sentinel"]')).toBeVisible();
   await expect(page.locator('[data-product-card="tenant-api-platform"]')).toBeVisible();
   await expect(page.locator('[data-product-card="event-stream-platform"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="sentinel"]')).toBeVisible();
 
-  // Filter: FORWARD DEPLOYED
+  // Filter: FORWARD DEPLOYED -> exactly schemeGPT and tenant
   await pillFd.click();
+  await expect(productCards).toHaveCount(2);
   await expect(page.locator('[data-product-card="schemegpt"]')).toBeVisible();
   await expect(page.locator('[data-product-card="tenant-api-platform"]')).toBeVisible();
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toBeHidden();
+  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
 
   // Keyboard navigation on filter pills
   await pillAll.focus();
@@ -134,11 +148,12 @@ test("role filter pills deterministically filter the 6 provisional product candi
   await page.keyboard.press("ArrowRight");
   await expect(pillAi).toBeFocused();
   await page.keyboard.press("Space");
-  await expect(page.locator('[data-product-card="event-stream-platform"]')).toBeHidden();
+  await expect(productCards).toHaveCount(2);
+  await expect(page.locator('[data-product-card="event-stream-platform"]')).toHaveCount(0);
 
   // Reset to ALL
   await pillAll.click();
-  await expect(productCards).toHaveCount(6);
+  await expect(productCards).toHaveCount(5);
 
   expect(errors).toEqual([]);
 });
@@ -152,7 +167,7 @@ test("provisional products display candidate/provisional status and verified exe
   // Every product card must show candidate/provisional status
   const statuses = productsSection.locator("[data-product-status]");
   const count = await statuses.count();
-  expect(count).toBe(6);
+  expect(count).toBe(5);
   for (let i = 0; i < count; i++) {
     const text = await statuses.nth(i).innerText();
     expect(text.toLowerCase()).toMatch(/candidate|provisional/);
@@ -168,9 +183,20 @@ test("provisional products display candidate/provisional status and verified exe
   // Verified facts surfaced in DOM
   const sectionText = await productsSection.innerText();
   expect(sectionText).toMatch(/62\s*(passed|pytest)/i);
-  expect(sectionText).toMatch(/29\s*(passed|pytest)/i);
   expect(sectionText).toMatch(/full Go suite passed[\s\S]{0,180}PostgreSQL and Redis/i);
   expect(sectionText).toMatch(/86-test Go suite[\s\S]{0,100}Compose smoke test passed/i);
+
+  expect(errors).toEqual([]);
+});
+
+test("mcp-from-scratch dossier preserves the 29-test evidence", async ({ page }) => {
+  const errors = collectRuntimeErrors(page);
+  const response = await page.goto("/projects/mcp-from-scratch");
+  expect(response?.status()).toBe(200);
+
+  const bodyText = await page.locator("body").innerText();
+  expect(bodyText).toMatch(/29\s*pytest/i);
+  expect(bodyText).toMatch(/29 TESTS PASSED/i);
 
   expect(errors).toEqual([]);
 });

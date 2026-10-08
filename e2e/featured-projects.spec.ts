@@ -10,6 +10,52 @@ const stockflowStack = [
   "Playwright",
 ];
 
+const selectedHomepageOrder = [
+  "schemegpt",
+  "stockflow",
+  "sentinel",
+  "tenant-api-platform",
+  "event-stream-platform",
+] as const;
+
+test("homepage surfaces exactly five selected projects in curated order", async ({ page }) => {
+  await page.goto("/");
+
+  const products = page.locator("#products");
+  const cards = products.locator("[data-product-card]");
+
+  await expect(cards).toHaveCount(selectedHomepageOrder.length);
+
+  const order = await cards.evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute("data-product-card")),
+  );
+  expect(order).toEqual([...selectedHomepageOrder]);
+
+  for (const slug of selectedHomepageOrder) {
+    const card = products.locator(`[data-product-card="${slug}"]`);
+    await expect(card).toBeVisible();
+    await expect(card.getByRole("link", { name: /source/i })).toBeVisible();
+    await expect(card.locator("details summary")).toContainText("Verification details");
+  }
+});
+
+test("products section shows the exact heading and evidence note", async ({ page }) => {
+  await page.goto("/");
+
+  const products = page.locator("#products");
+
+  await expect(
+    products.getByRole("heading", { level: 2, name: "Selected projects", exact: true }),
+  ).toBeVisible();
+
+  await expect(
+    products.getByText(
+      "Five projects across AI products, reliability, and backend systems. Source and verification details are linked on every card.",
+      { exact: true },
+    ),
+  ).toBeVisible();
+});
+
 test("StockFlow compact card exposes source, case study, full stack, and provenance", async ({ page }) => {
   await page.goto("/");
 

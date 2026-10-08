@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { flagships, type RoleCategory } from "@/lib/data";
+import { type RoleCategory } from "@/lib/data";
+import { featuredProjects } from "@/lib/featured-projects";
 import ProjectCard from "./ProjectCard";
 
 const ROLES: RoleCategory[] = [
@@ -17,8 +18,8 @@ export default function ProductsCatalog() {
 
   const filtered =
     selectedRole === "ALL"
-      ? flagships
-      : flagships.filter((p) => p.roles.includes(selectedRole));
+      ? featuredProjects
+      : featuredProjects.filter((p) => p.roles.includes(selectedRole));
 
   const handleKeyDown = (e: React.KeyboardEvent, index: number) => {
     if (e.key === "ArrowRight" || e.key === "ArrowDown") {
@@ -64,7 +65,7 @@ export default function ProductsCatalog() {
             >
               {role}
               <span className="ml-1.5 text-[10px] font-semibold">
-                ({role === "ALL" ? flagships.length : flagships.filter((p) => p.roles.includes(role)).length})
+                ({role === "ALL" ? featuredProjects.length : featuredProjects.filter((p) => p.roles.includes(role)).length})
               </span>
             </button>
           );
