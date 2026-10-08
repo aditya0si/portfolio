@@ -104,3 +104,91 @@ test("StockFlow compact card exposes source, case study, full stack, and provena
   await expect(provenance).toBeVisible();
   await expect(provenance).toHaveAttribute("href", /^https:\/\/github\.com\/aditya0si\/stockflow/);
 });
+
+const responsiveWidths = [375, 1280] as const;
+
+async function gridColumnCount(page: import("@playwright/test").Page) {
+  return page.locator("#products .project-grid").evaluate((element) =>
+    getComputedStyle(element)
+      .gridTemplateColumns.split(/\s+/)
+      .filter((track) => track.length > 0).length,
+  );
+}
+
+for (const width of responsiveWidths) {
+  const expectedColumns = width < 768 ? 1 : 2;
+
+  test(`products blueprint grid resolves to ${expectedColumns} column(s) at ${width}px with all five cards and no overflow`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+
+    const grid = page.locator("#products .project-grid");
+    await expect(grid).toBeVisible();
+    expect(await gridColumnCount(page)).toBe(expectedColumns);
+
+    const cards = page.locator("#products [data-product-card]");
+    await expect(cards).toHaveCount(5);
+    for (const slug of selectedHomepageOrder) {
+      await expect(page.locator(`#products [data-product-card="${slug}"]`)).toBeVisible();
+    }
+
+    const overflow = await page.evaluate(
+      () => document.documentElement.scrollWidth - document.documentElement.clientWidth,
+    );
+    expect(overflow).toBeLessThanOrEqual(1);
+  });
+
+  test(`card links and summaries are keyboard-reachable 44px targets at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await page.goto("/");
+
+    const targets = page.locator("#products .project-card .project-link:visible");
+    const count = await targets.count();
+    expect(count).toBeGreaterThan(0);
+
+    for (let i = 0; i < count; i++) {
+      const target = targets.nth(i);
+      const box = await target.boundingBox();
+      expect(box, `project target ${i} has a bounding box`).not.toBeNull();
+      expect(box!.height, `project target ${i} min-height`).toBeGreaterThanOrEqual(44);
+
+      const reachable = await target.evaluate((element) => {
+        (element as HTMLElement).focus();
+        return (element as HTMLElement).tabIndex >= 0 && document.activeElement === element;
+      });
+      expect(reachable, `project target ${i} keyboard reachable`).toBe(true);
+    }
+  });
+}
+
+test("role filter pills are 44px interactive targets", async ({ page }) => {
+  await page.goto("/");
+
+  const pills = page.locator("[data-role-filter]");
+  await expect(pills).toHaveCount(4);
+
+  for (let i = 0; i < 4; i++) {
+    const box = await pills.nth(i).boundingBox();
+    expect(box, `role pill ${i} has a bounding box`).not.toBeNull();
+    expect(box!.height, `role pill ${i} min-height`).toBeGreaterThanOrEqual(44);
+  }
+});
+
+test("capture task4 responsive screenshots for light and dark themes", async ({ page }) => {
+  for (const width of responsiveWidths) {
+    for (const theme of ["light", "dark"] as const) {
+      await page.setViewportSize({ width, height: 900 });
+      await page.goto("/");
+      await page.evaluate(
+        (value) => localStorage.setItem("as-theme", value),
+        theme === "dark" ? "b" : "a",
+      );
+      await page.reload();
+      await expect(page.locator("#products")).toBeVisible();
+      await page.screenshot({
+        path: `.hermes/briefs/screenshots/task4-${theme}-${width}.png`,
+        fullPage: true,
+      });
+    }
+  }
+});

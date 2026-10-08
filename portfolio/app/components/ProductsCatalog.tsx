@@ -57,7 +57,7 @@ export default function ProductsCatalog() {
               tabIndex={active ? 0 : -1}
               onClick={() => setSelectedRole(role)}
               onKeyDown={(e) => handleKeyDown(e, idx)}
-              className={`rounded-none border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent ${
+              className={`min-h-11 rounded-none border px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-accent ${
                 active
                   ? "border-accent bg-accent/10 font-medium text-accent shadow-sm"
                   : "border-line bg-bg text-muted hover:border-ink2 hover:text-ink"
@@ -73,7 +73,7 @@ export default function ProductsCatalog() {
       </div>
 
       {/* Product Cards */}
-      <div className="space-y-12">
+      <div className="project-grid">
         {filtered.map((project) => (
           <ProjectCard key={project.slug} project={project} />
         ))}

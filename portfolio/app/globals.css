@@ -138,6 +138,52 @@
     @apply inline-flex items-center gap-2 border border-line-strong px-6 py-3 font-mono text-[11px] uppercase tracking-[0.14em] text-ink transition-colors hover:border-accent hover:text-accent;
   }
 
+  /* Restrained responsive blueprint grid for selected projects */
+  .project-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .project-card {
+    min-width: 0;
+    border: 1px solid var(--line);
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: var(--bg);
+  }
+
+  .project-card:hover {
+    border-color: var(--line-strong);
+  }
+
+  .project-card .chip {
+    font-size: 11px;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .project-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    text-underline-offset: 4px;
+  }
+
+  .project-link:hover {
+    color: var(--accent);
+    text-decoration: underline;
+  }
+
+  @media (min-width: 768px) {
+    .project-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
   /* Faint blueprint grid, theme-aware */
   .blueprint-bg {
     background-image:
