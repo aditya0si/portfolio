@@ -1,4 +1,5 @@
 import Reveal from "./components/Reveal";
+import Script from "next/script";
 import FeaturedFrontends from "./components/FeaturedFrontends";
 import ContributionsCalendar from "./components/ContributionsCalendar";
 import ContactInfo from "./components/ContactInfo";
@@ -34,6 +35,16 @@ function SectionHeader({
 export default function Home() {
   return (
     <>
+      <Script
+        src="/swarm-cursors.js"
+        strategy="afterInteractive"
+        data-trigger="button"
+        data-delay="500"
+        data-label="Rebuild this page"
+        data-position="bottom-right"
+        data-paths="/"
+        data-reduced-motion="skip"
+      />
       {/* ============ HERO ============ */}
       <section className="blueprint-bg">
         <div className="mx-auto max-w-sheet px-5 pb-16 pt-16 sm:px-8 sm:pb-24 sm:pt-24">
