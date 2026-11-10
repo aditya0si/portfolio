@@ -428,6 +428,14 @@ for (const theme of THEMES) {
     ).toBeVisible();
     await expect(page.getByText("Visits unavailable", { exact: true })).toBeVisible();
 
+    // Axe measures composited colors; wait until the hero's scroll reveal is
+    // fully opaque so the scan does not sample a transient fade-in frame.
+    await expect.poll(() =>
+      page.locator('a[href="#products"]').evaluate((el) =>
+        getComputedStyle(el.closest(".reveal")!).opacity,
+      ),
+    ).toBe("1");
+
     const results = await new AxeBuilder({ page })
       .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
       .analyze();
