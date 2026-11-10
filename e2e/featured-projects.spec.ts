@@ -117,7 +117,7 @@ async function assertWrappedChips(card: Locator) {
 test("homepage surfaces exactly three featured frontends in curated order with real screenshots and live/source links", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const section = page.locator("#products");
   await expect(section).toBeVisible();
@@ -179,7 +179,7 @@ test("homepage surfaces exactly three featured frontends in curated order with r
 test("products section shows the approved heading and drops the removed backend catalog UI", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const products = page.locator("#products");
   await expect(
@@ -204,7 +204,7 @@ test("products section shows the approved heading and drops the removed backend 
 test("every card restates its exact technologies and every project link is a 44px target", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   for (const item of FEATURED) {
     const card = page.locator(`#products [data-frontend-card="${item.slug}"]`);
@@ -234,7 +234,7 @@ for (const width of WIDTHS) {
       page,
     }) => {
       await page.setViewportSize({ width, height: 900 });
-      await page.goto("/");
+      await page.goto("/?swarm=0");
       await enterTheme(page, theme);
 
       await expect(cards(page)).toHaveCount(FEATURED.length);

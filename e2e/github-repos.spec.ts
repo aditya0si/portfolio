@@ -27,7 +27,7 @@ const EXTERNAL_GITHUB_PREFIXES = [
 ];
 
 test("Home no longer renders the GitHub repository strip", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(page.locator("section#github")).toHaveCount(0);
 
@@ -49,7 +49,7 @@ test("loading Home performs no external GitHub API request", async ({ page }) =>
     }
   });
 
-  const response = await page.goto("/");
+  const response = await page.goto("/?swarm=0");
   expect(response?.status()).toBe(200);
 
   // Give any deferred client effect time to fire before asserting absence.
@@ -62,7 +62,7 @@ test("loading Home performs no external GitHub API request", async ({ page }) =>
 test("Home exposes no repository-strip prose or upstream API diagnostics", async ({
   page,
 }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const body = await page.locator("body").innerText();
   const lower = body.toLowerCase();

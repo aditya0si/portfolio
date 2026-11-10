@@ -52,7 +52,7 @@ test("renders a 1,234 visit count from a valid 200 response with the exact capti
   page,
 }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, 1234));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const counter = visitorCounter(page);
   await expect(counter.getByText("1,234 visits", { exact: true })).toBeVisible();
@@ -62,7 +62,7 @@ test("renders a 1,234 visit count from a valid 200 response with the exact capti
 
 test("renders zero as a valid count rather than an unavailable state", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, 0));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("0 visits", { exact: true }),
@@ -76,7 +76,7 @@ test("a 503 response renders Visits unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) =>
     fulfillVisits(route, 503, JSON.stringify({ error: "Visits unavailable" })),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -86,7 +86,7 @@ test("a 503 response renders Visits unavailable", async ({ page }) => {
 
 test("a negative count is rejected as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, -1));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -95,7 +95,7 @@ test("a negative count is rejected as unavailable", async ({ page }) => {
 
 test("a fractional count is rejected as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, 12.5));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -106,7 +106,7 @@ test("an unsafe-integer count is rejected as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) =>
     validCount(route, Number.MAX_SAFE_INTEGER + 2),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -115,7 +115,7 @@ test("an unsafe-integer count is rejected as unavailable", async ({ page }) => {
 
 test("a string count is rejected as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, "1234"));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -126,7 +126,7 @@ test("malformed JSON is rejected as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) =>
     fulfillVisits(route, 200, "{not json"),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -135,7 +135,7 @@ test("malformed JSON is rejected as unavailable", async ({ page }) => {
 
 test("a network failure is treated as unavailable", async ({ page }) => {
   await page.route(VISITS_GLOB, (route) => route.abort());
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -146,7 +146,7 @@ test("a request hanging past the six second timeout is aborted and unavailable",
   page,
 }) => {
   await page.route(VISITS_GLOB, () => new Promise<void>(() => {}));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits unavailable", { exact: true }),
@@ -155,7 +155,7 @@ test("a request hanging past the six second timeout is aborted and unavailable",
 
 test("the initial state exposes the loading label", async ({ page }) => {
   await page.route(VISITS_GLOB, () => new Promise<void>(() => {}));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("Visits: loading", { exact: true }),
@@ -168,7 +168,7 @@ test("issues exactly one same-origin POST to /api/visits", async ({ page }) => {
     methods.push(route.request().method());
     return validCount(route, 1234);
   });
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     visitorCounter(page).getByText("1,234 visits", { exact: true }),
@@ -192,7 +192,7 @@ test("makes no unique-visitor, Nth-visitor or badge-animation claims", async ({
   page,
 }) => {
   await page.route(VISITS_GLOB, (route) => validCount(route, 1234));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const counter = visitorCounter(page);
   await expect(counter.getByText("1,234 visits", { exact: true })).toBeVisible();

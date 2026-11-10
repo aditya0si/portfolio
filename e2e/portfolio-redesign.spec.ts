@@ -267,7 +267,7 @@ test("HUD theme button switches to theme B (dark), updates data-theme and saves 
   page,
 }) => {
   await mockSuccessIntegrations(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(page.locator("html")).not.toHaveAttribute("data-theme", "b");
   expect(await page.evaluate(() => localStorage.getItem("as-theme"))).toBeNull();
@@ -301,7 +301,7 @@ test("the simplified Home composes the approved sections in order and drops the 
   page,
 }) => {
   await mockSuccessIntegrations(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   for (const id of SECTION_ORDER) {
     await expect(page.locator(`section#${id}`)).toHaveCount(1);
@@ -333,7 +333,7 @@ for (const width of WIDTHS) {
       await page.setViewportSize({ width, height: 900 });
       const errors = collectRuntimeErrors(page);
       await mockSuccessIntegrations(page);
-      await page.goto("/");
+      await page.goto("/?swarm=0");
       await enterTheme(page, theme);
 
       // Three cards, exact curated order, exact live + source links.
@@ -390,7 +390,7 @@ for (const width of [375, 1280] as const) {
   }) => {
     await page.setViewportSize({ width, height: 900 });
     await mockSuccessIntegrations(page);
-    await page.goto("/");
+    await page.goto("/?swarm=0");
 
     const sequence = await tabThrough(page, 120);
 
@@ -420,7 +420,7 @@ for (const theme of THEMES) {
     page,
   }) => {
     await mockInvalidPayloadDeployed(page);
-    await page.goto("/");
+    await page.goto("/?swarm=0");
     await enterTheme(page, theme);
 
     await expect(
@@ -444,7 +444,7 @@ for (const theme of THEMES) {
 // ---------------------------------------------------------------------------
 
 test("Homepage sends the hardened security headers", async ({ page }) => {
-  const response = await page.goto("/");
+  const response = await page.goto("/?swarm=0");
   const headers = response?.headers() ?? {};
 
   expect(headers["x-content-type-options"]).toBe("nosniff");
@@ -470,7 +470,7 @@ test("no-JS context: server-rendered Home with three cards and 23 tools, six dos
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
 
-  const response = await page.goto("/");
+  const response = await page.goto("/?swarm=0");
   expect(response?.status()).toBe(200);
 
   await expect(productCards(page)).toHaveCount(FEATURED.length);

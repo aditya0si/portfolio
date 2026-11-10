@@ -38,8 +38,8 @@ export default function Home() {
       <Script
         src="/swarm-cursors.js"
         strategy="afterInteractive"
-        data-trigger="button"
-        data-delay="500"
+        data-trigger="auto"
+        data-delay="0"
         data-label="Rebuild this page"
         data-position="bottom-right"
         data-paths="/"

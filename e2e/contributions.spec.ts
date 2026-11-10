@@ -123,7 +123,7 @@ function calendar(page: Page) {
 test("homepage renders the GitHub contributions heading", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, twoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     page.getByRole("heading", { name: "GitHub contributions" }),
@@ -136,7 +136,7 @@ test("validated success shows total, updated time, weekday grid with missing lea
 
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, twoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   await expect(panel).toBeVisible();
@@ -179,7 +179,7 @@ test("validated success shows total, updated time, weekday grid with missing lea
 test("validated all-zero success shows the no-data message instead of zero", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, zeroPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   await expect(panel).toBeVisible();
@@ -194,7 +194,7 @@ test("unavailable response shows Contributions unavailable and the profile link"
   await mockContributions(page, (route) =>
     fulfillJson(route, 503, { error: "Contributions unavailable" }),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   await expect(
@@ -221,7 +221,7 @@ test("structurally invalid payload is treated as unavailable", async ({ page }) 
       updatedAt: "not-a-timestamp",
     }),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     calendar(page).getByText("Contributions unavailable", { exact: true }),
@@ -233,7 +233,7 @@ test("malformed JSON is treated as unavailable", async ({ page }) => {
   await mockContributions(page, (route) =>
     route.fulfill({ status: 200, contentType: "application/json", body: "{not json" }),
   );
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     calendar(page).getByText("Contributions unavailable", { exact: true }),
@@ -243,7 +243,7 @@ test("malformed JSON is treated as unavailable", async ({ page }) => {
 test("a request hanging past the timeout is aborted and treated as unavailable", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, () => new Promise<void>(() => {}));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     calendar(page).getByText("Contributions unavailable", { exact: true }),
@@ -253,7 +253,7 @@ test("a request hanging past the timeout is aborted and treated as unavailable",
 test("the initial loading state exposes the profile link as a no-JS fallback", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, () => new Promise<void>(() => {}));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   await expect(
     calendar(page).getByRole("link", { name: /github\.com\/aditya0si/i }),
@@ -264,7 +264,7 @@ test("mobile renders a 52-week calendar without page overflow", async ({ page })
   await page.setViewportSize({ width: 375, height: 900 });
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, fiftyTwoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   await expect(panel).toBeVisible();
@@ -294,7 +294,7 @@ test("mobile 52-week grid keeps 10px geometry contained in a real scroll wrapper
   await page.setViewportSize({ width: 375, height: 900 });
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, fiftyTwoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   await expect(panel).toBeVisible();
@@ -349,7 +349,7 @@ test("mobile 52-week grid keeps 10px geometry contained in a real scroll wrapper
 test("ready calendar keeps 14px prose and a 44px daily-disclosure target", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, twoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   const summaryText = panel.getByText("18 contributions in the last year", { exact: true });
@@ -374,7 +374,7 @@ test("ready calendar keeps 14px prose and a 44px daily-disclosure target", async
 test("loading and unavailable calendar states keep 14px prose and a 44px profile target", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, () => new Promise<void>(() => {}));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const panel = calendar(page);
   const loading = panel.getByText("Loading contributions…", { exact: true });
@@ -404,7 +404,7 @@ test("loading and unavailable calendar states keep 14px prose and a 44px profile
 test("homepage keeps the current section anchors with contributions directly after the hero", async ({ page }) => {
   await mockGitHubRepositories(page);
   await mockContributions(page, (route) => fulfillJson(route, 200, twoWeekPayload()));
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const order = ["contributions", "stack", "products", "contact"];
   const removed = ["systems", "concepts", "github", "education"];

@@ -3960,6 +3960,7 @@
     ready(() => {
       if (pathOk() && (cfg.trigger === "button" || cfg.trigger === "auto")) mountButton();
       const params = new URLSearchParams(location.search);
+      if (params.get("swarm") === "0") return;
       if (params.has("swarm") && params.get("swarm") !== "0") {
         setTimeout(start, cfg.delay);
         return;
@@ -3967,7 +3968,6 @@
       if (!pathOk()) return;
       if (cfg.trigger === "auto") {
         if (cfg.reducedMotion !== "ignore" && window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-        if (window.matchMedia && matchMedia("(pointer: coarse), (max-width: 767px)").matches) return;
         try {
           if (cfg.once === "session") {
             if (sessionStorage.getItem("swarm-cursors-seen")) return;

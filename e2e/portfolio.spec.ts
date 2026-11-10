@@ -104,7 +104,7 @@ function collectRuntimeErrors(page: Page) {
 
 test("homepage renders, navigates via shared HUD, and sends security headers", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
-  const response = await page.goto("/");
+  const response = await page.goto("/?swarm=0");
   expect(response?.status()).toBe(200);
   await expect(page.getByRole("heading", { name: /aditya singh/i, level: 1 })).toBeVisible();
   await expect(page.getByRole("navigation", { name: "Primary" })).toBeVisible();
@@ -129,6 +129,13 @@ test("homepage renders, navigates via shared HUD, and sends security headers", a
   await expect(homeLink).toBeVisible();
   await homeLink.click();
   await expect(page).toHaveURL(/\/$/);
+  await expect.poll(() =>
+    page.evaluate(() => (window as Window & { SwarmCursors?: { isRunning: () => boolean } }).SwarmCursors?.isRunning() ?? false),
+  ).toBe(true);
+  await page.evaluate(() =>
+    (window as Window & { SwarmCursors?: { stop: (reveal: boolean) => void } }).SwarmCursors?.stop(true),
+  );
+  await page.locator("swarm-rebuild").waitFor({ state: "detached" });
   await expect(page.locator("#products")).toBeVisible();
 
   const aboutLink = page.getByRole("link", { name: "About", exact: true });
@@ -152,7 +159,7 @@ test("homepage renders, navigates via shared HUD, and sends security headers", a
 
 test("stale and unsupported claims are completely absent from homepage", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const bodyText = await page.locator("body").innerText();
 
@@ -178,7 +185,7 @@ test("stale and unsupported claims are completely absent from homepage", async (
 
 test("featured frontends render in approved order with real screenshots and live anchors", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const productsSection = page.locator("#products");
   await expect(productsSection).toBeVisible();
@@ -238,7 +245,7 @@ test("featured frontends render in approved order with real screenshots and live
 
 test("featured frontends state honest backend limitations and drop the old backend cards", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const productsSection = page.locator("#products");
 
@@ -272,7 +279,7 @@ test("featured frontends state honest backend limitations and drop the old backe
 });
 
 test("shared Primary nav is exactly Home / About / Contact and /about is intentionally empty", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   const primary = page.getByRole("navigation", { name: "Primary" });
   await expect(primary).toBeVisible();
@@ -296,7 +303,7 @@ test("shared Primary nav is exactly Home / About / Contact and /about is intenti
 });
 
 test("Home and /contact render identical shared contact info", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/?swarm=0");
   const homeContact = page.locator("#contact");
   await expect(homeContact).toBeVisible();
   const homeText = (await homeContact.innerText()).trim();
@@ -329,7 +336,7 @@ test("mcp-from-scratch dossier preserves the 29-test evidence", async ({ page })
 
 test("conceptual systems R&D block is absent from the concise homepage", async ({ page }) => {
   const errors = collectRuntimeErrors(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
 
   // The approved concise Home no longer surfaces the conceptual systems block.
   // The component source is retained in the library but is not rendered here.
@@ -356,7 +363,7 @@ for (const route of productRoutes) {
 }
 
 test("homepage has no serious axe accessibility violations", async ({ page }) => {
-  await page.goto("/", { waitUntil: "networkidle" });
+  await page.goto("/?swarm=0", { waitUntil: "networkidle" });
   const results = await new AxeBuilder({ page })
     .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
     .analyze();
@@ -366,7 +373,7 @@ test("homepage has no serious axe accessibility violations", async ({ page }) =>
 test("mobile layout has no horizontal overflow and exposes keyboard focus", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   const errors = collectRuntimeErrors(page);
-  await page.goto("/");
+  await page.goto("/?swarm=0");
   await expect(page.getByRole("button", { name: "Toggle menu" })).toBeVisible();
 
   const overflow = await page.evaluate(
